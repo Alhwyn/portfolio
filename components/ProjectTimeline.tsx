@@ -4,6 +4,8 @@ export type Project = {
   id: string;
   title: string;
   category: string;
+  icon?: string;
+  tags?: Array<string | null>;
   images: Array<string | null>; // null → black placeholder
 };
 
@@ -49,12 +51,12 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
 
         <div className="flex items-center gap-4 mb-2">
             <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0" />
-            <h3 className="text-2xl font-serif font-semibold">{project.title}</h3>
+            <h3 className="text-2xl source-serif-4">{project.title}</h3>
         </div>
 
 
         {/* Overlapping cards */}
-    <div className="mt-6 flex pl-10 items-center">
+{/*     <div className="mt-6 flex pl-10 items-center">
         {project.images.map((img, idx) => (
             <div
             key={idx}
@@ -62,8 +64,8 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
                 idx > 0 ? "-ml-8" : ""
             } flex-shrink-0 rounded-lg bg-gray-200 ${img === null ? "bg-black" : ""}`}
             style={{
-                width: "8rem",
-                height: "5rem",
+                width: "10rem",
+                height: "1rem",
                 transform: `rotate(${rotations[idx]}deg)`,
             }}
             >
@@ -76,7 +78,7 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
             )}
             </div>
         ))}
-        </div>
+        </div> */}
     </div>
   );
 }
