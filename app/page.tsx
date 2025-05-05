@@ -5,27 +5,33 @@ import ReactMarkdown from "react-markdown";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 
 
-const sampleProjects: Project[] = [
-  {
-    id: "reeflog",
-    title: "ReefLog",
-    images: [null, null, null],
-    tags: ["Mobile", "SSC"],
-    year: "2025",
-  },
+const ProjectsList: Project[] = [
   {
     id: "photobomb",
     title: "PhotoBomb",
     images: [null, null, null],
-    tags: ["Mobile", "Photo Party Game"],
-    year: "2025",
+    tags: ["Mobile", "Photo Party Game", "2025"],
+    icon: "./public/image/icon/the_dock_victoria_logo.jpeg"
+  },
+  {
+    id: "AI BC lawyer",
+    title: "AI BC lawyer Agent",
+    images: [null, null, null],
+    tags: ["AI Agent", "MCP", "2025"],
+  },
+  {
+    id: "reeflog",
+    title: "ReefLog",
+    images: [null, null, null],
+    tags: ["Mobile", "SSC", "2025"],
+    icon: "./public/image/icon/Reeflog_icon.png"
   },
   {
     id: "dockbot",
     title: "DockBot",
     images: [null, null, null],
-    tags: ["AI", "Chatbot"],
-    year: "2024",
+    tags: ["AI", "Chatbot", "2024"],
+    icon: "./public/image/icon/the_dock_victoria_logo.jpeg"
   },
 ];
 
@@ -42,7 +48,7 @@ export default function Home() {
 
       <h3 className="text-2xl instrument-serif-regular-italic pl-8">What i’ve been up too...</h3>
       <div className="p-8">
-        <ProjectTimeline projects={sampleProjects} />
+        <ProjectTimeline projects={ProjectsList} />
       </div>
     </>
   );
