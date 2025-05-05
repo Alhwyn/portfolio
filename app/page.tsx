@@ -8,21 +8,24 @@ import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 const sampleProjects: Project[] = [
   {
     id: "reeflog",
-    title: "ReefLog (Swift Student Challenge)",
-    category: "Mobile",
+    title: "ReefLog",
     images: [null, null, null],
+    tags: ["Mobile", "SSC"],
+    year: "2025",
   },
   {
     id: "photobomb",
     title: "PhotoBomb",
-    category: "Mobile",
     images: [null, null, null],
+    tags: ["Mobile", "Photo Party Game"],
+    year: "2025",
   },
   {
     id: "dockbot",
     title: "DockBot",
-    category: "AI",
     images: [null, null, null],
+    tags: ["AI", "Chatbot"],
+    year: "2024",
   },
 ];
 

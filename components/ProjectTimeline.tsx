@@ -1,12 +1,13 @@
 import React, { useMemo } from "react";
+import { Badge } from "./ui/badge";
 
 export type Project = {
   id: string;
   title: string;
-  category: string;
   icon?: string;
   tags?: Array<string | null>;
   images: Array<string | null>; // null → black placeholder
+  year: string;
 };
 
 type ProjectTimelineProps = {
@@ -55,7 +56,6 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
         </div>
 
 
-        {/* Overlapping cards */}
 {/*     <div className="mt-6 flex pl-10 items-center">
         {project.images.map((img, idx) => (
             <div
@@ -85,31 +85,3 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
 
 // Sample usage:
 
-const sampleProjects: Project[] = [
-  {
-    id: "reeflog",
-    title: "ReefLog (Swift Student Challenge)",
-    category: "Mobile",
-    images: [null, null, null],
-  },
-  {
-    id: "photobomb",
-    title: "PhotoBomb",
-    category: "Mobile",
-    images: [null, null, null],
-  },
-  {
-    id: "dockbot",
-    title: "DockBot",
-    category: "AI",
-    images: [null, null, null],
-  },
-];
-
-export default function App() {
-  return (
-    <div className="p-8">
-      <ProjectTimeline projects={sampleProjects} />
-    </div>
-  );
-}
