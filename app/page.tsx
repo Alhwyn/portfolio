@@ -9,29 +9,26 @@ const ProjectsList: Project[] = [
   {
     id: "photobomb",
     title: "PhotoBomb",
-    images: [null, null, null],
-    tags: ["Mobile", "Photo Party Game", "2025"],
-    icon: "./public/image/icon/the_dock_victoria_logo.jpeg"
+    tags: ["Mobile", "Photo Party Game", "2025", "coming soon 👀"],
+    icon: "./image/icon/photobob_icon.jpeg"
   },
   {
-    id: "AI BC lawyer",
-    title: "AI BC lawyer Agent",
-    images: [null, null, null],
+    id: "AI Lawyer Assistant",
+    title: "BC Lawyer Agent",
     tags: ["AI Agent", "MCP", "2025"],
+    icon: "./image/icon/bc_icon.png"
   },
   {
     id: "reeflog",
     title: "ReefLog",
-    images: [null, null, null],
     tags: ["Mobile", "SSC", "2025"],
-    icon: "./public/image/icon/Reeflog_icon.png"
+    icon: "./image/icon/Reeflog_icon.png"
   },
   {
     id: "dockbot",
     title: "DockBot",
-    images: [null, null, null],
-    tags: ["AI", "Chatbot", "2024"],
-    icon: "./public/image/icon/the_dock_victoria_logo.jpeg"
+    tags: ["AI",  "RAG", "Chatbot", "2024"],
+    icon: "./image/icon/the_dock_victoria_logo.jpeg"
   },
 ];
 
@@ -42,8 +39,22 @@ export default function Home() {
       <section className="min-h-screen px-8 flex items-center justify-between bg-white  text-black">
         <div>
         <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
-          <p className="text-gray-500 text-md source-serif-4">building in Victoria rn</p>
+          <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada</p>
         </div>
+
+        <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700">
+          <a href="https://x.com/alhwynn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+            x.com/alhwynn
+          </a>
+          <a href="https://www.linkedin.com/in/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+            linkedin.com/alhwyn
+          </a>
+          <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
+          
+          
+        </div>
+
+
       </section>
 
       <h3 className="text-2xl instrument-serif-regular-italic pl-8">What i’ve been up too...</h3>
