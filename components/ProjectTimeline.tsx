@@ -105,7 +105,7 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 py-2">
             {project.icon ? (
-              <img
+              <Image
                 src={project.icon}
                 alt={`${project.title} icon`}
                 className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-xl"
