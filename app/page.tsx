@@ -3,6 +3,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
+import PhotoBomb from "@/components/ProjectArticle.tsx/PhotoBomb";
 
 
 const ProjectsList: Project[] = [
@@ -10,25 +11,29 @@ const ProjectsList: Project[] = [
     id: "photobomb",
     title: "PhotoBomb",
     tags: ["Mobile", "Photo Party Game", "2025", "coming soon 👀"],
-    icon: "./image/icon/photobob_icon.jpeg"
+    icon: "./image/icon/photobob_icon.jpeg",
+    article: <PhotoBomb />,
   },
   {
     id: "AI Lawyer Assistant",
     title: "BC Lawyer Agent",
     tags: ["AI Agent", "MCP", "2025"],
-    icon: "./image/icon/bc_icon.png"
+    icon: "./image/icon/bc_icon.png",
+    article: <PhotoBomb />,
   },
   {
     id: "reeflog",
     title: "ReefLog",
-    tags: ["Mobile", "SSC", "2025"],
-    icon: "./image/icon/Reeflog_icon.png"
+    tags: ["Mobile", "SwiftUI", "2025"],
+    icon: "./image/icon/Reeflog_icon.png",
+    article: <PhotoBomb />,
   },
   {
     id: "dockbot",
     title: "DockBot",
     tags: ["AI",  "RAG", "Chatbot", "2024"],
-    icon: "./image/icon/the_dock_victoria_logo.jpeg"
+    icon: "./image/icon/the_dock_victoria_logo.jpeg",
+    article: <PhotoBomb />,
   },
 ];
 

@@ -3,12 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
 
+
 export type Project = {
   id: string;
   title: string;
   icon?: string;
   tags?: Array<string | null>;
   description?: string;
+  article?: React.ReactNode;
 };
 
 type ProjectTimelineProps = {
@@ -24,7 +26,8 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
           {projects.map((project, idx) => (
             <motion.div
               key={project.id}
-              onClick={() => setOpenProject(project)}
+              onClick={() => 
+                setOpenProject(project)}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -66,8 +69,6 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
                 )}
                 <h3 className="text-2xl source-serif-4">{openProject.title}</h3>
               </div>
-
-
               <button
                 onClick={() => setOpenProject(null)}
                 className="text-gray-500 hover:text-gray-700"
@@ -76,7 +77,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
               </button>
             </header>
             <div className="p-6 overflow-y-auto h-[calc(100%-4rem)]">
-              <p className="text-gray-700">{openProject.description}</p>
+              {openProject.article}
             </div>
           </motion.article>
         )}
@@ -93,10 +94,10 @@ function ProjectEntry({ project }: ProjectEntryProps) {
 
   return (
     <div className="relative pl-4 group hover:bg-gray-100 transition-colors duration-200 min-h-[440px] rounded-lg">
-      <div className="absolute left-10 top-14 h-[calc(100%-.5rem)] w-px bg-gray-300 z-0" />
+      <div className="absolute left-10 top-16 h-[calc(100%-3.5rem)] w-px bg-gray-300 z-0" />
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 py-2">
             {project.icon ? (
               <img
                 src={project.icon}
