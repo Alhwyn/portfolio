@@ -63,6 +63,8 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
                   <Image
                     src={openProject.icon}
                     alt={`${openProject.title} icon`}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md"
                   />
                 ) : (
@@ -108,8 +110,10 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
               <Image
                 src={project.icon}
                 alt={`${project.title} icon`}
-                className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-xl"
-              />
+                width={48}
+                height={48}
+                className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md"
+            />
             ) : (
               <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0 shadow-md" />
             )}
