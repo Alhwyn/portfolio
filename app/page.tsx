@@ -46,15 +46,14 @@ export default function Home() {
           <a href="https://x.com/alhwynn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
             x.com/alhwynn
           </a>
+          <a href="https://github.com/Alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+            github.com/alhwyn
+          </a>
           <a href="https://www.linkedin.com/in/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
             linkedin.com/alhwyn
           </a>
           <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
-          
-          
         </div>
-
-
       </section>
 
       <h3 className="text-2xl instrument-serif-regular-italic pl-8">What i’ve been up too...</h3>
