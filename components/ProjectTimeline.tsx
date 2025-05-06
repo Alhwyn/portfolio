@@ -19,7 +19,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
   const [openProject, setOpenProject] = useState<Project | null>(null);
   return (
     <div className="relative">
-      <div className="space-y-4 w-[600px] h-[800px] bg-white rounded-xl pr-4 mr-4 overflow-hidden my-8">
+      <div className="space-y-4 w-[600px] h-max[1500px] bg-white rounded-xl pr-4 mr-4 overflow-hidden my-8">
         <AnimatePresence>
           {projects.map((project, idx) => (
             <motion.div
