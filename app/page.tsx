@@ -69,7 +69,7 @@ export default function Home() {
             <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
         </div>
         <div className="absolute bottom-5 left-8 flex items-center gap-x-2">
-          <h3 className="text-2xl instrument-serif-regular-italic pl-4">What i’ve been up too</h3>
+          <h3 className="text-2xl instrument-serif-regular-italic">What i’ve been up too</h3>
           <span className="pl-5 text-3xl  slow-bounce">↓</span>
         </div>
         
