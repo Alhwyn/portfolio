@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function PhotoBomb() {
   return (
-    <article className="max-w-3xl mx-auto bg-white rounded-xl space-y-8">
+    <article className="max-w-3xl mx-auto bg-slate-50 rounded-xl space-y-8">
       {/* Project image */}
       <div className="w-full flex justify-center mb-8">
         <video

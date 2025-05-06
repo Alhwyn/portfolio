@@ -20,8 +20,8 @@ type ProjectTimelineProps = {
 export function ProjectTimeline({ projects }: ProjectTimelineProps) {
   const [openProject, setOpenProject] = useState<Project | null>(null);
   return (
-    <div className="relative">
-      <div className="space-y-4 w-[600px] h-max[1500px] bg-white rounded-xl pr-4 mr-4 overflow-hidden my-8">
+    <div className="relative bg-slate-50">
+      <div className="space-y-4 w-[600px] h-max[1500px] bg-slate-50 rounded-xl pr-4 mr-4 overflow-hidden my-8">
         <AnimatePresence>
           {projects.map((project, idx) => (
             <motion.div
@@ -54,7 +54,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-white shadow-md"
+            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-slate-50 shadow-md"
           >
             <header className="flex justify-between items-center p-6 gap-r-6 ">
               <div className="flex items-center gap-4">
@@ -94,7 +94,7 @@ function ProjectEntry({ project }: ProjectEntryProps) {
 
   return (
     <div className="relative pl-4 group hover:bg-gray-100 transition-colors duration-200 min-h-[440px] rounded-lg">
-      <div className="absolute left-10 top-16 h-[calc(100%-3.5rem)] w-px bg-gray-300 z-0" />
+      <div className="absolute left-10 top-16 h-[calc(100%-3.5rem)] w-px bg-slate-200 z-0" />
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 py-2">

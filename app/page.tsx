@@ -4,6 +4,9 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import PhotoBomb from "@/components/ProjectArticle.tsx/PhotoBomb";
+import LawyerAgent from "@/components/ProjectArticle.tsx/LawyerAgent";
+import Reeflog from "@/components/ProjectArticle.tsx/Reeflog";
+import Dockbot from "@/components/ProjectArticle.tsx/Dockbot";
 
 
 const ProjectsList: Project[] = [
@@ -19,29 +22,29 @@ const ProjectsList: Project[] = [
     title: "BC Lawyer Agent",
     tags: ["AI Agent", "MCP", "2025"],
     icon: "./image/icon/bc_icon.png",
-    article: <PhotoBomb />,
+    article: <LawyerAgent />,
   },
   {
     id: "reeflog",
     title: "ReefLog",
     tags: ["Mobile", "SwiftUI", "2025"],
     icon: "./image/icon/Reeflog_icon.png",
-    article: <PhotoBomb />,
+    article: <Reeflog />,
   },
   {
     id: "dockbot",
     title: "DockBot",
     tags: ["AI",  "RAG", "Chatbot", "2024"],
     icon: "./image/icon/the_dock_victoria_logo.jpeg",
-    article: <PhotoBomb />,
+    article: <Dockbot />,
   },
 ];
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-slate-50">
       {/* Hero section */}
-      <section className="min-h-screen px-8 flex items-center justify-between bg-rgba(250,250,248,255)  text-black">
+      <section className="min-h-screen px-8 flex items-center justify-between bg-slate-50  text-black">
         <div>
           <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
             <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada 🇨🇦</p>
