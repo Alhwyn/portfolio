@@ -5,12 +5,15 @@ export default function PhotoBomb() {
     <article className="max-w-3xl mx-auto bg-white rounded-xl space-y-8">
       {/* Project image */}
       <div className="w-full flex justify-center mb-8">
-        <Image
-          src="/images/photobomb-cover.jpg" // <-- replace with your image path
-          alt="PhotoBomb project cover"
-          width={600}
-          height={340}
-          className="rounded-lg object-cover"
+        <video
+            src="./video/photobomb.mp4" // <-- replace with your video path
+            width={1200}
+            height={820}
+            className="rounded-lg object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
         />
       </div>
 
