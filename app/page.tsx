@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import PhotoBomb from "@/components/ProjectArticle.tsx/PhotoBomb";
 import LawyerAgent from "@/components/ProjectArticle.tsx/LawyerAgent";
@@ -52,9 +51,9 @@ export default function Home() {
     >
       {/* Hero section */}
       <section className="min-h-screen px-8 flex items-center justify-between bg-slate-50  text-black">
-        <div>
-          <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
-            <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada 🇨🇦</p>
+          <div>
+            <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
+            <p className="text-gray-700 text-md">18 year-old in highschool building in Victoria, Canada 🇨🇦</p>
           </div>
 
           <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700">
@@ -69,10 +68,19 @@ export default function Home() {
             </a>
             <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
         </div>
+        <div className="absolute bottom-5 left-8 flex items-center gap-x-2">
+          <h3 className="text-2xl instrument-serif-regular-italic pl-4">What i’ve been up too</h3>
+          <span className="pl-5 text-3xl  slow-bounce">↓</span>
+        </div>
+        
+        
       </section>
       {/* Projects section */}
-      <h3 className="text-2xl instrument-serif-regular-italic pl-4">What i’ve been up too ↓</h3>
-      <ProjectTimeline projects={ProjectsList} />
+      
+      <div className="pl-4">
+        <ProjectTimeline projects={ProjectsList} />
+      </div>
+      
     </motion.div>
   );
 }

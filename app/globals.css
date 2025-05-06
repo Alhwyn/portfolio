@@ -125,6 +125,15 @@
   }
 }
 
+@keyframes slow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+.slow-bounce {
+  animation: slow-bounce 2s infinite;
+  display: inline-block;
+}
+
 .jiggle-on-hover {
   transition: transform 0.15s ease-in-out;
 }

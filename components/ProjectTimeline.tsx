@@ -1,7 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "./ui/badge";
-import Image from "next/image";
 
 
 export type Project = {
@@ -33,7 +32,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
               exit={{ opacity: 0, x: -20 }}
               transition={{ delay: idx * 0.1, duration: 0.3 }}
             >
-              <ProjectEntry project={project} />
+              <ProjectEntry project={project} isLast={idx === projects.length - 1} />
             </motion.div>
           ))}
         </AnimatePresence>
@@ -89,13 +88,18 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
 
 type ProjectEntryProps = {
   project: Project;
+  isLast: boolean;
 };
 
-function ProjectEntry({ project }: ProjectEntryProps) {
+function ProjectEntry({ project, isLast }: ProjectEntryProps) {
 
   return (
-    <div className="relative pl-4 group hover:bg-gray-100 transition-colors duration-200 min-h-[440px] rounded-lg">
-      <div className="absolute left-10 top-16 h-[calc(100%-3.5rem)] w-px bg-slate-200 z-0" />
+    <div className="relative pl-4 group hover:bg-gray-100 transition-colors duration-200 min-h-[200px] rounded-lg">
+
+      {!isLast && (
+        <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 z-0" />
+      )}
+      <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 z-0" />
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 py-2">
