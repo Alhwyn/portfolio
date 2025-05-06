@@ -125,6 +125,14 @@
   }
 }
 
+.jiggle-on-hover {
+  transition: transform 0.15s ease-in-out;
+}
+
+.jiggle-on-hover:hover {
+  transform: rotate(-4deg);
+}
+
 .source-serif-4 {
   font-family: "Source Serif 4", serif;
   font-weight: 400;

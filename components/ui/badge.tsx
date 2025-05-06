@@ -37,7 +37,7 @@ function Badge({
   return (
     <Comp
       data-slot="badge"
-      className={cn(badgeVariants({ variant }), className)}
+      className={cn(badgeVariants({ variant }), "jiggle-on-hover", className)}
       {...props}
     />
   )

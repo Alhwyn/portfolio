@@ -39,32 +39,30 @@ const ProjectsList: Project[] = [
 
 export default function Home() {
   return (
-    <>
+    <div>
       {/* Hero section */}
-      <section className="min-h-screen px-8 flex items-center justify-between bg-white  text-black">
+      <section className="min-h-screen px-8 flex items-center justify-between bg-rgba(250,250,248,255)  text-black">
         <div>
-        <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
-          <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada 🇨🇦</p>
-        </div>
+          <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
+            <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada 🇨🇦</p>
+          </div>
 
-        <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700">
-          <a href="https://x.com/alhwynn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-            x.com/alhwynn
-          </a>
-          <a href="https://github.com/Alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-            github.com/alhwyn
-          </a>
-          <a href="https://www.linkedin.com/in/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-            linkedin.com/alhwyn
-          </a>
-          <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
+          <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700">
+            <a href="https://x.com/alhwynn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+              x.com/alhwynn
+            </a>
+            <a href="https://github.com/Alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+              github.com/alhwyn
+            </a>
+            <a href="https://www.linkedin.com/in/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+              linkedin.com/alhwyn
+            </a>
+            <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
         </div>
       </section>
-
-      <h3 className="text-2xl instrument-serif-regular-italic pl-8">What i’ve been up too...</h3>
-      <div className="p-8">
-        <ProjectTimeline projects={ProjectsList} />
-      </div>
-    </>
+      {/* Projects section */}
+      <h3 className="text-2xl instrument-serif-regular-italic pl-4">What i’ve been up too ↓</h3>
+      <ProjectTimeline projects={ProjectsList} />
+    </div>
   );
 }

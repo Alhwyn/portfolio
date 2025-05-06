@@ -54,7 +54,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-white shadow-xl"
+            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-white shadow-md"
           >
             <header className="flex justify-between items-center p-6 gap-r-6 ">
               <div className="flex items-center gap-4">
@@ -62,7 +62,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
                   <img
                     src={openProject.icon}
                     alt={`${openProject.title} icon`}
-                    className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100"
+                    className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md"
                   />
                 ) : (
                   <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0" />
@@ -102,10 +102,10 @@ function ProjectEntry({ project }: ProjectEntryProps) {
               <img
                 src={project.icon}
                 alt={`${project.title} icon`}
-                className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100"
+                className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-xl"
               />
             ) : (
-              <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0" />
+              <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0 shadow-md" />
             )}
             <h3 className="text-2xl source-serif-4">{project.title}</h3>
           </div>

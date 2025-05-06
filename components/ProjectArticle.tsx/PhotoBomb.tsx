@@ -7,8 +7,8 @@ export default function PhotoBomb() {
       <div className="w-full flex justify-center mb-8">
         <video
             src="./video/photobomb.mp4" // <-- replace with your video path
-            width={1200}
-            height={820}
+            width={1600}
+            height={20}
             className="rounded-lg object-cover"
             autoPlay
             muted
@@ -32,8 +32,6 @@ export default function PhotoBomb() {
           The app was inspired by classic party games and built to encourage creativity and laughter. 
           My main focus was on seamless user experience, fast photo uploads, and a fun, vibrant interface. 
           The project taught me a lot about mobile development, real-time data, and the importance of user feedback in shaping a product.
-
-
         </p>
       </div>
     </article>
