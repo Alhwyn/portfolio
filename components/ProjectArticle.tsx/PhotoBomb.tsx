@@ -6,7 +6,7 @@ export default function PhotoBomb() {
       {/* Project image */}
       <div className="w-full flex justify-center mb-8">
         <video
-            src="./video/photobomb.mp4" // <-- replace with your video path
+            src="./video/photobomb.mp4" 
             width={1600}
             height={20}
             className="rounded-lg object-cover"

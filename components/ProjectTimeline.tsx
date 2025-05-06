@@ -50,10 +50,10 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
       <AnimatePresence mode="wait">
         {openProject && (
           <motion.article
-            key={openProject.id} // <-- Add key for AnimatePresence to detect changes
+            key={openProject.id} 
             initial={{ x: '100%', opacity: 0, scale: 0.96 }}
             animate={{ x: 0, opacity: 1, scale: 1 }}
-            exit={{ x: 40, opacity: 0, scale: 0.96 }} // Slide slightly right and fade out
+            exit={{ x: 40, opacity: 0, scale: 0.96 }}  
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-slate-50 shadow-md"
       >
