@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "./ui/badge";
+import Image from "next/image";
 
 
 export type Project = {
@@ -59,7 +60,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
             <header className="flex justify-between items-center p-6 gap-r-6 ">
               <div className="flex items-center gap-4">
                 {openProject.icon ? (
-                  <img
+                  <Image
                     src={openProject.icon}
                     alt={`${openProject.title} icon`}
                     className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md"
