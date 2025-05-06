@@ -44,7 +44,7 @@ export default function Home() {
       <section className="min-h-screen px-8 flex items-center justify-between bg-white  text-black">
         <div>
         <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
-          <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada</p>
+          <p className="text-gray-700 text-md">18yr in highschool building in Victoria, Canada 🇨🇦</p>
         </div>
 
         <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700">
