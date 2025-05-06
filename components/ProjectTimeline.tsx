@@ -20,7 +20,7 @@ type ProjectTimelineProps = {
 export function ProjectTimeline({ projects }: ProjectTimelineProps) {
   const [openProject, setOpenProject] = useState<Project | null>(null);
   return (
-    <div className="relative bg-slate-50">
+    <div className="relative bg-slate-50 pt-8 pr-8 pb-8">
       <div className="space-y-4 w-[600px] h-max[1500px] bg-slate-50 rounded-xl pr-4 mr-4 overflow-hidden my-8">
         <AnimatePresence>
           {projects.map((project, idx) => (
