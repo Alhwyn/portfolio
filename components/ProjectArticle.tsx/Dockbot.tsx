@@ -26,6 +26,9 @@ export default function Dockbot() {
 
       <div className="pt-6 pb-20">
         <p>
+          AI Slop real one coming soon
+
+          <br/>
           DockBot is a Slack bot designed to help teams quickly access and share knowledge using Retrieval-Augmented Generation (RAG). 
           Built with Python, it leverages Google Cloud Platform’s text embedding model to understand and retrieve relevant information from internal documentation and resources. 
           The bot integrates seamlessly with Slack, allowing users to ask questions and receive context-aware answers directly in their workspace. 

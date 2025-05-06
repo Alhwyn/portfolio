@@ -26,6 +26,10 @@ export default function Reeflog() {
 
       <div className="pt-6 pb-20">
         <p>
+
+          AI Slop real one coming soon
+
+          <br/>
           ReefLog is a mobile app built with SwiftUI that allows scuba divers to easily log and visualize their dives. 
           The app features a clean, modern interface for recording dive locations, depths, times, and notes, as well as a map view to see all logged dives geographically. 
           Core Data is used for offline storage and fast retrieval, while MapKit powers the interactive dive map. 

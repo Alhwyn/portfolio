@@ -28,6 +28,10 @@ export default function LawyerAgent() {
 
       <div className="pt-6 pb-20">
         <p>
+
+          AI Slop real one coming soon
+
+          <br/>
           BC Lawyer Agent is an AI assistant designed to help users navigate legal information and generate draft legal documents. 
           Built using Gemini Pro for advanced language understanding and Python for backend logic, the agent can answer legal questions, summarize statutes, and assist with document creation. 
           The project leverages FastAPI and LangChain for robust API endpoints and prompt engineering, providing a seamless and secure user experience. 

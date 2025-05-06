@@ -28,6 +28,9 @@ export default function PhotoBomb() {
 
       <div className="pt-6 pb-20">
         <p>
+          AI Slop real one coming soon
+
+          <br/>
           PhotoBomb is a mobile party game that lets friends challenge each other to take themed photos in real time. 
           The app was inspired by classic party games and built to encourage creativity and laughter. 
           My main focus was on seamless user experience, fast photo uploads, and a fun, vibrant interface. 
