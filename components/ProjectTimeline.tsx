@@ -47,15 +47,16 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
       >
       </motion.div>
       {/* Sliding detail panel */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {openProject && (
           <motion.article
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            key={openProject.id} // <-- Add key for AnimatePresence to detect changes
+            initial={{ x: '100%', opacity: 0, scale: 0.96 }}
+            animate={{ x: 0, opacity: 1, scale: 1 }}
+            exit={{ x: 40, opacity: 0, scale: 0.96 }} // Slide slightly right and fade out
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-slate-50 shadow-md"
-          >
+      >
             <header className="flex justify-between items-center p-6 gap-r-6 ">
               <div className="flex items-center gap-4">
                 {openProject.icon ? (

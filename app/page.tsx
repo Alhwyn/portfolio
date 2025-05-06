@@ -7,6 +7,7 @@ import PhotoBomb from "@/components/ProjectArticle.tsx/PhotoBomb";
 import LawyerAgent from "@/components/ProjectArticle.tsx/LawyerAgent";
 import Reeflog from "@/components/ProjectArticle.tsx/Reeflog";
 import Dockbot from "@/components/ProjectArticle.tsx/Dockbot";
+import { motion } from "framer-motion";
 
 
 const ProjectsList: Project[] = [
@@ -42,7 +43,13 @@ const ProjectsList: Project[] = [
 
 export default function Home() {
   return (
-    <div className="bg-slate-50">
+    
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+      className="bg-slate-50"
+    >
       {/* Hero section */}
       <section className="min-h-screen px-8 flex items-center justify-between bg-slate-50  text-black">
         <div>
@@ -66,6 +73,6 @@ export default function Home() {
       {/* Projects section */}
       <h3 className="text-2xl instrument-serif-regular-italic pl-4">What i’ve been up too ↓</h3>
       <ProjectTimeline projects={ProjectsList} />
-    </div>
+    </motion.div>
   );
 }
