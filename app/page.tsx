@@ -50,7 +50,7 @@ export default function Home() {
       className="bg-slate-50"
     >
       {/* Hero section */}
-      <section className="min-h-screen px-8 flex items-center justify-between bg-slate-50  text-black">
+      <section className="min-h-screen w-full max-w-screen-lg mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between bg-slate-50 text-black">
           <div>
             <h1 className="text-6xl instrument-serif-regular">Alhwyn Geonzon</h1>
             <p className="text-gray-700 text-md">18 year-old in highschool building in Victoria, Canada 🇨🇦</p>
