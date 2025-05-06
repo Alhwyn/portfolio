@@ -4,7 +4,7 @@ export default function Dockbot() {
       {/* Project video */}
       <div className="w-full flex justify-center mb-8">
         <video
-          src="./video/dockbot-demo.mp4"
+          src="./video/dockbot_demo_1.mp4"
           width={600}
           height={340}
           className="rounded-lg object-cover"
