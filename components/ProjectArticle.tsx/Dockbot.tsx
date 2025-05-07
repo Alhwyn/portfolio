@@ -17,7 +17,7 @@ export default function Dockbot() {
 
       {/* Project info grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-gray-800">
-        <div className="font-semibold text-gray-500">PROJECT</div>
+        <div className="font-semibold text-gray-500">Project</div>
         <div>DockBot – a Slack bot powered by Retrieval-Augmented Generation (RAG) for instant knowledge sharing</div>
 
         <div className="font-semibold text-gray-500">Tools</div>
@@ -25,15 +25,43 @@ export default function Dockbot() {
       </div>
 
       <div className="pt-6 pb-20">
-        <p>
-          AI Slop real one coming soon
+        <p className="leading-loose">
+          My Programing Journey started when I Volunteering in a co-working space called
+          <a
+            href="https://thedockvictoria.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-800 underline hover:text-gray-500 ml-1"
+          >
+            theDock
+          </a>.
+          I used a Python script to process and split PDF documents (theDock Manual), extract their text using Google Document AI, 
+          and then chunk and clean the text for embeddings. Each chunk is converted into a vector using Google Cloud’s 
+          Vertex AI text embedding model. These vectors are stored in a DataFrame, which acts as a vector database. 
+          When a user asks a question in Slack, the bot embeds the question, finds the most relevant document chunks 
+          using dot product search, 
+          and uses Gemini Pro to generate a helpful answer based on the retrieved augmented generation (RAG).
 
-          <br/>
-          DockBot is a Slack bot designed to help teams quickly access and share knowledge using Retrieval-Augmented Generation (RAG). 
-          Built with Python, it leverages Google Cloud Platform’s text embedding model to understand and retrieve relevant information from internal documentation and resources. 
-          The bot integrates seamlessly with Slack, allowing users to ask questions and receive context-aware answers directly in their workspace. 
-          Deployment and scaling are handled via Railway, making updates and maintenance fast and reliable. 
-          This project deepened my experience with NLP, cloud AI services, and building production-ready bots for real-world team workflows.
+        </p>
+      </div>
+      <h2 className="font-semibold text-gray-500">Poll Command</h2>
+      {/* Project video */}
+      <div className="w-full flex justify-center mb-8">
+        <video
+          src="./video/dockbot_demo_2.mp4"
+          width={600}
+          height={340}
+          className="rounded-lg object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      </div>
+
+      <div className="pt-6 pb-20">
+        <p>
+          A simple command to create a poll in Slack.
         </p>
       </div>
     </article>

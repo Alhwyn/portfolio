@@ -19,7 +19,7 @@ export default function PhotoBomb() {
 
       {/* Project info grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-gray-800">
-        <div className="font-semibold text-gray-500">PROJECT</div>
+        <div className="font-semibold text-gray-500">Project</div>
         <div>Similar to cards against humanity its a party game app for sharing fun photos with friends</div>
 
         <div className="font-semibold text-gray-500">Tools</div>

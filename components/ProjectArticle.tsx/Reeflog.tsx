@@ -17,7 +17,7 @@ export default function Reeflog() {
 
       {/* Project info grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-gray-800">
-        <div className="font-semibold text-gray-500">PROJECT</div>
+        <div className="font-semibold text-gray-500">Project</div>
         <div>ReefLog – a SwiftUI-powered digital logbook for scuba divers</div>
 
         <div className="font-semibold text-gray-500">Tools</div>
