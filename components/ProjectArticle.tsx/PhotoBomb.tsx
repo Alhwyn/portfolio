@@ -38,7 +38,7 @@ export default function PhotoBomb() {
 
       <div className="pt-6 pb-20">
         <p className="leading-loose">
-          AI Slop real one coming soon
+          (AI Slop btw)
 
           <br/>
           PhotoBomb is a mobile party game that lets friends challenge each other to take themed photos in real time. 

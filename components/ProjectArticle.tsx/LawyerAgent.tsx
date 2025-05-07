@@ -30,7 +30,7 @@ export default function LawyerAgent() {
       <div className="pt-6 pb-20">
         <p className="leading-loose">
 
-          AI Slop real one coming soon
+          (AI Slop btw)
 
           <br/>
           BC Lawyer Agent is an AI assistant designed to help users navigate legal information and generate draft legal documents. 

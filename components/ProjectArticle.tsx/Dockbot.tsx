@@ -49,7 +49,7 @@ export default function Dockbot() {
           </a>.
           I used a Python script to process and split PDF documents (theDock Manual), extract their text using Google Document AI, 
           and then chunk and clean the text for embeddings. Each chunk is converted into a vector using Google Cloud’s 
-          Vertex AI text embedding model. These vectors are stored in a DataFrame, which acts as a vector database. 
+          Vertex AI text embedding model. These vectors are stored in a pandas dataFrame, which acts as a vector database. 
           When a user asks a question in Slack, the bot embeds the question, finds the most relevant document chunks 
           using dot product search, 
           and uses Gemini Pro to generate a helpful answer based on the retrieved augmented generation (RAG).
