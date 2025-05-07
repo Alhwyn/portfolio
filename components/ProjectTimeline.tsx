@@ -7,6 +7,7 @@ import Image from "next/image";
 export type Project = {
   id: string;
   title: string;
+  year: string;
   icon?: string;
   tags?: Array<string | null>;
   description?: string;
@@ -20,8 +21,8 @@ type ProjectTimelineProps = {
 export function ProjectTimeline({ projects }: ProjectTimelineProps) {
   const [openProject, setOpenProject] = useState<Project | null>(null);
   return (
-    <div className="relative bg-slate-50 pt-8 pr-8 pb-8">
-      <div className="space-y-4 w-[600px] h-max[1500px] bg-slate-50 rounded-xl pr-4 mr-4 overflow-hidden my-8">
+    <div className="relative bg-slate-100 dark:bg-neutral-900 dark:text-gray-100 pt-8 pr-8 pb-8">
+      <div className="space-y-4 w-[600px] h-max[1500px] bg-slate-100 dark:bg-neutral-900 dark:text-gray-100 rounded-xl pr-4 mr-4 overflow-hidden my-8">
         <AnimatePresence>
           {projects.map((project, idx) => (
             <motion.div
@@ -55,7 +56,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
             animate={{ x: 0, opacity: 1, scale: 1 }}
             exit={{ x: 40, opacity: 0, scale: 0.96 }}  
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-slate-50 shadow-md"
+            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-slate-100 dark:bg-neutral-900 dark:text-gray-100 shadow-md"
       >
             <header className="flex justify-between items-center p-6 gap-r-6 ">
               <div className="flex items-center gap-4">
@@ -65,12 +66,12 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
                     alt={`${openProject.title} icon`}
                     width={48}
                     height={48}
-                    className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md"
+                    className="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 dark:bg-gray-900 dark:text-gray-100 shadow-md"
                   />
                 ) : (
                   <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0" />
                 )}
-                <h3 className="text-2xl source-serif-4">{openProject.title}</h3>
+                <h3 className="text-2xl source-serif-4 dark:text-neutral-400">{openProject.title}</h3>
               </div>
               <button
                 onClick={() => setOpenProject(null)}
@@ -97,12 +98,12 @@ type ProjectEntryProps = {
 function ProjectEntry({ project, isLast }: ProjectEntryProps) {
 
   return (
-    <div className="relative pl-4 group hover:bg-gray-100 transition-colors duration-200 min-h-[200px] rounded-lg">
+    <div className="relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 min-h-[200px] rounded-lg">
 
       {!isLast && (
         <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 z-0" />
       )}
-      <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 z-0" />
+      <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 z-0 dark:bg-neutral-600" />
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 py-2">
@@ -117,13 +118,13 @@ function ProjectEntry({ project, isLast }: ProjectEntryProps) {
             ) : (
               <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0 shadow-md" />
             )}
-            <h3 className="text-2xl source-serif-4">{project.title}</h3>
+            <h3 className="text-2xl source-serif-4 dark:text-neutral-400">{project.title}</h3>
           </div>
         </div>
         {project.tags && (
           <div className="flex gap-2 mb-4 ml-16">
             {project.tags.filter(Boolean).map((tag, idx) => (
-              <Badge className="text-gray-600 rounded-2xl bg-gray-200" key={idx}>{tag}</Badge>
+              <Badge className="text-gray-600 rounded-2xl bg-gray-200 dark:bg-zinc-800 dark:text-neutral-400" key={idx}>{tag}</Badge>
             ))}
           </div>
         )}

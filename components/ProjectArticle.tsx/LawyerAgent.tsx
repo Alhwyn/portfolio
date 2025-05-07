@@ -1,8 +1,9 @@
 
 
 export default function LawyerAgent() {
+
   return (
-    <article className="max-w-3xl mx-auto bg-slate-50 rounded-xl space-y-8">
+    <article className="max-w-3xl mx-auto bg-slate-100 rounded-xl dark:bg-neutral-900 dark:text-neutral-400 space-y-8">
       {/* Project image */}
       <div className="w-full flex justify-center mb-8">
         <video
@@ -18,11 +19,11 @@ export default function LawyerAgent() {
       </div>
 
       {/* Project info grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-gray-800">
-        <div className="font-semibold text-gray-500">Project</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-gray-800 dark:text-neutral-400">
+        <div className="font-semibold text-gray-500 dark:text-neutral-400">Project</div>
         <div>BC Lawyer Agent – an AI-powered assistant for legal information and document drafting</div>
 
-        <div className="font-semibold text-gray-500">Tools</div>
+        <div className="font-semibold text-gray-5000 dark:text-neutral-400">Tools</div>
         <div>Gemini Pro, Python, FastAPI, LangChain, Vercel</div>
       </div>
 
