@@ -27,7 +27,7 @@ export default function PhotoBomb() {
       </div>
 
       <div className="pt-6 pb-20">
-        <p>
+        <p className="leading-loose">
           AI Slop real one coming soon
 
           <br/>

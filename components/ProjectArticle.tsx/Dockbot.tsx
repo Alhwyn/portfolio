@@ -18,7 +18,7 @@ export default function Dockbot() {
       {/* Project info grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-gray-800">
         <div className="font-semibold text-gray-500">Project</div>
-        <div>DockBot – a Slack bot powered by Retrieval-Augmented Generation (RAG) for instant knowledge sharing</div>
+        <div> AI chatbot in Slack</div>
 
         <div className="font-semibold text-gray-500">Tools</div>
         <div>Python, GCP, Railway</div>
