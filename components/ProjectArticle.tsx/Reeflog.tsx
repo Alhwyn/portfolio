@@ -28,7 +28,7 @@ export default function Reeflog() {
         <p className="leading-loose">
 
           When I come back home to the Philippines (where I was born) I love to go scuba diving. 
-          Especially I love tkaing ocean photography. So I built an app for a Swift Student Challenge<br/> (didnt win) to 
+          Especially I love taking ocean photography. So I built an app for a Swift Student Challenge<br/> (didnt win) to 
           log my scuba sessions and classify my photos using MAchine Image classification.
         </p>
       </div>
