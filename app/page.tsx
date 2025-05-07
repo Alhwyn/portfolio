@@ -13,7 +13,7 @@ const ProjectsList: Project[] = [
   {
     id: "photobomb",
     title: "PhotoBomb",
-    tags: ["Mobile", "Photo Party Game", "2025", "coming soon 👀"],
+    tags: ["Mobile", "Photo Party Game", "2025", "Coming soon 👀"],
     icon: "/image/icon/photobob_icon.jpeg",
     article: <PhotoBomb />,
   },
