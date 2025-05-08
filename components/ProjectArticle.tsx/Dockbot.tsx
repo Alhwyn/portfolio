@@ -83,6 +83,32 @@ export default function Dockbot() {
           A simple command to create a poll in Slack.
         </p>
       </div>
+      <h3 className="font-semibold text-gray-500 dark:text-neutral-400">Dockbot creating a poem about the organization</h3>
+      <div className="w-full flex justify-center mb-8">
+        {isVideoLoading && (
+          <Skeleton className="w-[600px] h-[330px] rounded-lg bg-gray-300" />
+        )}
+        <motion.video
+          src="./video/dockbot_demo_3.mp4"
+          width={600}
+          height={340}
+          className={`rounded-lg object-cover ${isVideoLoading ? "hidden" : "block"}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isVideoLoading ? 0 : 1 }}
+          transition={{ duration: 0.5 }}
+          onLoadedData={() => setIsVideoLoading(false)}
+        />
+      </div>
+
+      <div className="pt-6 pb-20">
+        <p>
+          Some fun prompt for Dockbot "create a poem about theDock." 
+        </p>
+      </div>
     </article>
   );
 }
