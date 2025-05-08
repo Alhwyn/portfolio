@@ -106,7 +106,7 @@ export default function Dockbot() {
 
       <div className="pt-6 pb-20">
         <p>
-          Some fun prompt for Dockbot "create a poem about theDock." 
+          Some fun prompt for Dockbot: create a poem about theDock.
         </p>
       </div>
     </article>
