@@ -21,11 +21,11 @@ const ProjectsList: Project[] = [
     article: <PhotoBomb />,
   },
   {
-    id: "AI Lawyer Assistant",
-    title: "BC Lawyer Agent",
+    id: "CanLII MCP",
+    title: "CanLII MCP",
     year: "2025",
-    tags: ["AI Agent", "MCP", "Legal"],
-    icon: "/image/icon/bc_icon.png",
+    tags: ["AI", "MCP", "Legal"],
+    icon: "/image/icon/canlii.jpg",
     article: <LawyerAgent />,
   },
   {
