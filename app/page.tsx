@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect} from "react";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
+import { Hackathon, HackathonTimeline } from "../components/HackathonList";
 import PhotoBomb from "@/components/ProjectArticle.tsx/PhotoBomb";
 import LawyerAgent from "@/components/ProjectArticle.tsx/LawyerAgent";
 import Reeflog from "@/components/ProjectArticle.tsx/Reeflog";
 import Dockbot from "@/components/ProjectArticle.tsx/Dockbot";
+import Scrapyard from "@/components/ProjectArticle.tsx/Scrapyard";
 import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -46,6 +48,18 @@ const ProjectsList: Project[] = [
   },
 ];
 
+
+const HackathonList: Hackathon[] = [
+  {
+    id: "scrapyard",
+    title: "Scrapyard Victoria",
+    date: "March 2025",
+    tags: ["March 2025", "HighSchool Hackathon"],
+    icon: "/image/scrapyardvictoria.png",
+    article: <Scrapyard />,
+  }
+];
+
 export default function Home() {
   const [theme, setTheme] = useState<"light"|"dark">("light");
 
@@ -73,11 +87,11 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400"
+      className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400"
     >
 
       {/* Theme toggle button in the top-right corner */}
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-0 right-4">
         <button
           onClick={toggleTheme}
           aria-label="Toggle light/dark mode"
@@ -95,7 +109,7 @@ export default function Home() {
       <section className="min-h-screen w-full px-8 flex items-center justify-between bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div>
             <h1 className="text-7xl instrument-serif-regular gradient-text pb-2">Alhwyn Geonzon</h1>
-            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old in highschool building in Victoria, Canada 🇨🇦</p>
+            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old in developer + hackathons organizer in Victoria, Canada 🇨🇦</p>
           </div>
 
           <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700 dark:text-neutral-400">
@@ -114,15 +128,21 @@ export default function Home() {
           <h3 className="text-2xl instrument-serif-regular-italic">What i’ve been up too</h3>
           <span className="pl-5 text-3xl  slow-bounce">↓</span>
         </div>
-        
-        
       </section>
       {/* Projects section */}
-      
       <div className="pl-4">
         <ProjectTimeline projects={ProjectsList} />
       </div>
-      
+      <section className="pl-8 bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
+        <div className="flex items-center gap-x-2">
+          <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing</h3>
+          <span className="pl-5 text-3xl  slow-bounce">↓</span>
+        </div>
+      </section>
+
+      <div className="pl-4">
+        <HackathonTimeline projects={HackathonList} />
+      </div>
     </motion.div>
   );
 }
