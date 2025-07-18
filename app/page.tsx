@@ -106,10 +106,10 @@ export default function Home() {
       </div>
 
       {/* Hero section */}
-      <section className="min-h-screen w-full px-8 flex items-center justify-between bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
+      <section className="relative min-h-screen w-full px-8 flex items-center justify-between bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div>
             <h1 className="text-7xl instrument-serif-regular gradient-text pb-2">Alhwyn Geonzon</h1>
-            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old in developer + hackathons organizer in Victoria, Canada 🇨🇦</p>
+            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old building Victoria, Canada 🇨🇦</p>
           </div>
 
           <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700 dark:text-neutral-400">
