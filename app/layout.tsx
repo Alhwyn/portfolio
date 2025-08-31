@@ -71,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alhwyn Geonzon - Full Stack Developer & AI Engineer",
-    description: "18-year-old full stack developer and AI engineer from Victoria, Canada. Building innovative mobile apps, AI-powered solutions, and web applications.",
+    title: "Alhwyn Geonzon - Portfolio",
+    description: "Portfolio ",
     site: "@alhwynn",
     creator: "@alhwynn",
     images: ["/image/icon/photobob_icon.jpeg"],
