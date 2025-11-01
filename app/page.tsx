@@ -113,7 +113,7 @@ export default function Home() {
         </div>
         <div className="absolute bottom-5 left-8 flex items-center gap-x-2">
           <h3 className="text-2xl instrument-serif-regular-italic">What i’ve been up too</h3>
-          <span className="pl-5 text-3xl  slow-bounce">↓</span>
+          <span className="pl-5 text-3xl slow-bounce z-10 relative">↓</span>
         </div>
       </section>
       {/* Projects section */}
@@ -124,7 +124,7 @@ export default function Home() {
       <section className="pl-8 bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
         <div className="flex items-center gap-x-2">
           <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organizer hackathons)</h3>
-          <span className="pl-5 text-3xl  slow-bounce">↓</span>
+          <span className="pl-5 text-3xl slow-bounce z-10 relative">↓</span>
         </div>
       </section>
 
