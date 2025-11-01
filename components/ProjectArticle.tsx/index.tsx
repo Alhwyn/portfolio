@@ -1,16 +1,7 @@
 "use client";
 
-import { Skeleton } from "../ui/skeleton";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../ui/carousel";
+import ImageCarousel from "../ImageCarousel";
+import VideoPlayer from "../VideoPlayer";
 import projectsData from "../../constants/projects.json";
 
 interface ProjectArticleProps {
@@ -18,9 +9,6 @@ interface ProjectArticleProps {
 }
 
 export default function ProjectArticle({ data }: ProjectArticleProps) {
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
-  const [isImageLoading, setIsImageLoading] = useState(true);
-
   // Determine if this is a hackathon (uses Event/Role) or project (uses Project/Tools)
   const isHackathon = data.event !== undefined;
   const infoLabel1 = isHackathon ? "Event" : "Project";
@@ -36,63 +24,13 @@ export default function ProjectArticle({ data }: ProjectArticleProps) {
       {/* Media section - Video or Carousel */}
       <div className="w-full flex justify-center mb-8">
         {data.media.type === "carousel" ? (
-          <Carousel className="w-full max-w-[700px]">
-            <CarouselContent>
-              {data.media.images.map((image: any, index: number) => (
-                <CarouselItem key={index}>
-                  <div className="flex justify-center">
-                    {isImageLoading && index === 0 && (
-                      <Skeleton className="w-[700px] h-[385px] rounded-lg bg-gray-300 dark:bg-neutral-700" />
-                    )}
-                    <motion.div
-                      className={`${isImageLoading && index === 0 ? "hidden" : "block"}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: isImageLoading && index === 0 ? 0 : 1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <div className="w-[700px] h-[385px] overflow-hidden rounded-lg">
-                        <Image
-                          src={image.src}
-                          alt={image.alt}
-                          width={700}
-                          height={385}
-                          className="w-full h-full object-cover object-top"
-                          onLoad={() => index === 0 && setIsImageLoading(false)}
-                          priority={index === 0}
-                        />
-                      </div>
-                    </motion.div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            {data.media.images.length > 1 && (
-              <>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
-              </>
-            )}
-          </Carousel>
+          <ImageCarousel images={data.media.images} />
         ) : (
-          <>
-            {isVideoLoading && (
-              <Skeleton className="w-[600px] h-[330px] rounded-lg bg-gray-300 dark:bg-neutral-700" />
-            )}
-            <motion.video
-              src={data.media.src}
-              width={data.media.width}
-              height={data.media.height}
-              className={`rounded-lg object-cover ${isVideoLoading ? "hidden" : "block"}`}
-              autoPlay
-              muted
-              loop
-              playsInline
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isVideoLoading ? 0 : 1 }}
-              transition={{ duration: 0.5 }}
-              onLoadedData={() => setIsVideoLoading(false)}
-            />
-          </>
+          <VideoPlayer
+            src={data.media.src}
+            width={data.media.width}
+            height={data.media.height}
+          />
         )}
       </div>
 
@@ -126,22 +64,10 @@ export default function ProjectArticle({ data }: ProjectArticleProps) {
             <HeadingTag className="font-semibold text-gray-500 dark:text-neutral-400">{section.title}</HeadingTag>
             {/* Section video */}
             <div className="w-full flex justify-center mb-8">
-              {isVideoLoading && (
-                <Skeleton className="w-[600px] h-[330px] rounded-lg bg-gray-300" />
-              )}
-              <motion.video
+              <VideoPlayer
                 src={section.src}
                 width={section.width}
                 height={section.height}
-                className={`rounded-lg object-cover ${isVideoLoading ? "hidden" : "block"}`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isVideoLoading ? 0 : 1 }}
-                transition={{ duration: 0.5 }}
-                onLoadedData={() => setIsVideoLoading(false)}
               />
             </div>
 
