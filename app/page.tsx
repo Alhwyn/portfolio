@@ -17,25 +17,11 @@ const ProjectsList: Project[] = [
     icon: "/image/icon/photobob_icon.jpeg",
   },
   {
-    id: "canlii-mcp",
-    title: "CanLII MCP",
-    year: "2025",
-    tags: ["AI", "MCP", "Legal"],
-    icon: "/image/icon/canlii.jpg",
-  },
-  {
-    id: "reeflog",
-    title: "ReefLog",
-    year: "2025",
-    tags: ["Mobile", "SwiftUI", "Machine Learning"],
-    icon: "/image/icon/Reeflog_icon.png",
-  },
-  {
-    id: "dockbot",
-    title: "DockBot",
+    id: "archive",
+    title: "Archive",
     year: "2024",
-    tags: ["AI",  "RAG", "Chatbot"],
-    icon: "/image/icon/the_dock_victoria_logo.jpeg",
+    tags: ["Projects", "Collection"],
+    icon: "/image/icon/cursor.png",
   },
 ];
 
@@ -128,6 +114,7 @@ export default function Home() {
       <div className="pl-4">
         <ProjectTimeline projects={ProjectsList} />
       </div>
+      
       <section className="pl-8 bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
         <div className="flex items-center gap-x-2">
           <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing</h3>
