@@ -21,12 +21,18 @@ const ProjectsList: Project[] = [
     title: "Archive",
     year: "2024",
     tags: ["Projects", "Collection"],
-    icon: "/image/icon/cursor.png",
   },
 ];
 
 
 const HackathonList: Hackathon[] = [
+  {
+    id: "cursor-hackathon",
+    title: "Cursor Hackathon Victoria",
+    date: "September 2025",
+    tags: ["September 2025", "Hackathon"],
+    icon: "/image/icon/cursor.png",
+  },
   {
     id: "scrapyard",
     title: "Scrapyard Victoria",
@@ -90,7 +96,7 @@ export default function Home() {
       <section className="relative min-h-screen w-full px-8 flex items-center justify-between bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div>
             <h1 className="text-7xl instrument-serif-regular gradient-text pb-2">Alhwyn Geonzon</h1>
-            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old building Victoria, Canada 🇨🇦</p>
+            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old building Victoria, Canada</p>
           </div>
 
           <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700 dark:text-neutral-400">
@@ -117,7 +123,7 @@ export default function Home() {
       
       <section className="pl-8 bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
         <div className="flex items-center gap-x-2">
-          <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing</h3>
+          <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organizer hackathons)</h3>
           <span className="pl-5 text-3xl  slow-bounce">↓</span>
         </div>
       </section>

@@ -48,6 +48,7 @@ const projectIdToKey: Record<string, keyof typeof projectsData> = {
   "canlii-mcp": "lawyerAgent",
   reeflog: "reeflog",
   dockbot: "dockbot",
+  "cursor-hackathon": "cursorHackathon",
   scrapyard: "scrapyard",
 };
 
@@ -57,6 +58,7 @@ const projectInfo: Record<string, { title: string; year?: string; date?: string 
   "canlii-mcp": { title: "CanLII MCP", year: "2025" },
   reeflog: { title: "ReefLog", year: "2025" },
   dockbot: { title: "DockBot", year: "2024" },
+  "cursor-hackathon": { title: "Cursor Hackathon Victoria", date: "September 2025" },
   scrapyard: { title: "Scrapyard Victoria", date: "March 2025" },
 };
 
