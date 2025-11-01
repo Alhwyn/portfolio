@@ -56,7 +56,7 @@ export function HackathonTimeline({ projects }: HackathonTimelineProps) {
             animate={{ x: 0, opacity: 1, scale: 1 }}
             exit={{ x: 40, opacity: 0, scale: 0.96 }}  
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed inset-y-0 right-0 w-full sm:w-1/2 bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400 shadow-md"
+            className="fixed inset-y-0 right-0 w-full sm:w-2/5 bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400 shadow-md"
       >
             <header className="flex justify-between items-center p-6 gap-r-6 ">
               <div className="flex items-center gap-4">
@@ -64,13 +64,13 @@ export function HackathonTimeline({ projects }: HackathonTimelineProps) {
                   <Image
                     src={openProject.icon}
                     alt={`${openProject.title} icon`}
-                    width={160}
-                    height={160}
-                    className="w-40 h-40 rounded-lg object-contain flex-shrink-0"
+                    width={openProject.id === "cursor" ? 48 : 160}
+                    height={openProject.id === "cursor" ? 48 : 160}
+                    className={`${openProject.id === "cursor" ? "w-12 h-12" : "w-40 h-40"} rounded-lg object-contain flex-shrink-0 ${openProject.id === "cursor" ? "bg-gray-100 dark:bg-gray-900 shadow-md" : ""}`}
                     priority
                   />
                 ) : (
-                  <div className="w-40 h-40 rounded-lg flex-shrink-0" />
+                  <div className={`${openProject.id === "cursor" ? "w-12 h-12" : "w-40 h-40"} rounded-lg flex-shrink-0`} />
                 )}
                 <h3 className="text-2xl source-serif-4 dark:text-neutral-400">{openProject.title}</h3>
               </div>
@@ -105,19 +105,19 @@ function ProjectEntry({ project }: ProjectEntryProps) {
               <Image
                 src={project.icon}
                 alt={`${project.title} icon`}
-                width={128}
-                height={128}
-                className="w-32 h-32 rounded-lg object-contain flex-shrink-0"
+                width={project.id === "cursor" ? 48 : 128}
+                height={project.id === "cursor" ? 48 : 128}
+                className={`${project.id === "cursor" ? "w-12 h-12" : "w-32 h-32"} rounded-lg object-contain flex-shrink-0 ${project.id === "cursor" ? "bg-gray-100 dark:bg-gray-900 shadow-md" : ""}`}
                 loading="lazy"
               />
             ) : (
-              <div className="w-32 h-32 rounded-lg flex-shrink-0" />
+              <div className={`${project.id === "cursor" ? "w-12 h-12" : "w-32 h-32"} rounded-lg flex-shrink-0`} />
             )}
             <h3 className="text-2xl source-serif-4 dark:text-neutral-400">{project.title}</h3>
           </div>
         </div>
         {project.tags && (
-          <div className="flex gap-2 mb-4 ml-16">
+          <div className={`flex gap-2 mb-4 ${project.id === "cursor" ? "ml-16" : "ml-36"}`}>
             {project.tags.filter(Boolean).map((tag, idx) => (
               <Badge className="text-gray-600 rounded-2xl bg-gray-200 dark:bg-zinc-800 dark:text-neutral-400" key={idx}>{tag}</Badge>
             ))}

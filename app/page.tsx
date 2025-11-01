@@ -8,6 +8,7 @@ import LawyerAgent from "@/components/ProjectArticle.tsx/LawyerAgent";
 import Reeflog from "@/components/ProjectArticle.tsx/Reeflog";
 import Dockbot from "@/components/ProjectArticle.tsx/Dockbot";
 import Scrapyard from "@/components/ProjectArticle.tsx/Scrapyard";
+import CursorHackathon from "@/components/ProjectArticle.tsx/CursorHackathon";
 import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -51,12 +52,20 @@ const ProjectsList: Project[] = [
 
 const HackathonList: Hackathon[] = [
   {
+    id: "cursor",
+    title: "Cursor Hackathon Victoria",
+    date: "September 2025",
+    tags: ["AI Development", "Victoria, BC"],
+    icon: "/image/icon/cursor.png",
+    article: <CursorHackathon/>,
+  },
+  {
     id: "scrapyard",
     title: "Scrapyard Victoria",
     date: "March 2025",
-    tags: ["March 2025", "HighSchool Hackathon"],
+    tags: ["High School", "Co-Organizer"],
     icon: "/image/scrapyardvictoria.png",
-    article: <Scrapyard />,
+    article: <Scrapyard/>,
   }
 ];
 
@@ -109,7 +118,7 @@ export default function Home() {
       <section className="relative min-h-screen w-full px-8 flex items-center justify-between bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div>
             <h1 className="text-7xl instrument-serif-regular gradient-text pb-2">Alhwyn Geonzon</h1>
-            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old building Victoria, Canada 🇨🇦</p>
+            <p className="text-gray-700 text-md dark:text-neutral-400">18 year-old builder in Victoria, Canada 🇨🇦</p>
           </div>
 
           <div className="absolute bottom-8 right-8 text-right space-y-2 text-gray-700 dark:text-neutral-400">
@@ -135,7 +144,7 @@ export default function Home() {
       </div>
       <section className="pl-8 bg-slate-100 text-black dark:bg-neutral-900 dark:text-neutral-400">
         <div className="flex items-center gap-x-2">
-          <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing</h3>
+          <h3 className="text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organize hackathons)</h3>
           <span className="pl-5 text-3xl  slow-bounce">↓</span>
         </div>
       </section>
