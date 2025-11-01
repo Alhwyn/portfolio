@@ -3,7 +3,6 @@
 import React, { useState, useEffect} from "react";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
-import { PhotoBomb, LawyerAgent, Reeflog, Dockbot, Scrapyard } from "@/components/ProjectArticle.tsx";
 import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -16,15 +15,13 @@ const ProjectsList: Project[] = [
     year: "2025",
     tags: ["Mobile", "Photo Party Game", "Coming soon 👀"],
     icon: "/image/icon/photobob_icon.jpeg",
-    article: <PhotoBomb />,
   },
   {
-    id: "CanLII MCP",
+    id: "canlii-mcp",
     title: "CanLII MCP",
     year: "2025",
     tags: ["AI", "MCP", "Legal"],
     icon: "/image/icon/canlii.jpg",
-    article: <LawyerAgent />,
   },
   {
     id: "reeflog",
@@ -32,7 +29,6 @@ const ProjectsList: Project[] = [
     year: "2025",
     tags: ["Mobile", "SwiftUI", "Machine Learning"],
     icon: "/image/icon/Reeflog_icon.png",
-    article: <Reeflog />,
   },
   {
     id: "dockbot",
@@ -40,7 +36,6 @@ const ProjectsList: Project[] = [
     year: "2024",
     tags: ["AI",  "RAG", "Chatbot"],
     icon: "/image/icon/the_dock_victoria_logo.jpeg",
-    article: <Dockbot />,
   },
 ];
 
@@ -52,7 +47,6 @@ const HackathonList: Hackathon[] = [
     date: "March 2025",
     tags: ["March 2025", "HighSchool Hackathon"],
     icon: "/image/scrapyardvictoria.png",
-    article: <Scrapyard />,
   }
 ];
 
@@ -60,6 +54,9 @@ export default function Home() {
   const [theme, setTheme] = useState<"light"|"dark">("light");
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === "undefined") return;
+    
     const stored = localStorage.getItem("theme") as "light"|"dark"|null;
     if (stored) {
       setTheme(stored);
@@ -70,6 +67,8 @@ export default function Home() {
 
   // Whenever theme changes, update <html> and persist
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    
     document.documentElement.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
   }, [theme]);

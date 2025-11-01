@@ -5,8 +5,31 @@ import VideoPlayer from "../VideoPlayer";
 import DescriptionParagraphs from "../DescriptionParagraphs";
 import projectsData from "../../constants/projects.json";
 
+interface ProjectData {
+  project?: string;
+  event?: string;
+  tools?: string;
+  role?: string;
+  description: string[];
+  media: {
+    type: "video" | "carousel";
+    src?: string;
+    images?: Array<{ src: string; alt: string; title?: string }>;
+    width?: number;
+    height?: number;
+  };
+  sections?: Array<{
+    title: string;
+    headingLevel: "h2" | "h3";
+    src: string;
+    width: number;
+    height: number;
+    description: string[];
+  }>;
+}
+
 interface ProjectArticleProps {
-  data: any;
+  data: ProjectData;
 }
 
 export default function ProjectArticle({ data }: ProjectArticleProps) {
@@ -25,14 +48,14 @@ export default function ProjectArticle({ data }: ProjectArticleProps) {
       {/* Media section - Video or Carousel */}
       <div className="w-full flex justify-center mb-8">
         {data.media.type === "carousel" ? (
-          <ImageCarousel images={data.media.images} />
-        ) : (
+          <ImageCarousel images={data.media.images || []} />
+        ) : data.media.src ? (
           <VideoPlayer
             src={data.media.src}
             width={data.media.width}
             height={data.media.height}
           />
-        )}
+        ) : null}
       </div>
 
       {/* Project info grid */}
@@ -52,7 +75,7 @@ export default function ProjectArticle({ data }: ProjectArticleProps) {
       </div>
 
       {/* Optional sections (for Dockbot) */}
-      {data.sections?.map((section: any, sectionIndex: number) => {
+      {data.sections?.map((section, sectionIndex: number) => {
         const HeadingTag = section.headingLevel === "h3" ? "h3" : "h2";
         return (
           <div key={sectionIndex}>
@@ -78,22 +101,22 @@ export default function ProjectArticle({ data }: ProjectArticleProps) {
 
 // Export pre-configured components
 export function LawyerAgent() {
-  return <ProjectArticle data={projectsData.lawyerAgent} />;
+  return <ProjectArticle data={projectsData.lawyerAgent as ProjectData} />;
 }
 
 export function PhotoBomb() {
-  return <ProjectArticle data={projectsData.photoBomb} />;
+  return <ProjectArticle data={projectsData.photoBomb as ProjectData} />;
 }
 
 export function Reeflog() {
-  return <ProjectArticle data={projectsData.reeflog} />;
+  return <ProjectArticle data={projectsData.reeflog as ProjectData} />;
 }
 
 export function Dockbot() {
-  return <ProjectArticle data={projectsData.dockbot} />;
+  return <ProjectArticle data={projectsData.dockbot as ProjectData} />;
 }
 
 export function Scrapyard() {
-  return <ProjectArticle data={projectsData.scrapyard} />;
+  return <ProjectArticle data={projectsData.scrapyard as ProjectData} />;
 }
 

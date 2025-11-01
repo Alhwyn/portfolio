@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 
@@ -27,7 +28,10 @@ export function TimelineEntry({
   isLast = false,
 }: TimelineEntryProps) {
   return (
-    <div className="relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 min-h-[200px] rounded-lg">
+    <Link 
+      href={`/projects/${item.id}`}
+      className="block relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 min-h-[200px] rounded-lg cursor-pointer"
+    >
       {showConnector && !isLast && (
         <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 dark:bg-neutral-600 z-0" />
       )}
@@ -61,7 +65,7 @@ export function TimelineEntry({
           ))}
         </div>
       )}
-    </div>
+    </Link>
   );
 }
 
