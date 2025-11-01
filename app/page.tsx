@@ -3,11 +3,7 @@
 import React, { useState, useEffect} from "react";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
-import PhotoBomb from "@/components/ProjectArticle.tsx/PhotoBomb";
-import LawyerAgent from "@/components/ProjectArticle.tsx/LawyerAgent";
-import Reeflog from "@/components/ProjectArticle.tsx/Reeflog";
-import Dockbot from "@/components/ProjectArticle.tsx/Dockbot";
-import Scrapyard from "@/components/ProjectArticle.tsx/Scrapyard";
+import { PhotoBomb, LawyerAgent, Reeflog, Dockbot, Scrapyard } from "@/components/ProjectArticle.tsx";
 import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 

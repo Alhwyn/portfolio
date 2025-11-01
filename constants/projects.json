@@ -1,0 +1,122 @@
+{
+  "lawyerAgent": {
+    "project": "A Model Context Protocol (MCP) server for Canadian legal research using the CanLii database",
+    "tools": "TypeScript, Cloudflare Workers, CanLii API, MCP Protocol",
+    "description": [
+      "This project is a Model Context Protocol (MCP) server built specifically for Canadian legal research. It integrates with the CanLii database to provide AI assistants with access to Canadian case law, statutes, and legal resources. Built with TypeScript and deployed on Cloudflare Workers for fast, global access, the MCP server enables seamless legal research capabilities for AI applications. The project demonstrates how to build robust API integrations with legal databases while maintaining performance and reliability at scale."
+    ],
+    "media": {
+      "type": "video",
+      "src": "./video/law_demo.mp4",
+      "width": 600,
+      "height": 340
+    }
+  },
+  "photoBomb": {
+    "project": "Similar to cards against humanity its a party game app for sharing fun photos with friends",
+    "tools": "React Native, Expo, Supabase",
+    "description": [
+      "(AI Slop btw)",
+      "",
+      "PhotoBomb is a mobile party game that lets friends challenge each other to take themed photos in real time. The app was inspired by classic party games and built to encourage creativity and laughter. My main focus was on seamless user experience, fast photo uploads, and a fun, vibrant interface. The project taught me a lot about mobile development, real-time data, and the importance of user feedback in shaping a product."
+    ],
+    "media": {
+      "type": "video",
+      "src": "./video/photobomb.mp4",
+      "width": 600,
+      "height": 340
+    }
+  },
+  "reeflog": {
+    "project": "A scuba diving log book classifying your scuba photos",
+    "tools": "SwiftUI Machine Laarning",
+    "description": [
+      "",
+      "When I come back home to the Philippines (where I was born) I love to go scuba diving. Especially I love taking ocean photography. So I built an app for a Swift Student Challenge<br/> (didnt win) to log my scuba sessions and classify my photos using MAchine Image classification."
+    ],
+    "media": {
+      "type": "video",
+      "src": "./video/reeflog_demo_simple.mp4",
+      "width": 600,
+      "height": 340
+    }
+  },
+  "dockbot": {
+    "project": " AI chatbot in Slack",
+    "tools": "Python, GCP, Railway",
+    "description": [
+      "My Programing Journey started when I Volunteering in a co-working space called",
+      "<a href=\"https://thedockvictoria.com\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-gray-800 underline font-semibold dark:text-neutral-400 hover:text-blue-500 ml-1\">theDock</a>.",
+      "I used a Python script to process and split PDF documents (theDock Manual), extract their text using Google Document AI, and then chunk and clean the text for embeddings. Each chunk is converted into a vector using Google Cloud's Vertex AI text embedding model. These vectors are stored in a pandas dataFrame, which acts as a vector database. When a user asks a question in Slack, the bot embeds the question, finds the most relevant document chunks using dot product search, and uses Gemini Pro to generate a helpful answer based on the retrieved augmented generation (RAG)."
+    ],
+    "sections": [
+      {
+        "title": "Poll Command",
+        "headingLevel": "h2",
+        "type": "video",
+        "src": "./video/dockbot_demo_2.mp4",
+        "width": 600,
+        "height": 340,
+        "description": ["A simple command to create a poll in Slack."]
+      },
+      {
+        "title": "Dockbot creating a poem about the organization",
+        "headingLevel": "h3",
+        "type": "video",
+        "src": "./video/dockbot_demo_3.mp4",
+        "width": 600,
+        "height": 340,
+        "description": [
+          "Some fun prompt for Dockbot: create a poem about theDock."
+        ]
+      }
+    ],
+    "media": {
+      "type": "video",
+      "src": "./video/dockbot_demo_1.mp4",
+      "width": 600,
+      "height": 340
+    }
+  },
+  "scrapyard": {
+    "event": "High School Hackathon",
+    "role": "Co-Organizer (with Kai Prairie)",
+    "description": [
+      "Realizing that tech events in Victoria were majority for adults, my friend Kai Prairie and I started Scrapyard Victoria - a hackathon specifically designed for high school students.",
+      "",
+      "We successfully raised over $2000 CAD to make this event happen through our amazing sponsors: <a href=\"https://viatec.ca\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold hover:underline\"> VIATEC</a>, <a href=\"https://hackclub.com\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold hover:underline\">HackClub</a>, <a href=\"https://tiny.com\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold hover:underline\">Tiny</a>, <strong> Shreena Kalaria</strong>, and <a href=\"https://www.tenfoldvictoria.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-bold hover:underline\">TenFold Victoria</a> funded prizes and served as our advisors throughout the planning process.",
+      ""
+    ],
+    "media": {
+      "type": "carousel",
+      "images": [
+        {
+          "src": "/image/scrapyard/image_720.png",
+          "alt": "Scrapyard Victoria Event Image 5",
+          "title": "Scrapyard Victoria"
+        },
+        {
+          "src": "/image/scrapyard/1A9E8C29-A828-46BE-8FAF-23CA32D0F446 1.png",
+          "alt": "Scrapyard Victoria Event Image 2",
+          "title": "Hackathon Planning"
+        },
+        {
+          "src": "/image/scrapyard/2218313b-9668-4b03-9306-6d52714491a2 2.png",
+          "alt": "Scrapyard Victoria Event Image 1",
+          "title": "Hackathon Event"
+        },
+        {
+          "src": "/image/scrapyard/image_720-2.png",
+          "alt": "Scrapyard Victoria Event Image 3",
+          "title": "Hackathon Activities"
+        },
+        {
+          "src": "/image/scrapyard/image_720-3.png",
+          "alt": "Scrapyard Victoria Event Image 4",
+          "title": "Scrapyard Victoria"
+        }
+      ]
+    }
+  }
+}
+

@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://alhwyn.com'),
   title: {
     default: "Alhwyn Geonzon",
     template: "%s | Alhwyn Geonzon"
