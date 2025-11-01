@@ -19,7 +19,7 @@ export function HackathonTimeline({ projects }: HackathonTimelineProps) {
       openItem={openProject}
       onItemClick={setOpenProject}
       onClose={() => setOpenProject(null)}
-      backgroundClassName="bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400"
+      backgroundClassName="bg-slate-100 dark:bg-neutral-900 dark:text-neutral-400"
       entryIconSize={128}
       entryIconClassName="w-32 h-32 rounded-lg object-contain flex-shrink-0"
       headerIconSize={160}

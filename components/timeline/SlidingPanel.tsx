@@ -31,7 +31,7 @@ export function SlidingPanel({
           animate={{ x: 0, opacity: 1, scale: 1 }}
           exit={{ x: 40, opacity: 0, scale: 0.96 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className={`fixed inset-y-0 right-0 w-full sm:w-1/2 ${backgroundClassName} shadow-md`}
+          className={`fixed inset-y-0 right-0 w-full sm:w-1/2 ${backgroundClassName} shadow-md z-50`}
         >
           <header className="flex justify-between items-center p-6 gap-r-6">
             <div className="flex items-center gap-4">
@@ -56,7 +56,7 @@ export function SlidingPanel({
               ✕
             </button>
           </header>
-          <div className="p-6 overflow-y-auto h-[calc(100%-4rem)]">
+          <div className="p-6 overflow-y-auto h-[calc(100%-4rem)] relative z-10">
             {children}
           </div>
         </motion.article>

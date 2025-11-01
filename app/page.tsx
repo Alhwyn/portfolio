@@ -87,14 +87,14 @@ export default function Home() {
     >
 
       {/* Theme toggle button in the top-right corner */}
-      <div className="absolute top-0 right-4">
+      <div className="fixed top-4 right-4 z-50">
         <button
           onClick={toggleTheme}
           aria-label="Toggle light/dark mode"
-          className="p-2 rounded-full bg-gray-200 dark:bg-neutral-400 hover:scale-110 transition"
+          className="p-2 rounded-full bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600 hover:scale-110 transition-all shadow-md"
         >
           {theme === "dark" ? (
-            <Sun className="w-6 h-6 text-stone-100" />
+            <Sun className="w-6 h-6 text-yellow-300" />
           ) : (
             <Moon className="w-6 h-6 text-gray-800" />
           )}
