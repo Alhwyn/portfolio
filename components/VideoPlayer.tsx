@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "./ui/skeleton";
+import VideoSkeleton from "./VideoSkeleton";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -16,9 +16,7 @@ export default function VideoPlayer({ src, width, height, className = "" }: Vide
 
   return (
     <>
-      {isVideoLoading && (
-        <Skeleton className="w-[600px] h-[330px] rounded-lg bg-gray-300 dark:bg-neutral-700" />
-      )}
+      {isVideoLoading && <VideoSkeleton />}
       <motion.video
         src={src}
         width={width}

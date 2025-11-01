@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "./ui/skeleton";
+import CarouselSkeleton from "./CarouselSkeleton";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -25,9 +25,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
         {images.map((image, index) => (
           <CarouselItem key={index}>
             <div className="flex justify-center">
-              {isImageLoading && index === 0 && (
-                <Skeleton className="w-[700px] h-[385px] rounded-lg bg-gray-300 dark:bg-neutral-700" />
-              )}
+              {isImageLoading && index === 0 && <CarouselSkeleton />}
               <motion.div
                 className={`${isImageLoading && index === 0 ? "hidden" : "block"}`}
                 initial={{ opacity: 0 }}

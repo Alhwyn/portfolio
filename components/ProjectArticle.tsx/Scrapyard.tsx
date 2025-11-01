@@ -1,6 +1,7 @@
 "use client";
 
 import ImageCarousel from "../ImageCarousel";
+import DescriptionParagraphs from "../DescriptionParagraphs";
 import projectsData from "../../constants/projects.json";
 
 export default function Scrapyard() {
@@ -23,13 +24,7 @@ export default function Scrapyard() {
       </div>
 
       <div className="pt-6 pb-32 dark:bg-neutral-900 dark:text-neutral-400">
-        {data.description.map((paragraph: string, index: number) =>
-          paragraph === "" ? (
-            <br key={index} />
-          ) : (
-            <p key={index} className="leading-loose" dangerouslySetInnerHTML={{ __html: paragraph }} />
-          )
-        )}
+        <DescriptionParagraphs paragraphs={data.description} paragraphClassName="leading-loose" />
       </div>
     </article>
   );
