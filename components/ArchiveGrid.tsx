@@ -30,9 +30,9 @@ export function ArchiveGrid({ projects }: ArchiveGridProps) {
   }
 
   // Ensure we have at least 9 items to fill the 3x3 grid, pad with empty slots
-  const paddedProjects = [...projects];
+  const paddedProjects: (ArchiveProject | null)[] = [...projects];
   while (paddedProjects.length < 9) {
-    paddedProjects.push(null as any);
+    paddedProjects.push(null);
   }
 
   return (

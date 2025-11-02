@@ -72,7 +72,7 @@ export default function Home() {
       {/* Hero section */}
       <section className="relative min-h-screen w-full px-4 sm:px-8 flex flex-col justify-center items-start gap-8 bg-slate-100 text-black dark:bg-slate-900 dark:text-neutral-400">
           <div className="w-full">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl instrument-serif-regular gradient-text pb-2">Alhwyn Geonzon</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl instrument-serif-regular text-black dark:text-neutral-100 pb-2">Alhwyn Geonzon</h1>
             <p className="text-gray-700 text-sm sm:text-md dark:text-neutral-400">18 year-old building Victoria, Canada</p>
           </div>
 
@@ -90,7 +90,7 @@ export default function Home() {
           </div>
           
           <div className="absolute bottom-5 left-4 sm:left-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-x-2 w-auto">
-            <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">What i've been up too</h3>
+            <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">What i&apos;ve been up too</h3>
             <span className="pl-0 sm:pl-5 text-2xl sm:text-3xl slow-bounce z-10 relative">↓</span>
           </div>
       </section>
