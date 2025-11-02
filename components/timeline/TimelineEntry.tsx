@@ -1,6 +1,5 @@
-import React from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { Badge } from "../ui/badge";
 import Image from "next/image";
 
 export type TimelineItem = {
@@ -9,7 +8,7 @@ export type TimelineItem = {
   icon?: string;
   tags?: Array<string | null>;
   description?: string;
-  article?: React.ReactNode;
+  article?: ReactNode;
 };
 
 type TimelineEntryProps = {
@@ -18,6 +17,8 @@ type TimelineEntryProps = {
   iconClassName?: string;
   showConnector?: boolean;
   isLast?: boolean;
+  minHeight?: string;
+  iconContainerWidth?: string;
 };
 
 export function TimelineEntry({
@@ -26,45 +27,42 @@ export function TimelineEntry({
   iconClassName = "w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md",
   showConnector = false,
   isLast = false,
+  minHeight = "200px",
+  iconContainerWidth,
 }: TimelineEntryProps) {
   return (
     <Link 
       href={`/projects/${item.id}`}
-      className="block relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 min-h-[200px] rounded-lg cursor-pointer"
+      className={`block relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 rounded-lg cursor-pointer`}
+      style={{ minHeight: minHeight }}
     >
       {showConnector && !isLast && (
         <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 dark:bg-neutral-600 z-0" />
       )}
       
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-4 py-2">
-          {item.icon ? (
+      <div className="flex items-center gap-4 py-2">
+        {item.icon ? (
+          <div className={iconContainerWidth ? `${iconContainerWidth} flex-shrink-0 flex items-center` : "flex-shrink-0 flex items-center"}>
             <Image
               src={item.icon}
               alt={`${item.title} icon`}
               width={iconSize}
               height={iconSize}
-              className={iconClassName}
+              className={`${iconClassName} flex-shrink-0`}
             />
-          ) : (
-            <div className={iconClassName} />
+          </div>
+        ) : (
+          <div className={`${iconClassName} flex-shrink-0 ${iconContainerWidth || ""}`} />
+        )}
+        <div className="flex flex-col min-w-0">
+          <h3 className="text-2xl source-serif-4 dark:text-neutral-400 mb-2">{item.title}</h3>
+          {item.description && (
+            <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed m-0 p-0">
+              {item.description}
+            </p>
           )}
-          <h3 className="text-2xl source-serif-4 dark:text-neutral-400">{item.title}</h3>
         </div>
       </div>
-      
-      {item.tags && (
-        <div className="flex gap-2 mb-4 ml-16">
-          {item.tags.filter(Boolean).map((tag, idx) => (
-            <Badge
-              key={idx}
-              className="text-gray-600 rounded-2xl bg-gray-200 dark:bg-zinc-800 dark:text-neutral-400"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      )}
     </Link>
   );
 }

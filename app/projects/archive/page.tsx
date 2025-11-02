@@ -1,52 +1,38 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArchiveGrid, ArchiveProject } from "@/components/ArchiveGrid";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTheme } from "@/hooks/use-theme";
 
-// Archive projects - these will be displayed in a 4x4 grid
+// Archive projects - these will be displayed in a 3x3 grid
 const ArchiveProjects: ArchiveProject[] = [
   {
     id: "canlii-mcp",
     title: "CanLII MCP",
     year: "2025",
     icon: "/image/icon/canlii.jpg",
+    description: "A Model Context Protocol (MCP) server for Canadian legal research using the CanLii database.",
   },
   {
     id: "reeflog",
     title: "ReefLog",
     year: "2025",
     icon: "/image/icon/Reeflog_icon.png",
+    description: "A scuba diving log book classifying your scuba photos using Machine Learning.",
   },
   {
     id: "dockbot",
     title: "DockBot",
     year: "2024",
     icon: "/image/icon/the_dock_victoria_logo.jpeg",
+    description: "AI chatbot in Slack for The Dock Victoria coworking space, built with RAG and Google Cloud.",
   },
 ];
 
 export default function ArchivePage() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    
-    const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-    if (stored) {
-      setTheme(stored);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  useTheme(); // Initialize theme, but we don't need the toggle here
 
   return (
     <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">

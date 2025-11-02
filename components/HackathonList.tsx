@@ -1,6 +1,5 @@
-import React from "react";
-import { TimelineEntry, TimelineItem } from "./timeline/TimelineEntry";
 import { motion, AnimatePresence } from "framer-motion";
+import { TimelineEntry, TimelineItem } from "./timeline/TimelineEntry";
 
 export type Hackathon = TimelineItem & {
   date: string;
@@ -12,16 +11,16 @@ type HackathonTimelineProps = {
 
 export function HackathonTimeline({ projects }: HackathonTimelineProps) {
   return (
-    <div className="relative bg-slate-100 dark:bg-neutral-900 dark:text-neutral-400 pt-8 pr-8 pb-8">
-      <div className="space-y-4 w-[600px] h-max[1500px] bg-slate-100 dark:bg-neutral-900 dark:text-neutral-400 rounded-xl pr-4 mr-4 overflow-hidden my-8">
+    <div className="relative bg-slate-100 dark:bg-slate-900 dark:text-neutral-400 pt-8 pr-8 pb-8">
+      <div className="space-y-8 w-[600px] bg-slate-100 dark:bg-slate-900 dark:text-neutral-400 rounded-xl">
         <AnimatePresence>
           {projects.map((item, idx) => {
             // Use smaller icon size for cursor-hackathon
             const isCursorHackathon = item.id === "cursor-hackathon";
             const iconSize = isCursorHackathon ? 64 : 128;
             const iconClassName = isCursorHackathon 
-              ? "w-16 h-16 rounded-lg object-contain flex-shrink-0"
-              : "w-32 h-32 rounded-lg object-contain flex-shrink-0";
+              ? "w-16 h-16 rounded-lg object-contain"
+              : "w-32 h-32 rounded-lg object-contain";
             
             return (
               <motion.div
@@ -37,6 +36,8 @@ export function HackathonTimeline({ projects }: HackathonTimelineProps) {
                   iconClassName={iconClassName}
                   showConnector={false}
                   isLast={idx === projects.length - 1}
+                  minHeight="auto"
+                  iconContainerWidth="w-32"
                 />
               </motion.div>
             );
