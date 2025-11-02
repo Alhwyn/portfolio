@@ -11,8 +11,8 @@ type HackathonTimelineProps = {
 
 export function HackathonTimeline({ projects }: HackathonTimelineProps) {
   return (
-    <div className="relative bg-slate-100 dark:bg-slate-900 dark:text-neutral-400 pt-8 pr-8 pb-8">
-      <div className="space-y-8 w-[600px] bg-slate-100 dark:bg-slate-900 dark:text-neutral-400 rounded-xl">
+    <div className="relative bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400 pt-8 pr-8 pb-8">
+      <div className="space-y-8 w-[600px] bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400 rounded-xl">
         <AnimatePresence>
           {projects.map((item, idx) => {
             // Use smaller icon size for cursor-hackathon

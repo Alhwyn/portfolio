@@ -11,7 +11,7 @@ type TimelineContainerProps<T extends TimelineItem> = {
 
 export function TimelineContainer<T extends TimelineItem>({
   items,
-  backgroundClassName = "bg-slate-100 dark:bg-slate-900 dark:text-gray-100",
+  backgroundClassName = "bg-slate-50 dark:bg-neutral-900 dark:text-gray-100",
   entryIconSize = 48,
   entryIconClassName = "w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md",
   showConnector = false,

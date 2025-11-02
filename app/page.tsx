@@ -51,7 +51,7 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative min-h-screen bg-slate-100 text-black dark:bg-slate-900 dark:text-neutral-400"
+      className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400"
     >
 
       {/* Theme toggle button in the top-right corner */}
@@ -70,9 +70,9 @@ export default function Home() {
       </div>
 
       {/* Hero section */}
-      <section className="relative min-h-screen w-full px-4 sm:px-8 flex flex-col justify-center items-start gap-8 bg-slate-100 text-black dark:bg-slate-900 dark:text-neutral-400">
+      <section className="relative min-h-screen w-full px-4 sm:px-8 flex flex-col justify-center items-start gap-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div className="w-full">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl instrument-serif-regular text-black dark:text-neutral-100 pb-2">Alhwyn Geonzon</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl instrument-serif-regular text-gray-700 dark:text-neutral-300 pb-2">Alhwyn Geonzon</h1>
             <p className="text-gray-700 text-sm sm:text-md dark:text-neutral-400">18 year-old building Victoria, Canada</p>
           </div>
 
@@ -99,7 +99,7 @@ export default function Home() {
         <ProjectTimeline projects={ProjectsList} />
       </div>
       
-      <section className="pl-4 sm:pl-8 bg-slate-100 text-black dark:bg-slate-900 dark:text-neutral-400">
+      <section className="pl-4 sm:pl-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
         <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organizer hackathons)</h3>
       </section>
 

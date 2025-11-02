@@ -8,7 +8,7 @@ export default function Scrapyard() {
   const data = projectsData.scrapyard;
   
   return (
-    <article className="max-w-3xl mx-auto bg-slate-100 dark:bg-neutral-900 dark:text-neutral-400 rounded-xl space-y-8">
+    <article className="max-w-3xl mx-auto bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400 rounded-xl space-y-8">
       {/* Project image carousel */}
       <div className="w-full flex justify-center mb-8">
         <ImageCarousel images={data.media.images} />

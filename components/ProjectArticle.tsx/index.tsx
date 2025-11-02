@@ -44,7 +44,7 @@ export default function ProjectArticle({ data }: ProjectArticleProps) {
   const descriptionPadding = isHackathon ? "pb-32" : "pb-20";
 
   return (
-    <article className="max-w-3xl mx-auto bg-slate-100 rounded-xl space-y-8 dark:bg-neutral-900 dark:text-neutral-400">
+    <article className="max-w-3xl mx-auto bg-slate-50 rounded-xl space-y-8 dark:bg-neutral-900 dark:text-neutral-400">
       {/* Media section - Video or Carousel */}
       <div className="w-full flex justify-center mb-8">
         {data.media.type === "carousel" ? (
