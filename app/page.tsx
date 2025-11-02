@@ -100,7 +100,7 @@ export default function Home() {
       </div>
       
       <section className="pl-4 sm:pl-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
-        <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organizer hackathons)</h3>
+        <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organize hackathons)</h3>
       </section>
 
       <div className="pl-4">
