@@ -28,6 +28,13 @@ const ProjectsList: Project[] = [
 
 const HackathonList: Hackathon[] = [
   {
+    id: "slate",
+    title: "Cafe Cursor",
+    date: "2025",
+    description: "Come and join us from Victoria, BC Canada ",
+    icon: "/image/icon/cursor.png",
+  },
+  {
     id: "cursor-hackathon",
     title: "Cursor Hackathon Victoria",
     date: "September 2025",
@@ -70,7 +77,7 @@ export default function Home() {
       </div>
 
       {/* Hero section */}
-      <section className="relative min-h-screen w-full px-4 sm:px-8 flex flex-col justify-center items-start gap-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
+      <section className="relative min-h-screen w-full px-4 sm:px-8 py-8 sm:py-12 flex flex-col justify-center items-start gap-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div className="w-full">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl instrument-serif-regular text-gray-700 dark:text-neutral-300 pb-2">Alhwyn Geonzon</h1>
             <p className="text-gray-700 text-sm sm:text-md dark:text-neutral-400">18 year-old building Victoria, Canada</p>

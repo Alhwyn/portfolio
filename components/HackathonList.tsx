@@ -15,10 +15,10 @@ export function HackathonTimeline({ projects }: HackathonTimelineProps) {
       <div className="space-y-8 w-[600px] bg-slate-50 dark:bg-neutral-900 dark:text-neutral-400 rounded-xl">
         <AnimatePresence>
           {projects.map((item, idx) => {
-            // Use smaller icon size for cursor-hackathon
-            const isCursorHackathon = item.id === "cursor-hackathon";
-            const iconSize = isCursorHackathon ? 64 : 128;
-            const iconClassName = isCursorHackathon 
+            // Use smaller icon size for cursor-related hackathons, keep original size for others
+            const isCursorRelated = item.id === "cursor-hackathon" || item.id === "slate";
+            const iconSize = isCursorRelated ? 64 : 128;
+            const iconClassName = isCursorRelated 
               ? "w-16 h-16 rounded-lg object-contain"
               : "w-32 h-32 rounded-lg object-contain";
             
@@ -38,6 +38,7 @@ export function HackathonTimeline({ projects }: HackathonTimelineProps) {
                   isLast={idx === projects.length - 1}
                   minHeight="auto"
                   iconContainerWidth="w-32"
+                  basePath="hackathons"
                 />
               </motion.div>
             );

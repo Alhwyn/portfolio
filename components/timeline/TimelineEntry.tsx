@@ -19,6 +19,7 @@ type TimelineEntryProps = {
   isLast?: boolean;
   minHeight?: string;
   iconContainerWidth?: string;
+  basePath?: string;
 };
 
 export function TimelineEntry({
@@ -29,10 +30,11 @@ export function TimelineEntry({
   isLast = false,
   minHeight = "200px",
   iconContainerWidth,
+  basePath = "projects",
 }: TimelineEntryProps) {
   return (
     <Link 
-      href={`/projects/${item.id}`}
+      href={`/${basePath}/${item.id}`}
       className={`block relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 rounded-lg cursor-pointer`}
       style={{ minHeight: minHeight }}
     >
