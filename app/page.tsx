@@ -2,6 +2,7 @@
 
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
+import CountdownBanner from "@/components/CountdownBanner";
 import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "../hooks/use-theme";
@@ -52,6 +53,8 @@ const HackathonList: Hackathon[] = [
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
+  const cafeCursorDate = "2025-12-14T09:00:00-08:00";
+
   return (
     
     <motion.div
@@ -60,6 +63,11 @@ export default function Home() {
       transition={{ duration: 1.5 }}
       className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400"
     >
+      <CountdownBanner 
+        eventName="Cafe Cursor Victoria" 
+        targetDate={cafeCursorDate}
+        lumaUrl="https://lu.ma/7bx22l8b"
+      />
 
       {/* Theme toggle button in the top-right corner */}
       <div className="fixed top-4 right-4 z-50">
