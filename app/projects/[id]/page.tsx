@@ -3,90 +3,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ImageCarousel from "@/components/ImageCarousel";
 import VideoPlayer from "@/components/VideoPlayer";
-import DescriptionParagraphs from "@/components/DescriptionParagraphs";
-import projectsData from "@/constants/projects.json";
+import MarkdownContent from "@/components/MarkdownContent";
+import { getContentBySlug, getContentSlugs } from "@/lib/content";
 import { ArrowLeft } from "lucide-react";
 
-// Type definitions for project data
-interface ProjectData {
-  project?: string;
-  event?: string;
-  tools?: string;
-  role?: string;
-  description: string[];
-  media: {
-    type: "video" | "carousel";
-    src?: string;
-    images?: Array<{ src: string; alt: string; title?: string }>;
-    width?: number;
-    height?: number;
-  };
-  sections?: Array<{
-    title: string;
-    headingLevel: "h2" | "h3";
-    src: string;
-    width: number;
-    height: number;
-    description: string[];
-  }>;
-}
-
-// Helper to normalize paths (convert ./video/ to /video/, etc.)
-function normalizePath(path: string): string {
-  if (path.startsWith("./")) {
-    return "/" + path.slice(2);
-  }
-  if (!path.startsWith("/")) {
-    return "/" + path;
-  }
-  return path;
-}
-
-// Map project IDs to JSON keys
-const projectIdToKey: Record<string, keyof typeof projectsData> = {
-  photobomb: "photoBomb",
-  "canlii-mcp": "lawyerAgent",
-  reeflog: "reeflog",
-  dockbot: "dockbot",
-  "cursor-hackathon": "cursorHackathon",
-  scrapyard: "scrapyard",
-};
-
-// Map project IDs to display info
-const projectInfo: Record<string, { title: string; year?: string; date?: string }> = {
-  photobomb: { title: "PhotoBomb", year: "2025" },
-  "canlii-mcp": { title: "CanLII MCP", year: "2025" },
-  reeflog: { title: "ReefLog", year: "2025" },
-  dockbot: { title: "DockBot", year: "2024" },
-  "cursor-hackathon": { title: "Cursor Hackathon Victoria", date: "September 2025" },
-  scrapyard: { title: "Scrapyard Victoria", date: "March 2025" },
-};
+// Valid project slugs that map to MDX files
+const validProjectSlugs = ['photobomb', 'canlii-mcp', 'reeflog', 'dockbot'];
 
 export async function generateStaticParams() {
-  return Object.keys(projectIdToKey).map((id) => ({
-    id: id,
-  }));
+  const slugs = getContentSlugs('projects');
+  return slugs
+    .filter((slug) => validProjectSlugs.includes(slug))
+    .map((slug) => ({ id: slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const id = resolvedParams.id;
-  const projectKey = projectIdToKey[id];
+  const data = getContentBySlug(id, 'projects');
   
-  if (!projectKey || !projectsData[projectKey]) {
+  if (!data) {
     return {
       title: "Project Not Found",
     };
   }
 
-  const info = projectInfo[id] || { title: id };
-  const data = projectsData[projectKey];
-  
   return {
-    title: info.title,
-    description: Array.isArray(data.description) 
-      ? data.description.filter(p => p && p.trim()).join(" ").slice(0, 160)
-      : "Project details",
+    title: data.frontmatter.title,
+    description: data.content.slice(0, 160),
   };
 }
 
@@ -98,21 +42,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     notFound();
   }
   
-  const projectKey = projectIdToKey[id];
+  const data = getContentBySlug(id, 'projects');
   
-  if (!projectKey || !projectsData[projectKey]) {
+  if (!data) {
     notFound();
   }
 
-  const data = projectsData[projectKey] as ProjectData;
-  const info = projectInfo[id] || { title: id };
+  const { frontmatter, content } = data;
+  const { title, year, date, project, event, tools, role, media, sections } = frontmatter;
   
-  // Determine if this is a hackathon (uses Event/Role) or project (uses Project/Tools)
-  const isHackathon = 'event' in data && data.event !== undefined;
+  // Determine if this is a hackathon-style (uses Event/Role) or project-style (uses Project/Tools)
+  const isHackathon = event !== undefined;
   const infoLabel1 = isHackathon ? "Event" : "Project";
-  const infoValue1 = isHackathon ? (data.event as string) : (data.project as string);
+  const infoValue1 = isHackathon ? event : project;
   const infoLabel2 = isHackathon ? "Role" : "Tools";
-  const infoValue2 = isHackathon ? (data.role as string) : (data.tools as string);
+  const infoValue2 = isHackathon ? role : tools;
 
   return (
     <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
@@ -132,50 +76,61 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         {/* Header */}
         <header className="mb-12">
           <div className="text-gray-600 dark:text-neutral-500 text-sm mb-4">
-            {info.year || info.date || ""}
+            {year || date || ""}
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 instrument-serif-regular text-gray-900 dark:text-neutral-100">
-            {info.title}
+            {title}
           </h1>
         </header>
 
         {/* Media section - Video or Carousel */}
-        <div className="w-full flex justify-center mb-12">
-          {data.media.type === "carousel" ? (
-            <ImageCarousel images={(data.media.images || []).map((img) => ({
-              src: normalizePath(img.src),
-              alt: img.alt || "",
-            }))} />
-          ) : data.media.src ? (
-            <VideoPlayer
-              src={normalizePath(data.media.src)}
-              width={data.media.width}
-              height={data.media.height}
-            />
-          ) : null}
-        </div>
+        {media && (
+          <div className="w-full flex justify-center mb-12">
+            {media.type === "carousel" && media.images ? (
+              <ImageCarousel images={media.images.map((img) => ({
+                src: img.src,
+                alt: img.alt || "",
+              }))} />
+            ) : media.src ? (
+              <VideoPlayer
+                src={media.src}
+                width={media.width}
+                height={media.height}
+              />
+            ) : null}
+          </div>
+        )}
 
         {/* Project info grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 text-gray-800 dark:text-neutral-300 mb-12 border-b border-gray-200 dark:border-neutral-700 pb-12">
-          <div className="font-semibold text-gray-600 dark:text-neutral-500">{infoLabel1}</div>
-          <div className="text-lg">{infoValue1}</div>
+        {(infoValue1 || infoValue2) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 text-gray-800 dark:text-neutral-300 mb-12 border-b border-gray-200 dark:border-neutral-700 pb-12">
+            {infoValue1 && (
+              <>
+                <div className="font-semibold text-gray-600 dark:text-neutral-500">{infoLabel1}</div>
+                <div className="text-lg">{infoValue1}</div>
+              </>
+            )}
 
-          <div className="font-semibold text-gray-600 dark:text-neutral-500">
-            {infoLabel2}
+            {infoValue2 && (
+              <>
+                <div className="font-semibold text-gray-600 dark:text-neutral-500">
+                  {infoLabel2}
+                </div>
+                <div className="text-lg">{infoValue2}</div>
+              </>
+            )}
           </div>
-          <div className="text-lg">{infoValue2}</div>
-        </div>
+        )}
 
-        {/* Description section */}
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <DescriptionParagraphs 
-            paragraphs={data.description} 
-            paragraphClassName="leading-relaxed text-gray-800 dark:text-neutral-300 text-lg mb-6" 
-          />
-        </div>
+        {/* Description section - now using Markdown */}
+        {content && (
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            <MarkdownContent content={content} />
+          </div>
+        )}
 
-        {/* Optional sections (for Dockbot) */}
-        {data.sections?.map((section, sectionIndex: number) => {
+        {/* Optional sections (for projects with multiple demos like Dockbot) */}
+        {sections?.map((section, sectionIndex: number) => {
           const HeadingTag = section.headingLevel === "h3" ? "h3" : "h2";
           return (
             <div key={sectionIndex} className="mt-16 pt-12 border-t border-gray-200 dark:border-neutral-700">
@@ -186,18 +141,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               {/* Section video */}
               <div className="w-full flex justify-center mb-8">
                 <VideoPlayer
-                  src={normalizePath(section.src)}
+                  src={section.src}
                   width={section.width}
                   height={section.height}
                 />
               </div>
 
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                <DescriptionParagraphs 
-                  paragraphs={section.description} 
-                  paragraphClassName="leading-relaxed text-gray-800 dark:text-neutral-300 text-lg mb-6" 
-                />
-              </div>
+              {section.description && (
+                <div className="prose prose-lg dark:prose-invert max-w-none">
+                  <MarkdownContent content={section.description} />
+                </div>
+              )}
             </div>
           );
         })}
@@ -205,4 +159,3 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     </div>
   );
 }
-
