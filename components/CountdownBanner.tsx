@@ -44,11 +44,11 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
 
   return (
     <div className="w-full bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 py-3 px-3 sm:px-4 text-center z-50 border-b border-gray-200 dark:border-neutral-700">
-      <div className="w-full max-w-full flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
-        <span className="break-words">
+      <div className="w-full max-w-full flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 text-sm sm:text-base font-medium">
+        <span className="whitespace-normal leading-normal">
           {eventName} starts in
         </span>
-        <div className="text-xs bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-400 px-2 py-0.5 rounded border border-gray-200 dark:border-neutral-700 whitespace-nowrap flex-shrink-0">
+        <div className="text-xs sm:text-sm bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-400 px-2 py-0.5 rounded border border-gray-200 dark:border-neutral-700 whitespace-nowrap flex-shrink-0">
           {timeLeft.days}d {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
         </div>
 
