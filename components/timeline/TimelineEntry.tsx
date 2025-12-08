@@ -42,9 +42,9 @@ export function TimelineEntry({
         <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 dark:bg-neutral-600 z-0" />
       )}
       
-      <div className="flex items-center gap-4 py-2">
+      <div className="flex items-center gap-3 py-2">
         {item.icon ? (
-          <div className={iconContainerWidth ? `${iconContainerWidth} flex-shrink-0 flex items-center` : "flex-shrink-0 flex items-center"}>
+          <div className={iconContainerWidth ? `${iconContainerWidth} flex-shrink-0 flex items-center justify-center` : "flex-shrink-0 flex items-center"}>
             <Image
               src={item.icon}
               alt={`${item.title} icon`}
@@ -57,9 +57,9 @@ export function TimelineEntry({
           <div className={`${iconClassName} flex-shrink-0 ${iconContainerWidth || ""}`} />
         )}
         <div className="flex flex-col min-w-0">
-          <h3 className="text-2xl source-serif-4 dark:text-neutral-400 mb-2">{item.title}</h3>
+          <h3 className="text-lg font-medium source-serif-4 dark:text-neutral-400 mb-0.5">{item.title}</h3>
           {item.description && (
-            <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed m-0 p-0">
+            <p className="text-gray-500 dark:text-neutral-500 text-xs leading-snug m-0 p-0 line-clamp-2">
               {item.description}
             </p>
           )}
