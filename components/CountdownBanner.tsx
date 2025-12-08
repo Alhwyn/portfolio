@@ -43,12 +43,12 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
   if (!timeLeft) return null;
 
   return (
-    <div className="w-full bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 py-3 px-4 text-center z-50 border-b border-gray-200 dark:border-neutral-700">
-      <div className="container mx-auto flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 text-sm font-medium">
-        <span>
+    <div className="w-full bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 py-4 px-4 text-center z-50 border-b border-gray-200 dark:border-neutral-700">
+      <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
+        <span className="text-base sm:text-lg font-medium">
           {eventName} starts in
         </span>
-        <div className="text-xs bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-400 px-2 py-0.5 rounded border border-gray-200 dark:border-neutral-700">
+        <div className="text-sm sm:text-base bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-400 px-3 py-1 rounded border border-gray-200 dark:border-neutral-700 whitespace-nowrap">
           {timeLeft.days}d {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
         </div>
 
@@ -57,7 +57,7 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
             href={lumaUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-4 py-1.5 text-sm bg-black text-white dark:bg-white dark:text-black rounded-lg hover:opacity-80 transition-opacity font-medium"
+            className="inline-block px-5 py-2 text-sm sm:text-base bg-black text-white dark:bg-white dark:text-black rounded-lg hover:opacity-80 transition-opacity font-medium whitespace-nowrap"
           >
             Register
           </a>

@@ -4,7 +4,6 @@ import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
 import CountdownBanner from "@/components/CountdownBanner";
 import { Sun, Moon } from "lucide-react";
-import { motion } from "framer-motion";
 import { useTheme } from "../hooks/use-theme";
 
 
@@ -56,13 +55,7 @@ export default function Home() {
   const cafeCursorDate = "2025-12-14T09:00:00-08:00";
 
   return (
-    
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5 }}
-      className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400"
-    >
+    <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
       <CountdownBanner 
         eventName="Cafe Cursor Victoria" 
         targetDate={cafeCursorDate}
@@ -121,6 +114,6 @@ export default function Home() {
       <div className="pl-4">
         <HackathonTimeline projects={HackathonList} />
       </div>
-    </motion.div>
+    </div>
   );
 }
