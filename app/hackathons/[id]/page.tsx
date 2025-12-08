@@ -5,68 +5,33 @@ import { ArrowLeft } from "lucide-react";
 import Script from "next/script";
 import ImageCarousel from "@/components/ImageCarousel";
 import VideoPlayer from "@/components/VideoPlayer";
-import DescriptionParagraphs from "@/components/DescriptionParagraphs";
-import projectsData from "@/constants/projects.json";
+import MarkdownContent from "@/components/MarkdownContent";
+import { getContentBySlug, getContentSlugs } from "@/lib/content";
 
-interface ProjectData {
-  project?: string;
-  event?: string;
-  tools?: string;
-  role?: string;
-  description: string[];
-  media: {
-    type: "video" | "carousel";
-    src?: string;
-    images?: Array<{ src: string; alt: string; title?: string }>;
-    width?: number;
-    height?: number;
-  };
-  sections?: Array<{
-    title: string;
-    headingLevel: "h2" | "h3";
-    src: string;
-    width: number;
-    height: number;
-    description: string[];
-  }>;
-}
-
-function normalizePath(path: string): string {
-  if (path.startsWith("./")) {
-    return "/" + path.slice(2);
-  }
-  if (!path.startsWith("/")) {
-    return "/" + path;
-  }
-  return path;
-}
-
-// Map hackathon IDs to display info
-const hackathonInfo: Record<string, { title: string; date?: string; projectKey?: string }> = {
-  slate: { title: "Cafe Cursor", date: "2025" },
-  "cursor-hackathon": { title: "Cursor Hackathon Victoria", date: "September 2025", projectKey: "cursorHackathon" },
-  scrapyard: { title: "Scrapyard Victoria", date: "March 2025", projectKey: "scrapyard" },
-};
-
-// Map hackathon IDs to Luma event IDs
-const lumaEventIds: Record<string, string> = {
-  slate: "evt-tB0j8v1wlNZccMs",
-};
+// Valid hackathon slugs
+const validHackathonSlugs = ['slate', 'cursor-hackathon', 'scrapyard'];
 
 export async function generateStaticParams() {
-  return Object.keys(hackathonInfo).map((id) => ({
-    id: id,
-  }));
+  const slugs = getContentSlugs('hackathons');
+  return slugs
+    .filter((slug) => validHackathonSlugs.includes(slug))
+    .map((slug) => ({ id: slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const id = resolvedParams.id;
-  const info = hackathonInfo[id] || { title: id };
+  const data = getContentBySlug(id, 'hackathons');
   
+  if (!data) {
+    return {
+      title: "Hackathon Not Found",
+    };
+  }
+
   return {
-    title: info.title,
-    description: `Details for ${info.title}`,
+    title: data.frontmatter.title,
+    description: `Details for ${data.frontmatter.title}`,
   };
 }
 
@@ -74,14 +39,18 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
   const resolvedParams = await params;
   const id = resolvedParams.id;
   
-  if (!id || !hackathonInfo[id]) {
+  if (!id) {
+    notFound();
+  }
+  
+  const data = getContentBySlug(id, 'hackathons');
+  
+  if (!data) {
     notFound();
   }
 
-  const info = hackathonInfo[id];
-  const lumaEventId = lumaEventIds[id];
-  const projectKey = info.projectKey;
-  const data = projectKey ? projectsData[projectKey as keyof typeof projectsData] as ProjectData : null;
+  const { frontmatter, content } = data;
+  const { title, date, event, role, media, lumaEventId } = frontmatter;
 
   return (
     <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
@@ -101,10 +70,10 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
         {/* Header */}
         <header className="mb-12">
           <div className="text-gray-600 dark:text-neutral-500 text-sm mb-4">
-            {info.date || ""}
+            {date || ""}
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 instrument-serif-regular text-gray-900 dark:text-neutral-100">
-            {info.title}
+            {title}
           </h1>
         </header>
 
@@ -123,44 +92,48 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
           </div>
         )}
 
-        {data && (
-          <>
-            <div className="w-full flex justify-center mb-12">
-              {data.media.type === "carousel" ? (
-                <ImageCarousel images={(data.media.images || []).map((img) => ({
-                  src: normalizePath(img.src),
-                  alt: img.alt,
-                }))} />
-              ) : data.media.src ? (
-                <VideoPlayer
-                  src={normalizePath(data.media.src)}
-                  width={data.media.width}
-                  height={data.media.height}
-                />
-              ) : null}
-            </div>
+        {/* Media section */}
+        {media && (
+          <div className="w-full flex justify-center mb-12">
+            {media.type === "carousel" && media.images ? (
+              <ImageCarousel images={media.images.map((img) => ({
+                src: img.src,
+                alt: img.alt || "",
+              }))} />
+            ) : media.src ? (
+              <VideoPlayer
+                src={media.src}
+                width={media.width}
+                height={media.height}
+              />
+            ) : null}
+          </div>
+        )}
 
-            {(data.event || data.project) && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 text-gray-800 dark:text-neutral-300 mb-12 border-b border-gray-200 dark:border-neutral-700 pb-12">
-                <div className="font-semibold text-gray-600 dark:text-neutral-500">
-                  {data.event ? "Event" : "Project"}
-                </div>
-                <div className="text-lg">{data.event || data.project}</div>
-
-                <div className="font-semibold text-gray-600 dark:text-neutral-500">
-                  {data.role ? "Role" : "Tools"}
-                </div>
-                <div className="text-lg">{data.role || data.tools}</div>
-              </div>
+        {/* Event info grid */}
+        {(event || role) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 text-gray-800 dark:text-neutral-300 mb-12 border-b border-gray-200 dark:border-neutral-700 pb-12">
+            {event && (
+              <>
+                <div className="font-semibold text-gray-600 dark:text-neutral-500">Event</div>
+                <div className="text-lg">{event}</div>
+              </>
             )}
 
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <DescriptionParagraphs 
-                paragraphs={data.description} 
-                paragraphClassName="leading-relaxed text-gray-800 dark:text-neutral-300 text-lg mb-6" 
-              />
-            </div>
-          </>
+            {role && (
+              <>
+                <div className="font-semibold text-gray-600 dark:text-neutral-500">Role</div>
+                <div className="text-lg">{role}</div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Description section - now using Markdown */}
+        {content && (
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            <MarkdownContent content={content} />
+          </div>
         )}
 
         {/* Luma Embed */}
@@ -183,4 +156,3 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
     </div>
   );
 }
-
