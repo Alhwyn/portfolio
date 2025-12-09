@@ -35,7 +35,7 @@ export function TimelineEntry({
   return (
     <Link 
       href={`/${basePath}/${item.id}`}
-      className={`block relative pl-4 group hover:bg-gray-100 hover:dark:bg-neutral-700 transition-colors duration-200 rounded-lg cursor-pointer`}
+      className={`block relative pl-4 group rounded-lg cursor-pointer`}
       style={{ minHeight: minHeight }}
     >
       {showConnector && !isLast && (
