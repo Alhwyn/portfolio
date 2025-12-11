@@ -45,7 +45,7 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
   return (
     <div className="w-full bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 py-4 px-4 text-center z-50 border-b border-gray-200 dark:border-neutral-700">
       <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
-        <span className="text-base sm:text-lg font-medium">
+        <span className="text-base sm:text-lg font-medium source-serif-4">
           {eventName} starts in
         </span>
         <div className="text-sm sm:text-base bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-400 px-3 py-1 rounded border border-gray-200 dark:border-neutral-700 whitespace-nowrap">

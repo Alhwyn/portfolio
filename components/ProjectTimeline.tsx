@@ -15,7 +15,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
       items={projects}
       backgroundClassName="bg-slate-50 dark:bg-neutral-900 dark:text-gray-100"
       entryIconSize={48}
-      entryIconClassName="w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md"
+      entryIconClassName="w-12 h-12 rounded-lg object-cover flex-shrink-0"
       showConnector={true}
     />
   );

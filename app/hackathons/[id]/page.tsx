@@ -50,7 +50,7 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
   }
 
   const { frontmatter, content } = data;
-  const { title, date, event, role, media, lumaEventId } = frontmatter;
+  const { title, date, media, lumaEventId } = frontmatter;
 
   return (
     <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
@@ -77,20 +77,6 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
           </h1>
         </header>
 
-        {/* Luma Registration Button */}
-        {lumaEventId && (
-          <div className="mb-12">
-            <a
-              href={`https://luma.com/event/${lumaEventId}`}
-              className="luma-checkout--button inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-center"
-              data-luma-action="checkout"
-              data-luma-event-id={lumaEventId}
-            >
-              Register for Event
-            </a>
-            <Script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js" />
-          </div>
-        )}
 
         {/* Media section */}
         {media && (
@@ -110,24 +96,6 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
           </div>
         )}
 
-        {/* Event info grid */}
-        {(event || role) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 text-gray-800 dark:text-neutral-300 mb-12 border-b border-gray-200 dark:border-neutral-700 pb-12">
-            {event && (
-              <>
-                <div className="font-semibold text-gray-600 dark:text-neutral-500">Event</div>
-                <div className="text-lg">{event}</div>
-              </>
-            )}
-
-            {role && (
-              <>
-                <div className="font-semibold text-gray-600 dark:text-neutral-500">Role</div>
-                <div className="text-lg">{role}</div>
-              </>
-            )}
-          </div>
-        )}
 
         {/* Description section - now using Markdown */}
         {content && (

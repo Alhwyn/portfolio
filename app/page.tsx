@@ -21,7 +21,7 @@ const ProjectsList: Project[] = [
     title: "Archive",
     year: "2024",
     description: "A collection of archived projects",
-    icon: "/image/icon/archive.png",
+    icon: "/image/icon/archive.svg",
   },
 ];
 
@@ -29,7 +29,7 @@ const ProjectsList: Project[] = [
 const HackathonList: Hackathon[] = [
   {
     id: "slate",
-    title: "Cafe Cursor",
+    title: "Cafe Cursor Victoria",
     date: "2025",
     description: "Come and join us from Victoria, BC Canada ",
     icon: "/image/icon/cursor.png",
@@ -70,9 +70,9 @@ export default function Home() {
           className="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 hover:scale-110 transition-all shadow-md"
         >
           {theme === "dark" ? (
-            <Sun className="w-6 h-6 text-yellow-300" />
+            <Sun className="w-6 h-6 text-yellow-300" strokeWidth={1} />
           ) : (
-            <Moon className="w-6 h-6 text-gray-800" />
+            <Moon className="w-6 h-6 text-gray-800" strokeWidth={1} />
           )}
         </button>
       </div>
@@ -108,7 +108,7 @@ export default function Home() {
       </div>
       
       <section className="pl-4 sm:pl-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
-        <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">Hackathon Maxxing (I organize hackathons)</h3>
+        <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">Hackathons I&apos;ve Organized</h3>
       </section>
 
       <div className="pl-4">
