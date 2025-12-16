@@ -85,8 +85,8 @@ export default function Home() {
           </div>
 
           <div className="mt-8 sm:mt-0 sm:absolute sm:bottom-8 sm:right-8 w-full sm:w-auto text-left sm:text-right space-y-2 text-gray-700 dark:text-neutral-400 text-sm sm:text-base">
-            <a href="https://x.com/alhwynn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              x.com/alhwynn
+            <a href="https://x.com/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+              x.com/alhwyn
             </a>
             <a href="https://github.com/Alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
               github.com/alhwyn

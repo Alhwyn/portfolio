@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Alhwyn Geonzon - Portfolio",
     description: "Portfolio ",
-    site: "@alhwynn",
-    creator: "@alhwynn",
+    site: "@alhwyn",
+    creator: "@alhwyn",
     images: ["/image/icon/photobob_icon.jpeg"],
   },
   alternates: {
