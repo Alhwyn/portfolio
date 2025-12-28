@@ -55,7 +55,7 @@ export default function Home() {
   const cafeCursorDate = "2025-12-14T09:00:00-08:00";
 
   return (
-    <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
+    <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
       <CountdownBanner 
         eventName="Cafe Cursor Victoria" 
         targetDate={cafeCursorDate}
@@ -79,27 +79,18 @@ export default function Home() {
 
       {/* Hero section */}
       <section className="relative min-h-screen w-full px-4 sm:px-8 py-8 sm:py-12 flex flex-col justify-center items-start gap-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
-          <div className="w-full">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl instrument-serif-regular text-gray-700 dark:text-neutral-300 pb-2">Alhwyn Geonzon</h1>
-            <p className="text-gray-700 text-sm sm:text-md dark:text-neutral-400">18 year-old building Victoria, Canada</p>
-          </div>
-
-          <div className="mt-8 sm:mt-0 sm:absolute sm:bottom-8 sm:right-8 w-full sm:w-auto text-left sm:text-right space-y-2 text-gray-700 dark:text-neutral-400 text-sm sm:text-base">
-            <a href="https://x.com/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              x.com/alhwyn
-            </a>
-            <a href="https://github.com/Alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              github.com/alhwyn
-            </a>
-            <a href="https://www.linkedin.com/in/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              linkedin.com/alhwyn
-            </a>
-            <a href="mailto:alhwyn@alhwyn.com" className="block hover:underline">alhwyn@alhwyn.com</a>
+          <div className="w-full max-w-3xl">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-neutral-400 leading-relaxed">
+              Hey! I&apos;m an 18-year-old software developer based in Victoria, Canada. 
+              I love building things that solve real problems and bringing people together through tech. 
+              Right now, I&apos;m organizing events like Cursor Hackathon and working on projects 
+              ranging from AI tools to mobile apps. When I&apos;m not coding, you&apos;ll find me 
+              connecting with the local tech community and exploring what&apos;s possible with new technologies.
+            </p>
           </div>
           
           <div className="absolute bottom-5 left-4 sm:left-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-x-2 w-auto">
             <h3 className="text-lg sm:text-xl md:text-2xl instrument-serif-regular-italic">What i&apos;ve been up too</h3>
-            <span className="pl-0 sm:pl-5 text-2xl sm:text-3xl slow-bounce z-10 relative">↓</span>
           </div>
       </section>
       {/* Projects section */}

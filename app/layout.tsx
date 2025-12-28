@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Sidebar } from "@/components/Sidebar";
 import "./globals.css";
 
 const geistSans = Instrument_Serif({
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 dark:bg-neutral-900`}
       >
+        <Sidebar />
         {children}
         <Analytics />
       </body>

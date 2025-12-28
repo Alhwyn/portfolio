@@ -59,7 +59,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const infoValue2 = isHackathon ? role : tools;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
+    <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
       {/* Back button */}
       <div className="max-w-4xl mx-auto px-8 pt-12 pb-8">
         <Link

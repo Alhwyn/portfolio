@@ -35,7 +35,7 @@ export default function ArchivePage() {
   useTheme(); // Initialize theme, but we don't need the toggle here
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
+    <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
       {/* Back button */}
       <div className="max-w-7xl mx-auto px-8 pt-12 pb-8">
         <Link
