@@ -53,9 +53,15 @@ const HackathonList: Hackathon[] = [
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const cafeCursorDate = "2025-12-14T09:00:00-08:00";
+  const vikeLabsCafeDate = "2026-01-29T11:00:00-08:00";
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
+      <CountdownBanner 
+        eventName="VikeLabs Cafe x Startup School" 
+        targetDate={vikeLabsCafeDate}
+        lumaUrl="https://lu.ma/7bs63dew"
+      />
       <CountdownBanner 
         eventName="Cafe Cursor Victoria" 
         targetDate={cafeCursorDate}
