@@ -19,7 +19,7 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
   useEffect(() => {
     const calculateTimeLeft = () => {
       const difference = +new Date(targetDate) - +new Date();
-      
+
       if (difference > 0) {
         return {
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -49,7 +49,7 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
           {eventName} starts in
         </span>
         <div className="text-sm sm:text-base bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-400 px-3 py-1 rounded border border-gray-200 dark:border-neutral-700 whitespace-nowrap">
-          {timeLeft.days}d {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+          {timeLeft.days}d {String(timeLeft.hours).padStart(2, "0")}:{String(timeLeft.minutes).padStart(2, "0")}:{String(timeLeft.seconds).padStart(2, "0")}
         </div>
 
         {lumaUrl && (
@@ -66,4 +66,3 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl }: Coun
     </div>
   );
 }
-
