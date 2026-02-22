@@ -74,7 +74,16 @@ export default function Home() {
           <div className="w-full max-w-3xl">
             <p className="text-base sm:text-lg text-gray-600 dark:text-neutral-400 leading-relaxed">
               I&apos;m a software developer based in Victoria, Canada. 
-              I organize hackathons and build projects in my free time.
+              I organize hackathons and build projects in my free time, like{" "}
+              <a
+                href="https://www.photobomb.online/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline"
+              >
+                PhotoBomb
+              </a>
+              .
             </p>
           </div>
           
