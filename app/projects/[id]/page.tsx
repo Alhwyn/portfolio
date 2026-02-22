@@ -5,7 +5,7 @@ import ImageCarousel from "@/components/ImageCarousel";
 import VideoPlayer from "@/components/VideoPlayer";
 import MarkdownContent from "@/components/MarkdownContent";
 import { getContentBySlug, getContentSlugs } from "@/lib/content";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 
 // Valid project slugs that map to MDX files
 const validProjectSlugs = ['photobomb', 'canlii-mcp', 'reeflog', 'dockbot'];
@@ -49,7 +49,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   }
 
   const { frontmatter, content } = data;
-  const { title, year, date, project, event, tools, role, media, sections } = frontmatter;
+  const { title, year, date, project, event, tools, role, url, media, sections } = frontmatter;
   
   // Determine if this is a hackathon-style (uses Event/Role) or project-style (uses Project/Tools)
   const isHackathon = event !== undefined;
@@ -81,6 +81,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <h1 className="text-5xl md:text-6xl font-bold mb-4 instrument-serif-regular text-gray-900 dark:text-neutral-100">
             {title}
           </h1>
+          {url && (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-lg text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+            >
+              <ExternalLink className="w-5 h-5" />
+              Visit website
+            </a>
+          )}
         </header>
 
         {/* Media section - Video or Carousel */}

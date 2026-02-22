@@ -30,6 +30,7 @@ export interface ProjectFrontmatter {
   event?: string;
   tools?: string;
   role?: string;
+  url?: string;
   media?: MediaConfig;
   sections?: SectionConfig[];
   lumaEventId?: string;
