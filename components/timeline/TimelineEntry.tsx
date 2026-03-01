@@ -9,6 +9,11 @@ export type TimelineItem = {
   tags?: Array<string | null>;
   description?: string;
   article?: ReactNode;
+  externalUrl?: string;
+  linkDisabled?: boolean;
+  previewImage?: string;
+  previewVideo?: string;
+  previewTip?: string;
 };
 
 type TimelineEntryProps = {
@@ -32,16 +37,15 @@ export function TimelineEntry({
   iconContainerWidth,
   basePath = "projects",
 }: TimelineEntryProps) {
-  return (
-    <Link 
-      href={`/${basePath}/${item.id}`}
-      className={`block relative pl-4 group rounded-lg cursor-pointer`}
-      style={{ minHeight: minHeight }}
-    >
+  const href = item.externalUrl ?? `/${basePath}/${item.id}`;
+  const isExternal = !!item.externalUrl;
+  const isLinkDisabled = !!item.linkDisabled;
+
+  const content = (
+    <>
       {showConnector && !isLast && (
         <div className="absolute left-10 top-18 h-[calc(100%-4.5rem)] w-px bg-slate-200 dark:bg-neutral-600 z-0" />
       )}
-      
       <div className="flex items-center gap-3 py-2">
         {item.icon ? (
           <div className={iconContainerWidth ? `${iconContainerWidth} flex-shrink-0 flex items-center justify-center` : "flex-shrink-0 flex items-center"}>
@@ -50,21 +54,47 @@ export function TimelineEntry({
               alt={`${item.title} icon`}
               width={iconSize}
               height={iconSize}
-              className={`${iconClassName} flex-shrink-0`}
+              className={`${iconClassName} flex-shrink-0 ${item.icon.includes("archive.svg") ? "dark:invert" : ""}`}
             />
           </div>
         ) : (
           <div className={`${iconClassName} flex-shrink-0 ${iconContainerWidth || ""}`} />
         )}
         <div className="flex flex-col min-w-0">
-          <h3 className="text-lg font-medium source-serif-4 dark:text-neutral-400 mb-0.5">{item.title}</h3>
+          <h3 className="text-lg font-medium dark:text-neutral-400 mb-0.5 source-serif-4">{item.title}</h3>
           {item.description && (
-            <p className="text-gray-500 dark:text-neutral-500 text-xs leading-snug m-0 p-0 line-clamp-2">
+            <p className="text-gray-500 dark:text-neutral-500 text-xs leading-snug m-0 p-0 line-clamp-2 source-serif-4">
               {item.description}
             </p>
           )}
         </div>
       </div>
+    </>
+  );
+
+  const linkClassName = "block relative pl-4 group rounded-lg cursor-pointer";
+  const staticClassName = "block relative pl-4 group rounded-lg";
+  const style = { minHeight: minHeight } as React.CSSProperties;
+
+  if (isLinkDisabled) {
+    return (
+      <div className={staticClassName} style={style}>
+        {content}
+      </div>
+    );
+  }
+
+  if (isExternal) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={linkClassName} style={style}>
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={linkClassName} style={style}>
+      {content}
     </Link>
   );
 }

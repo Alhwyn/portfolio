@@ -17,6 +17,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
       entryIconSize={48}
       entryIconClassName="w-12 h-12 rounded-lg object-cover flex-shrink-0"
       showConnector={true}
+      showHoverPreview={true}
     />
   );
 }
