@@ -53,18 +53,15 @@ const HackathonList: Hackathon[] = [
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const cafeCursorDate = "2025-12-14T09:00:00-08:00";
-  
-  // Sample leaderboard data - replace with actual data from your API/database
-  const leaderboardEntries = [
-    { rank: 1, name: "Team Alpha", score: 950 },
-    { rank: 2, name: "Team Beta", score: 875 },
-    { rank: 3, name: "Team Gamma", score: 820 },
-    { rank: 4, name: "Team Delta", score: 765 },
-    { rank: 5, name: "Team Epsilon", score: 720 },
-  ];
+  const vikeLabsCafeDate = "2026-01-29T11:00:00-08:00";
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
+ {/*      <CountdownBanner 
+        eventName="VikeLabs Cafe x Startup School" 
+        targetDate={vikeLabsCafeDate}
+        lumaUrl="https://lu.ma/7bs63dew"
+      />
       <CountdownBanner 
         eventName="Cafe Cursor Victoria" 
         targetDate={cafeCursorDate}
@@ -72,7 +69,7 @@ export default function Home() {
         lumaModelUrl="https://luma.com/7bs63dew"
         leaderboardEntries={leaderboardEntries}
         showLeaderboard={true}
-      />
+      /> */}
 
       {/* Theme toggle button in the top-right corner */}
       <div className="fixed top-4 right-4 z-50">
