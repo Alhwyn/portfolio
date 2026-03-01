@@ -2,7 +2,6 @@
 
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
-import CountdownBanner from "@/components/CountdownBanner";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../hooks/use-theme";
 
@@ -52,8 +51,6 @@ const HackathonList: Hackathon[] = [
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
-  const cafeCursorDate = "2025-12-14T09:00:00-08:00";
-  const vikeLabsCafeDate = "2026-01-29T11:00:00-08:00";
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">

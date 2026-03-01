@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HeaderLeaderboard from "./HeaderLeaderboard";
-
 interface LeaderboardEntry {
   rank: number;
   name: string;
@@ -19,7 +17,7 @@ interface CountdownBannerProps {
   showLeaderboard?: boolean;
 }
 
-export default function CountdownBanner({ targetDate, eventName, lumaUrl, lumaModelUrl, leaderboardEntries, showLeaderboard }: CountdownBannerProps) {
+export default function CountdownBanner({ targetDate, eventName, lumaUrl }: CountdownBannerProps) {
   const [timeLeft, setTimeLeft] = useState<{
     days: number;
     hours: number;
@@ -53,21 +51,6 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl, lumaMo
 
   if (!timeLeft) return null;
 
-  // Extract model ID from Luma URL (e.g., https://luma.com/7bs63dew -> 7bs63dew)
-  const getLumaEmbedUrl = (url: string) => {
-    // Handle luma.com URLs
-    const lumaMatch = url.match(/luma\.com\/([^\/\?]+)/);
-    if (lumaMatch) {
-      return `https://lumalabs.ai/embed/${lumaMatch[1]}`;
-    }
-    // Handle lumalabs.ai URLs
-    const lumalabsMatch = url.match(/lumalabs\.ai\/([^\/\?]+)/);
-    if (lumalabsMatch) {
-      return `https://lumalabs.ai/embed/${lumalabsMatch[1]}`;
-    }
-    return url;
-  };
-
   return (
     <div className="w-full bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 py-4 px-4 text-center z-50 border-b border-gray-200 dark:border-neutral-700">
       <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
@@ -88,7 +71,6 @@ export default function CountdownBanner({ targetDate, eventName, lumaUrl, lumaMo
               Register
             </a>
           )}
-        </div>
       </div>
     </div>
   );
