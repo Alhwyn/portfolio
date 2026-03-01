@@ -8,7 +8,7 @@ import { getContentBySlug, getContentSlugs } from "@/lib/content";
 import { ArrowLeft } from "lucide-react";
 
 // Valid project slugs that map to MDX files
-const validProjectSlugs = ['photobomb', 'canlii-mcp', 'reeflog', 'dockbot'];
+const validProjectSlugs = ['photobomb', 'clawpify', 'canlii-mcp', 'reeflog', 'dockbot'];
 
 export async function generateStaticParams() {
   const slugs = getContentSlugs('projects');
@@ -59,7 +59,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const infoValue2 = isHackathon ? role : tools;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
+    <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
       {/* Back button */}
       <div className="max-w-4xl mx-auto px-8 pt-12 pb-8">
         <Link
