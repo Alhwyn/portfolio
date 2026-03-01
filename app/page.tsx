@@ -1,7 +1,6 @@
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
 import CountdownBanner from "@/components/CountdownBanner";
-import { ThemeToggle } from "@/components/HomeClient";
 import { getProjectsForTimeline } from "@/lib/projects";
 
 const FEATURED_PROJECT_SLUGS = ["clawpify", "photobomb"] as const;
@@ -57,7 +56,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400 lg:ml-64">
+    <div className="relative min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
       <CountdownBanner 
         eventName="VikeLabs Cafe x Startup School" 
         targetDate={vikeLabsCafeDate}
@@ -68,8 +67,6 @@ export default function Home() {
         targetDate={cafeCursorDate}
         lumaUrl="https://lu.ma/7bx22l8b"
       />
-
-      <ThemeToggle />
 
       {/* Hero section */}
       <section className="relative min-h-screen w-full px-4 sm:px-8 py-8 sm:py-12 flex flex-col justify-center items-start gap-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
