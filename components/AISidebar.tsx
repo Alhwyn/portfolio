@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { usePathname } from "next/navigation";
-import { ArrowUp, X, FolderOpen, Trophy } from "lucide-react";
+import { ArrowUp, X, FolderOpen, Trophy, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -71,7 +71,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
     [pathname]
   );
 
-  const { messages, sendMessage, status } = useChat({ transport });
+  const { messages, sendMessage, status, setMessages } = useChat({ transport });
 
   const suggestions = getSuggestions(pathname || "/");
 
@@ -207,7 +207,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 z-40 pointer-events-none"
+            className="fixed inset-0 bg-black/10 dark:bg-black/20 z-40 pointer-events-none"
             aria-hidden
           />
 
@@ -216,19 +216,33 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed right-2 bottom-2 left-2 top-2 sm:left-auto w-full sm:w-[360px] h-[calc(100vh-1rem)] bg-neutral-800 dark:bg-neutral-900 flex flex-col z-50 rounded-xl shadow-2xl border border-neutral-700/50 overflow-hidden"
+            className="fixed right-2 bottom-2 left-2 top-2 sm:left-auto w-full sm:w-[360px] h-[calc(100vh-1rem)] bg-white dark:bg-neutral-900 flex flex-col z-50 rounded-xl shadow-2xl border border-neutral-200 dark:border-neutral-700/50 overflow-hidden"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-3 py-2">
-              <span className="text-sm text-neutral-400">alhwyn.com</span>
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close"
-                className="p-1.5 text-neutral-400 hover:text-neutral-200 rounded transition-colors"
-              >
-                <X className="w-4 h-4" strokeWidth={1} />
-              </button>
+            <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-200 dark:border-neutral-700/50">
+              <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">alhwyn.com</span>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMessages([]);
+                    setUsedSuggestions(new Set());
+                  }}
+                  aria-label="Clear chat"
+                  title="Clear chat"
+                  className="p-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" strokeWidth={1} />
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Close"
+                  className="p-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded transition-colors"
+                >
+                  <X className="w-4 h-4" strokeWidth={1} />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
@@ -239,8 +253,8 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                   className={cn(
                     "rounded-md p-2.5 text-sm",
                     message.role === "user"
-                      ? "bg-neutral-700 ml-4 text-neutral-100"
-                      : "bg-neutral-700/50 mr-4 text-neutral-200"
+                      ? "ml-4 bg-neutral-600 dark:bg-neutral-700 text-white"
+                      : "bg-neutral-100 dark:bg-neutral-700/50 mr-4 text-neutral-800 dark:text-neutral-200"
                   )}
                 >
                   <div className="flex flex-wrap items-center gap-1.5 whitespace-pre-wrap break-words">
@@ -262,7 +276,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                             {refs.map((item) => (
                               <span
                                 key={`${item.type}-${item.slug}`}
-                                className="inline-flex items-center gap-1.5 rounded-md bg-neutral-600/80 px-2 py-0.5 text-xs text-neutral-200 shrink-0 max-w-[140px]"
+                                className="inline-flex items-center gap-1.5 rounded-md bg-neutral-200 dark:bg-neutral-600/80 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-200 shrink-0 max-w-[140px]"
                               >
                                 {item.icon ? (
                                   <Image
@@ -287,7 +301,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                 </div>
               ))}
               {(status === "submitted" || status === "streaming") && (
-                <div className="flex items-center gap-2 text-neutral-400 text-sm">
+                <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
                   <BicycleWheelIcon className="w-5 h-5" spin />
                 </div>
               )}
@@ -308,18 +322,18 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.98 }}
                         onClick={() => handleSuggestionClick(prompt)}
-                        className="w-full rounded-xl bg-neutral-700/50 hover:bg-neutral-600 px-3 py-1.5 text-xs text-neutral-300 hover:text-neutral-100 transition-colors text-left"
+                        className="w-full rounded-xl bg-neutral-100 dark:bg-neutral-700/50 hover:bg-neutral-200 dark:hover:bg-neutral-600 px-3 py-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-100 transition-colors text-left"
                       >
                         {prompt}
                       </motion.button>
                     ))}
                 </div>
               )}
-              <div className="relative flex flex-wrap items-center gap-2 rounded-lg bg-neutral-700/50 px-2.5 py-1.5 min-h-[42px] focus-within:ring-1 focus-within:ring-neutral-600">
+              <div className="relative flex flex-wrap items-center gap-2 rounded-lg bg-neutral-100 dark:bg-neutral-700/50 px-2.5 py-1.5 min-h-[42px]">
                 {referencedItems.map((item) => (
                   <span
                     key={`${item.type}-${item.slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-md bg-neutral-600/80 px-2 py-0.5 text-xs text-neutral-200 shrink-0 max-w-[140px]"
+                    className="inline-flex items-center gap-1.5 rounded-md bg-neutral-200 dark:bg-neutral-600/80 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-200 shrink-0 max-w-[140px]"
                   >
                     {item.icon ? (
                       <Image
@@ -353,18 +367,18 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                   onKeyDown={handleKeyDown}
                   placeholder="Ask about this page... Type @ to reference projects or hackathons"
                   disabled={status !== "ready"}
-                  className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-neutral-200 placeholder-neutral-500 text-sm"
+                  className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-neutral-800 dark:text-neutral-200 placeholder-neutral-400 dark:placeholder-neutral-500 text-sm"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || status !== "ready"}
                   aria-label="Send"
-                  className="p-1.5 rounded-md bg-transparent hover:bg-neutral-600/50 text-neutral-400 hover:text-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shrink-0"
+                  className="p-1.5 rounded-md bg-transparent hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shrink-0 text-black dark:text-white"
                 >
                   <ArrowUp className="w-4 h-4" strokeWidth={1} />
                 </button>
                 {showAtDropdown && (
-                  <div className="absolute bottom-full left-0 right-0 mb-1 max-h-36 overflow-y-auto rounded-md border border-neutral-600 bg-neutral-800 shadow-lg">
+                  <div className="absolute bottom-full left-0 right-0 mb-1 max-h-36 overflow-y-auto rounded-md border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-lg">
                     {flatItems.length === 0 ? (
                       <div className="px-2 py-1.5 text-xs text-neutral-500">
                         No matches
@@ -372,7 +386,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                     ) : (
                       <>
                         {filteredProjects.length > 0 && (
-                          <div className="border-b border-neutral-700/80">
+                          <div className="border-b border-neutral-200 dark:border-neutral-700/80">
                             <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 uppercase tracking-wide">
                               <FolderOpen className="w-3 h-3" />
                               Projects
@@ -387,10 +401,10 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                                   type="button"
                                   onClick={() => handleSelectItem(item)}
                                   className={cn(
-                                    "w-full px-2 py-1.5 flex items-center gap-2 text-left text-xs text-neutral-200",
+                                    "w-full px-2 py-1.5 flex items-center gap-2 text-left text-xs text-neutral-800 dark:text-neutral-200",
                                     isSelected
-                                      ? "bg-neutral-600"
-                                      : "hover:bg-neutral-700/80"
+                                      ? "bg-neutral-200 dark:bg-neutral-600"
+                                      : "hover:bg-neutral-100 dark:hover:bg-neutral-700/80"
                                   )}
                                 >
                                   {item.icon ? (
@@ -426,10 +440,10 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                                   type="button"
                                   onClick={() => handleSelectItem(item)}
                                   className={cn(
-                                    "w-full px-2 py-1.5 flex items-center gap-2 text-left text-xs text-neutral-200",
+                                    "w-full px-2 py-1.5 flex items-center gap-2 text-left text-xs text-neutral-800 dark:text-neutral-200",
                                     isSelected
-                                      ? "bg-neutral-600"
-                                      : "hover:bg-neutral-700/80"
+                                      ? "bg-neutral-200 dark:bg-neutral-600"
+                                      : "hover:bg-neutral-100 dark:hover:bg-neutral-700/80"
                                   )}
                                 >
                                   {item.icon ? (

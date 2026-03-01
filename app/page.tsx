@@ -46,11 +46,10 @@ export default function Home() {
   const projects = [
     ...getProjectsForTimeline([...FEATURED_PROJECT_SLUGS], {
       overrides: {
-      photobomb: {
-        linkDisabled: true,
-        description: "A mobile party game for sharing fun photos with friends.",
+        photobomb: {
+          description: "A mobile party game for sharing fun photos with friends.",
+        },
       },
-    },
     }),
     ArchiveEntry,
   ];

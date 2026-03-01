@@ -25,11 +25,17 @@ export function TimelineContainer<T extends TimelineItem>({
   showHoverPreview = false,
 }: TimelineContainerProps<T>) {
   const [hoveredItem, setHoveredItem] = useState<TimelineItem | null>(null);
+  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleMouseEnter = (item: TimelineItem) => {
+  const handleMouseEnter = (item: TimelineItem, e: React.MouseEvent) => {
     if (!showHoverPreview) return;
+    setCursorPos({ x: e.clientX, y: e.clientY });
     hoverTimeoutRef.current = setTimeout(() => setHoveredItem(item), HOVER_DELAY_MS);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setCursorPos({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseLeave = () => {
@@ -38,14 +44,20 @@ export function TimelineContainer<T extends TimelineItem>({
       hoverTimeoutRef.current = null;
     }
     setHoveredItem(null);
+    setCursorPos(null);
   };
 
   return (
     <div className={`relative ${backgroundClassName} pt-2 pr-8 pb-2`}>
       {showHoverPreview && hoveredItem && (
-        <ProjectHoverPreview item={hoveredItem} visible={!!hoveredItem} />
+        <ProjectHoverPreview
+          item={hoveredItem}
+          visible={!!hoveredItem}
+          x={cursorPos?.x}
+          y={cursorPos?.y}
+        />
       )}
-      <div className={`space-y-4 w-[600px] h-max[1500px] ${backgroundClassName} rounded-xl pr-4 mr-4 overflow-hidden my-8`}>
+      <div className={`space-y-2 w-[600px] h-max[1500px] ${backgroundClassName} rounded-xl pr-4 mr-4 overflow-hidden my-8`}>
         <AnimatePresence>
           {items.map((item, idx) => (
             <motion.div
@@ -54,7 +66,8 @@ export function TimelineContainer<T extends TimelineItem>({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ delay: idx * 0.1, duration: 0.3 }}
-              onMouseEnter={() => handleMouseEnter(item)}
+              onMouseEnter={(e) => handleMouseEnter(item, e)}
+              onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
               <TimelineEntry

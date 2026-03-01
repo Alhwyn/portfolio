@@ -8,6 +8,8 @@ import type { TimelineItem } from "./timeline/TimelineEntry";
 type ProjectHoverPreviewProps = {
   item: TimelineItem;
   visible: boolean;
+  x?: number;
+  y?: number;
 };
 
 type PreviewType = "video" | "image" | "tip" | "fallback";
@@ -19,7 +21,9 @@ function getPreviewType(item: TimelineItem): PreviewType {
   return "fallback";
 }
 
-export function ProjectHoverPreview({ item, visible }: ProjectHoverPreviewProps) {
+const CURSOR_OFFSET = 16;
+
+export function ProjectHoverPreview({ item, visible, x, y }: ProjectHoverPreviewProps) {
   const [canHover, setCanHover] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -92,8 +96,13 @@ export function ProjectHoverPreview({ item, visible }: ProjectHoverPreviewProps)
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="fixed left-1/2 top-1/2 z-50 hidden w-[min(240px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200/80 bg-white shadow-xl dark:border-neutral-600/80 dark:bg-neutral-800 sm:block"
-          style={{ pointerEvents: "none" }}
+          className="fixed z-50 hidden w-[min(240px,90vw)] rounded-2xl border border-slate-200/80 bg-white shadow-xl dark:border-neutral-600/80 dark:bg-neutral-800 sm:block"
+          style={{
+            pointerEvents: "none",
+            left: x != null && y != null ? x + CURSOR_OFFSET : "50%",
+            top: x != null && y != null ? y + CURSOR_OFFSET : "50%",
+            transform: x != null && y != null ? "none" : "translate(-50%, -50%)",
+          }}
         >
           <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl bg-slate-100 dark:bg-neutral-700">
             {renderPreviewContent()}

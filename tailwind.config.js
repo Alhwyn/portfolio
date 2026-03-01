@@ -1,5 +1,5 @@
 module.exports = {
-    darkMode: 'media', // Enables media-based dark mode
+    darkMode: 'class', // Enables class-based dark mode for theme toggle
     content: [
       './app/**/*.{js,ts,jsx,tsx}', // Adjust paths to match your project structure
       './components/**/*.{js,ts,jsx,tsx}',

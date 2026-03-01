@@ -33,7 +33,7 @@ export function TimelineEntry({
   iconClassName = "w-12 h-12 rounded-lg object-cover flex-shrink-0 bg-gray-100 shadow-md",
   showConnector = false,
   isLast = false,
-  minHeight = "200px",
+  minHeight = "150px",
   iconContainerWidth,
   basePath = "projects",
 }: TimelineEntryProps) {

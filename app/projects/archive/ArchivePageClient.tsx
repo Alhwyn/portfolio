@@ -31,7 +31,7 @@ export function ArchivePageClient({ projects }: ArchivePageClientProps) {
           Archive
         </h1>
         <p className="text-gray-600 dark:text-neutral-500 text-lg">
-          A collection of past projects and experiments
+          Past projects
         </p>
       </div>
 
