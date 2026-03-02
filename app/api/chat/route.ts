@@ -1,8 +1,17 @@
-import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import { streamText, convertToModelMessages, type UIMessage, tool, jsonSchema } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
-import { getContentBySlug } from "@/lib/content";
+import { z } from "zod";
+import { getContentBySlug, getAllContent, getResume, getResumeFiles } from "@/lib/content";
 
 export const maxDuration = 30;
+
+const VALID_PROJECT_SLUGS = [
+  "photobomb",
+  "clawpify",
+  "canlii-mcp",
+  "reeflog",
+  "dockbot",
+];
 
 function getPageContext(pathname: string): string {
   // Match /projects/[id] or /hackathons/[id]
@@ -65,6 +74,23 @@ Additional context - User is asking about these items they referenced with @:
 ${sections.join("\n\n---\n\n")}`;
 }
 
+function getProjectsContext(): string {
+  const allProjects = getAllContent("projects").filter((p) =>
+    VALID_PROJECT_SLUGS.includes(p.slug)
+  );
+  if (allProjects.length === 0) return "";
+  const list = allProjects
+    .map((p) => `- ${p.frontmatter.title} (slug: ${p.slug})
+  Year: ${p.frontmatter.year ?? "—"}
+  Tools: ${p.frontmatter.tools ?? "—"}
+  Description: ${p.content}`)
+    .join("\n\n");
+  return `
+
+Projects list (use this when user asks to list projects, what projects you have, etc.):
+${list}`;
+}
+
 export async function POST(req: Request) {
   const {
     messages,
@@ -78,6 +104,7 @@ export async function POST(req: Request) {
 
   const pageContext = getPageContext(pathname);
   const referencedContext = getReferencedContext(referencedItems);
+  const projectsContext = getProjectsContext();
 
   const systemPrompt = `You are Alhwyn. You're the AI on alhwyn.com - you're literally him. Answer like you're texting a friend. Blunt. Direct. No fluff.
 
@@ -114,12 +141,60 @@ Playfully critical (only when it fits - not on straight portfolio questions):
 
 Never: emojis, buzzwords, sycophantic tone, long paragraphs, corny greetings. "who is alhwyn" = one sentence. That's it.
 
-${pageContext}${referencedContext}`;
+${pageContext}${referencedContext}${projectsContext}`;
 
   const result = streamText({
     model: anthropic("claude-sonnet-4-20250514"),
     system: systemPrompt,
     messages: await convertToModelMessages(messages),
+    tools: {
+      fetch_resume: tool({
+        description: "Fetch the user's resume content and PDF files. Use when user asks to show, view, or see their resume.",
+        inputSchema: jsonSchema({
+          type: "object",
+          properties: {},
+          required: [],
+        }),
+        execute: async () => {
+          const resume = getResume();
+          const files = getResumeFiles();
+          if (!resume) {
+            return { error: "Resume not found", openResumeModal: false };
+          }
+          return {
+            content: resume.content,
+            frontmatter: resume.frontmatter,
+            files,
+            openResumeModal: true,
+          };
+        },
+      }),
+      fetch_project: tool({
+        description: "Fetch a single project by slug with its full description. Use when user asks about a specific project (e.g. Clawpify, Photobomb).",
+        inputSchema: z.object({
+          slug: z.string().describe("Project slug, e.g. clawpify, photobomb, canlii-mcp, reeflog, dockbot"),
+        }),
+        execute: async ({ slug }) => {
+          const normalizedSlug = slug.toLowerCase().replace(/\s+/g, "-");
+          if (!VALID_PROJECT_SLUGS.includes(normalizedSlug)) {
+            return {
+              error: `Project "${slug}" not found. Valid slugs: ${VALID_PROJECT_SLUGS.join(", ")}`,
+            };
+          }
+          const data = getContentBySlug(normalizedSlug, "projects");
+          if (!data) return { error: "Project not found" };
+          return {
+            slug: data.slug,
+            title: data.frontmatter.title,
+            year: data.frontmatter.year,
+            tools: data.frontmatter.tools,
+            role: data.frontmatter.role,
+            description: data.content,
+            frontmatter: data.frontmatter,
+          };
+        },
+      }),
+    },
   });
 
   return result.toUIMessageStreamResponse();

@@ -9,6 +9,8 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { BicycleWheelIcon } from "./BicycleWheelIcon";
+import MarkdownContent from "./MarkdownContent";
+import { FileDown } from "lucide-react";
 
 interface AISidebarProps {
   isOpen: boolean;
@@ -22,22 +24,6 @@ type ReferenceItem = {
   icon?: string;
 };
 
-function getSuggestions(pathname: string): [string, string, string] {
-  if (pathname?.match(/^\/projects\/[^/]+/)) {
-    return ["Summarize this project", "What's the tech stack?", "Tell me more about this"];
-  }
-  if (pathname?.match(/^\/hackathons\/[^/]+/)) {
-    return ["Summarize this event", "When and where?", "Tell me more"];
-  }
-  if (pathname === "/projects/archive") {
-    return ["What projects are here?", "Summarize the archive", "Tell me more"];
-  }
-  if (pathname === "/" || pathname === "") {
-    return ["Tell me about this portfolio", "What projects do you have?", "Summarize the page"];
-  }
-  return ["Summarize this page", "Tell me more", "What's this about?"];
-}
-
 export function AISidebar({ isOpen, onClose }: AISidebarProps) {
   const pathname = usePathname();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -45,7 +31,6 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
   const selectedItemRef = useRef<HTMLButtonElement>(null);
 
   const [input, setInput] = useState("");
-  const [usedSuggestions, setUsedSuggestions] = useState<Set<string>>(new Set());
   const [referencedItems, setReferencedItems] = useState<ReferenceItem[]>([]);
   const [projects, setProjects] = useState<ReferenceItem[]>([]);
   const [hackathons, setHackathons] = useState<ReferenceItem[]>([]);
@@ -73,8 +58,6 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
 
   const { messages, sendMessage, status, setMessages } = useChat({ transport });
 
-  const suggestions = getSuggestions(pathname || "/");
-
   useEffect(() => {
     fetch("/api/projects")
       .then((r) => r.json())
@@ -92,6 +75,24 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+
+  const isResumeQuery = (t: string) => /resume/i.test(t.trim());
+
+  const showResumeInChat = async (userText: string) => {
+    try {
+      const res = await fetch("/api/resume");
+      if (!res.ok) throw new Error("Resume not found");
+      const data = await res.json();
+      setMessages((prev) => [
+        ...prev,
+        { id: `user-${Date.now()}`, role: "user" as const, parts: [{ type: "text" as const, text: userText }] },
+        { id: `assistant-${Date.now()}`, role: "assistant" as const, parts: [{ type: "data-resume" as const, data: { content: data.content, files: data.files } }] },
+      ]);
+    } catch {
+      sendMessage({ text: userText });
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = input.trim();
@@ -103,16 +104,13 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
           { type: "data-references" as const, data: referencedItems },
         ],
       });
+    } else if (isResumeQuery(text)) {
+      showResumeInChat(text);
     } else {
       sendMessage({ text });
     }
     setInput("");
     setReferencedItems([]);
-  };
-
-  const handleSuggestionClick = (prompt: string) => {
-    setUsedSuggestions((prev) => new Set(prev).add(prompt));
-    sendMessage({ text: prompt });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -224,10 +222,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
               <div className="flex items-center gap-1">
                 <button
                   type="button"
-                  onClick={() => {
-                    setMessages([]);
-                    setUsedSuggestions(new Set());
-                  }}
+                  onClick={() => setMessages([])}
                   aria-label="Clear chat"
                   title="Clear chat"
                   className="p-1.5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded transition-colors"
@@ -295,6 +290,65 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                           </span>
                         );
                       }
+                      const toolPart = part as { type?: string; toolName?: string; result?: { content?: string; files?: Array<{ name: string; url: string }> } };
+                      if (toolPart.type === "tool-invocation" && toolPart.toolName === "fetch_resume" && (toolPart.result?.content || toolPart.result?.files?.length)) {
+                        const result = toolPart.result;
+                        return (
+                          <span key={`${message.id}-${i}`} className="contents">
+                            {result.content && (
+                              <div className="prose prose-sm prose-neutral dark:prose-invert max-w-none text-neutral-800 dark:text-neutral-200">
+                                <MarkdownContent content={result.content} />
+                              </div>
+                            )}
+                            {result.files && result.files.length > 0 && (
+                              <>
+                                {result.files.map((file) => (
+                                  <a
+                                    key={file.url}
+                                    href={file.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 rounded-md bg-neutral-200 dark:bg-neutral-600/80 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-200 shrink-0"
+                                  >
+                                    <FileDown className="w-3.5 h-3.5" strokeWidth={1} />
+                                    {file.name}
+                                  </a>
+                                ))}
+                              </>
+                            )}
+                          </span>
+                        );
+                      }
+                      const dataPart = part as { type?: string; data?: { content?: string; files?: Array<{ name: string; url: string }> } };
+                      if (dataPart.type === "data-resume" && dataPart.data) {
+                        const d = dataPart.data;
+                        if (!d.content && !d.files?.length) return null;
+                        return (
+                          <span key={`${message.id}-${i}`} className="contents">
+                            {d.content && (
+                              <div className="prose prose-sm prose-neutral dark:prose-invert max-w-none text-neutral-800 dark:text-neutral-200">
+                                <MarkdownContent content={d.content} />
+                              </div>
+                            )}
+                            {d.files && d.files.length > 0 && (
+                              <>
+                                {d.files.map((file) => (
+                                  <a
+                                    key={file.url}
+                                    href={file.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 rounded-md bg-neutral-200 dark:bg-neutral-600/80 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-200 shrink-0"
+                                  >
+                                    <FileDown className="w-3.5 h-3.5" strokeWidth={1} />
+                                    {file.name}
+                                  </a>
+                                ))}
+                              </>
+                            )}
+                          </span>
+                        );
+                      }
                       return null;
                     })}
                   </div>
@@ -310,25 +364,6 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
 
             {/* Input */}
             <form onSubmit={handleSubmit} className="p-3">
-              {messages.length === 0 && (
-                <div className="flex flex-col gap-1.5 mb-2">
-                  {suggestions
-                    .filter((s) => !usedSuggestions.has(s))
-                    .map((prompt) => (
-                      <motion.button
-                        key={prompt}
-                        type="button"
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        onClick={() => handleSuggestionClick(prompt)}
-                        className="w-full rounded-xl bg-neutral-100 dark:bg-neutral-700/50 hover:bg-neutral-200 dark:hover:bg-neutral-600 px-3 py-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-100 transition-colors text-left"
-                      >
-                        {prompt}
-                      </motion.button>
-                    ))}
-                </div>
-              )}
               <div className="relative flex flex-wrap items-center gap-2 rounded-lg bg-neutral-100 dark:bg-neutral-700/50 px-2.5 py-1.5 min-h-[42px]">
                 {referencedItems.map((item) => (
                   <span
