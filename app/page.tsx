@@ -71,7 +71,7 @@ export default function Home() {
       <section className="relative min-h-screen w-full px-4 sm:px-8 py-8 sm:py-12 flex flex-col justify-center items-start gap-8 bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
           <div className="w-full max-w-3xl">
             <p className="text-base sm:text-lg text-gray-600 dark:text-neutral-400 leading-relaxed source-serif-4">
-              I&apos;m 18, a software developer in Gist Applications, based in Victoria, Canada. 
+              I&apos;m 19, a software developer in Gist Applications, based in Victoria, Canada. 
               I organize hackathons and build projects in my free time.
             </p>
           </div>
