@@ -3,7 +3,6 @@
  * Keys match content slugs.
  */
 export const PROJECT_ICONS: Record<string, string> = {
-  clawpify: "/image/icon/clawpify.png",
   photobomb: "/image/icon/photobob_icon.jpeg",
   "canlii-mcp": "/image/icon/canlii.jpg",
   reeflog: "/image/icon/Reeflog_icon.png",

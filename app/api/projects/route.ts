@@ -3,7 +3,6 @@ import { PROJECT_ICONS, HACKATHON_ICONS } from "@/lib/reference-icons";
 
 const VALID_PROJECT_SLUGS = [
   "photobomb",
-  "clawpify",
   "canlii-mcp",
   "reeflog",
   "dockbot",
