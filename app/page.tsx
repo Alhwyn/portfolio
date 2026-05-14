@@ -3,7 +3,7 @@ import { Hackathon, HackathonTimeline } from "../components/HackathonList";
 import CountdownBanner from "@/components/CountdownBanner";
 import { getProjectsForTimeline } from "@/lib/projects";
 
-const FEATURED_PROJECT_SLUGS = ["clawpify", "photobomb"] as const;
+const FEATURED_PROJECT_SLUGS = ["photobomb", "canlii-mcp"] as const;
 
 const ArchiveEntry: Project = {
   id: "archive",

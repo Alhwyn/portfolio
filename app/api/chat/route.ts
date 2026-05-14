@@ -7,7 +7,6 @@ export const maxDuration = 30;
 
 const VALID_PROJECT_SLUGS = [
   "photobomb",
-  "clawpify",
   "canlii-mcp",
   "reeflog",
   "dockbot",
@@ -170,9 +169,9 @@ ${pageContext}${referencedContext}${projectsContext}`;
         },
       }),
       fetch_project: tool({
-        description: "Fetch a single project by slug with its full description. Use when user asks about a specific project (e.g. Clawpify, Photobomb).",
+        description: "Fetch a single project by slug with its full description. Use when user asks about a specific project (e.g. Photobomb, CanLII MCP).",
         inputSchema: z.object({
-          slug: z.string().describe("Project slug, e.g. clawpify, photobomb, canlii-mcp, reeflog, dockbot"),
+          slug: z.string().describe("Project slug, e.g. photobomb, canlii-mcp, reeflog, dockbot"),
         }),
         execute: async ({ slug }) => {
           const normalizedSlug = slug.toLowerCase().replace(/\s+/g, "-");

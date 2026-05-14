@@ -8,7 +8,7 @@ import { getContentBySlug, getContentSlugs } from "@/lib/content";
 import { ArrowLeft } from "lucide-react";
 
 // Valid project slugs that map to MDX files
-const validProjectSlugs = ['photobomb', 'clawpify', 'canlii-mcp', 'reeflog', 'dockbot'];
+const validProjectSlugs = ['photobomb', 'canlii-mcp', 'reeflog', 'dockbot'];
 
 export async function generateStaticParams() {
   const slugs = getContentSlugs('projects');
