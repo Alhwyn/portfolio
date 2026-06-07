@@ -37,6 +37,9 @@ export function Sidebar() {
           <a href="https://www.linkedin.com/in/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
             linkedin.com/alhwyn
           </a>
+          <a href="https://cursor.com/@alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
+            cursor.com/@alhwyn
+          </a>
           <button
             type="button"
             onClick={handleCopy}
