@@ -5,6 +5,17 @@ import { AIChatProvider } from "@/contexts/AIChatContext";
 import { Sidebar } from "@/components/Sidebar";
 import { AISidebarProvider } from "@/components/AISidebarProvider";
 import { ContentWrapper } from "@/components/ContentWrapper";
+import { JsonLd } from "@/components/JsonLd";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_HEIGHT,
+  DEFAULT_OG_IMAGE_WIDTH,
+  SITE_NAME,
+  SITE_URL,
+  personJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Instrument_Serif({
@@ -19,56 +30,60 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://alhwyn.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Alhwyn Geonzon",
-    template: "%s | Alhwyn Geonzon"
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+  description: DEFAULT_DESCRIPTION,
   keywords: [
     "Alhwyn Geonzon",
     "Alhwyn",
+    "software developer",
+    "Victoria BC",
+    "hackathon organizer",
+    "portfolio",
   ],
-  authors: [{ name: "Alhwyn Geonzon" }],
-  creator: "Alhwyn Geonzon",
-  publisher: "Alhwyn Geonzon",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://alhwyn.com",
-    siteName: "Alhwyn Geonzon Portfolio",
-    title: "Alhwyn Geonzon - Portfolio",
-    description: "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+    url: SITE_URL,
+    siteName: `${SITE_NAME} Portfolio`,
+    title: `${SITE_NAME} - Portfolio`,
+    description: DEFAULT_DESCRIPTION,
     images: [
       {
-        url: "/image/icon/photobob_icon.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Alhwyn Geonzon Portfolio",
+        url: DEFAULT_OG_IMAGE,
+        width: DEFAULT_OG_IMAGE_WIDTH,
+        height: DEFAULT_OG_IMAGE_HEIGHT,
+        alt: `${SITE_NAME} Portfolio`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alhwyn Geonzon - Portfolio",
-    description: "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+    title: `${SITE_NAME} - Portfolio`,
+    description: DEFAULT_DESCRIPTION,
     site: "@alhwyn",
     creator: "@alhwyn",
-    images: ["/image/icon/photobob_icon.jpeg"],
+    images: [DEFAULT_OG_IMAGE],
   },
   alternates: {
-    canonical: "https://alhwyn.com",
+    canonical: SITE_URL,
   },
   category: "Technology",
   classification: "Portfolio Website",
@@ -84,6 +99,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 dark:bg-neutral-900`}
       >
+        <JsonLd data={[personJsonLd(), websiteJsonLd()]} />
         <AIChatProvider>
           <Sidebar />
           <AISidebarProvider />

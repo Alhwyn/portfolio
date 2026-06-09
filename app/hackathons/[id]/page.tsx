@@ -5,15 +5,21 @@ import { ArrowLeft } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
 import VideoPlayer from "@/components/VideoPlayer";
 import MarkdownContent from "@/components/MarkdownContent";
+import { JsonLd } from "@/components/JsonLd";
 import { getContentBySlug, getContentSlugs } from "@/lib/content";
-
-// Valid hackathon slugs
-const validHackathonSlugs = ['slate', 'cursor-hackathon', 'scrapyard'];
+import {
+  PUBLIC_HACKATHON_SLUGS,
+  createPageMetadata,
+  eventJsonLd,
+  getContentDescription,
+} from "@/lib/seo";
 
 export async function generateStaticParams() {
-  const slugs = getContentSlugs('hackathons');
+  const slugs = getContentSlugs("hackathons");
   return slugs
-    .filter((slug) => validHackathonSlugs.includes(slug))
+    .filter((slug) =>
+      PUBLIC_HACKATHON_SLUGS.includes(slug as (typeof PUBLIC_HACKATHON_SLUGS)[number])
+    )
     .map((slug) => ({ id: slug }));
 }
 
@@ -25,13 +31,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!data) {
     return {
       title: "Hackathon Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
+  const description = getContentDescription(
+    data.content,
+    `${data.frontmatter.title} — a hackathon organized by Alhwyn Geonzon`,
+    data.frontmatter
+  );
+
+  return createPageMetadata({
     title: data.frontmatter.title,
-    description: `Details for ${data.frontmatter.title}`,
-  };
+    description,
+    path: `/hackathons/${id}`,
+    type: "article",
+  });
 }
 
 export default async function HackathonPage({ params }: { params: Promise<{ id: string }> }) {
@@ -51,8 +66,22 @@ export default async function HackathonPage({ params }: { params: Promise<{ id: 
   const { frontmatter, content } = data;
   const { title, date, media, lumaEventId } = frontmatter;
 
+  const description = getContentDescription(
+    content,
+    `${title} — a hackathon organized by Alhwyn Geonzon`,
+    frontmatter
+  );
+
   return (
     <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
+      <JsonLd
+        data={eventJsonLd({
+          title,
+          description,
+          path: `/hackathons/${id}`,
+          date,
+        })}
+      />
       {/* Back button */}
       <div className="max-w-4xl mx-auto px-8 pt-12 pb-8">
         <Link

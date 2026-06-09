@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import { Project, ProjectTimeline } from "../components/ProjectTimeline";
+import { createPageMetadata, DEFAULT_DESCRIPTION } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Alhwyn Geonzon",
+  description: DEFAULT_DESCRIPTION,
+  path: "/",
+});
 import { Hackathon, HackathonTimeline } from "../components/HackathonList";
 import CountdownBanner from "@/components/CountdownBanner";
 import { getProjectsForTimeline } from "@/lib/projects";

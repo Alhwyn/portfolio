@@ -4,16 +4,20 @@ import Link from "next/link";
 import ImageCarousel from "@/components/ImageCarousel";
 import VideoPlayer from "@/components/VideoPlayer";
 import MarkdownContent from "@/components/MarkdownContent";
+import { JsonLd } from "@/components/JsonLd";
 import { getContentBySlug, getContentSlugs } from "@/lib/content";
+import {
+  PUBLIC_PROJECT_SLUGS,
+  createPageMetadata,
+  creativeWorkJsonLd,
+  getContentDescription,
+} from "@/lib/seo";
 import { ArrowLeft } from "lucide-react";
 
-// Valid project slugs that map to MDX files
-const validProjectSlugs = ['photobomb', 'canlii-mcp', 'reeflog', 'dockbot'];
-
 export async function generateStaticParams() {
-  const slugs = getContentSlugs('projects');
+  const slugs = getContentSlugs("projects");
   return slugs
-    .filter((slug) => validProjectSlugs.includes(slug))
+    .filter((slug) => PUBLIC_PROJECT_SLUGS.includes(slug as (typeof PUBLIC_PROJECT_SLUGS)[number]))
     .map((slug) => ({ id: slug }));
 }
 
@@ -25,13 +29,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!data) {
     return {
       title: "Project Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
+  const description = getContentDescription(
+    data.content,
+    `${data.frontmatter.title} — a project by Alhwyn Geonzon`,
+    data.frontmatter
+  );
+
+  return createPageMetadata({
     title: data.frontmatter.title,
-    description: data.content.slice(0, 160),
-  };
+    description,
+    path: `/projects/${id}`,
+    type: "article",
+  });
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
@@ -58,8 +71,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const infoLabel2 = isHackathon ? "Role" : "Tools";
   const infoValue2 = isHackathon ? role : tools;
 
+  const description = getContentDescription(
+    content,
+    `${title} — a project by Alhwyn Geonzon`,
+    frontmatter
+  );
+
   return (
     <div className="min-h-screen bg-slate-50 text-black dark:bg-neutral-900 dark:text-neutral-400">
+      <JsonLd
+        data={creativeWorkJsonLd({
+          title,
+          description,
+          path: `/projects/${id}`,
+          date: year || date,
+        })}
+      />
       {/* Back button */}
       <div className="max-w-4xl mx-auto px-8 pt-12 pb-8">
         <Link
