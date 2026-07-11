@@ -23,9 +23,9 @@ export function SiteHeader() {
         </div>
 
         <div className="flex flex-col gap-1">
-          <a href="/#work" className={navLinkClass}>
+          <Link href="/#work" className={navLinkClass}>
             Work
-          </a>
+          </Link>
           <span className={navLinkClass}>Github</span>
         </div>
 

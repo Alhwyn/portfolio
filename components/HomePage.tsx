@@ -47,6 +47,7 @@ function AppStoreCarousel({
                   controls={false}
                 />
               ) : (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={item.src}
                   alt={item.alt}
@@ -85,6 +86,7 @@ function ProjectPreviewMedia({ project }: { project: ProjectListItem }) {
         playsInline
       />
     ) : (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={project.previewSrc}
         alt=""
@@ -155,7 +157,8 @@ export function HomePage({ projects }: HomePageProps) {
         aria-hidden={!selected}
         className="flex min-w-0 flex-1 items-center justify-center"
       >
-        {selected?.previewSrc || (selected?.previewImages?.length ?? 0) > 0 ? (
+        {selected &&
+        (selected.previewSrc || (selected.previewImages?.length ?? 0) > 0) ? (
           <div className="flex w-full max-w-3xl flex-col items-stretch gap-3">
             <ProjectPreviewMedia project={selected} />
             {(selected.blurb || selected.stack || selected.href) && (

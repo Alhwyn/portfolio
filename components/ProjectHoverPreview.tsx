@@ -50,6 +50,7 @@ export function ProjectHoverPreview({ project }: ProjectHoverPreviewProps) {
           playsInline
         />
       ) : (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={media.src}
           alt=""
