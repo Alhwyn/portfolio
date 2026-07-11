@@ -1,9 +1,5 @@
 import Link from "next/link";
 
-/** System geometric sans — project `--font-sans` is Source Serif, so override here. */
-const headerSans =
-  "[font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,'Helvetica_Neue',Arial,sans-serif]";
-
 const navLinkClass =
   "font-normal text-[15px] leading-snug text-neutral-900 hover:opacity-60 transition-opacity";
 
@@ -12,21 +8,18 @@ const nameClass =
 
 export function SiteHeader() {
   return (
-    <header className={`px-6 sm:px-10 lg:px-16 pt-8 pb-6 ${headerSans}`}>
+    <header className="px-6 sm:px-10 lg:px-16 pt-8 pb-6">
       <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
           <Link href="/" className={nameClass}>
-            Alhwyn Geonzon
+            alhwyn.com
           </Link>
         </div>
 
         <div className="flex flex-col gap-1">
-          <a href="/#info" className={navLinkClass}>
-            Info
-          </a>
-          <a href="/hackathons/scrapyard" className={navLinkClass}>
+          <Link href="/events" className={navLinkClass}>
             Events
-          </a>
+          </Link>
         </div>
 
         <div className="flex flex-col gap-1">

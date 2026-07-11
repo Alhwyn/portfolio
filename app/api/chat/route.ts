@@ -11,9 +11,7 @@ const VALID_PROJECT_SLUGS = [
 ];
 
 function getPageContext(pathname: string): string {
-  // Match /projects/[id] or /hackathons/[id]
   const projectMatch = pathname.match(/^\/projects\/([^/]+)/);
-  const hackathonMatch = pathname.match(/^\/hackathons\/([^/]+)/);
 
   if (projectMatch) {
     const data = getContentBySlug(projectMatch[1], "projects");
@@ -26,20 +24,13 @@ ${content}`;
     }
   }
 
-  if (hackathonMatch) {
-    const data = getContentBySlug(hackathonMatch[1], "hackathons");
-    if (data) {
-      const { frontmatter, content } = data;
-      return `Current page context - Hackathon: "${frontmatter.title}"
-Frontmatter: ${JSON.stringify(frontmatter, null, 2)}
-Content:
-${content}`;
-    }
+  if (pathname === "/events") {
+    return `Current page context: Events cover flow — hosted events gallery (no article pages).`;
   }
 
   if (pathname === "/" || pathname === "") {
     return `Current page context: Portfolio home page (alhwyn.com)
-This is Alhwyn Geonzon's portfolio with projects and hackathons. Alhwyn is 19 and works as a software developer at Gist Applications in Victoria, Canada.`;
+This is Alhwyn Geonzon's portfolio with projects and events. Alhwyn is 19 and works as a software developer at Gist Applications in Victoria, Canada.`;
   }
 
   return `Current page context: ${pathname || "Unknown page"}`;
@@ -52,12 +43,11 @@ function getReferencedContext(referencedItems: ReferencedItem[]): string {
 
   const sections = referencedItems
     .map(({ type, slug }) => {
-      const subdir = type === "project" ? "projects" : "hackathons";
-      const data = getContentBySlug(slug, subdir);
+      if (type !== "project") return null;
+      const data = getContentBySlug(slug, "projects");
       if (!data) return null;
       const { frontmatter, content } = data;
-      const label = type === "project" ? "Project" : "Hackathon";
-      return `${label}: "${frontmatter.title}" (slug: ${slug})
+      return `Project: "${frontmatter.title}" (slug: ${slug})
 Frontmatter: ${JSON.stringify(frontmatter, null, 2)}
 Content:
 ${content}`;

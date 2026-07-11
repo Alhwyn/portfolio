@@ -7,9 +7,10 @@ const contentDirectory = path.join(process.cwd(), 'content');
 export interface MediaConfig {
   type: 'video' | 'carousel';
   src?: string;
-  images?: Array<{ src: string; alt: string; title?: string }>;
+  images?: Array<{ src: string; alt: string; title?: string; type?: 'image' | 'video' }>;
   width?: number;
   height?: number;
+  frame?: 'phone' | 'flat';
 }
 
 export interface SectionConfig {
@@ -30,6 +31,8 @@ export interface ProjectFrontmatter {
   event?: string;
   tools?: string;
   role?: string;
+  url?: string;
+  stack?: string;
   media?: MediaConfig;
   sections?: SectionConfig[];
   lumaEventId?: string;
@@ -44,7 +47,7 @@ export interface ContentData {
 /**
  * Get all content files from a specific subdirectory
  */
-export function getContentSlugs(subdir: 'projects' | 'hackathons'): string[] {
+export function getContentSlugs(subdir: 'projects'): string[] {
   const directory = path.join(contentDirectory, subdir);
   
   if (!fs.existsSync(directory)) {
@@ -61,7 +64,7 @@ export function getContentSlugs(subdir: 'projects' | 'hackathons'): string[] {
  */
 export function getContentBySlug(
   slug: string,
-  subdir: 'projects' | 'hackathons'
+  subdir: 'projects'
 ): ContentData | null {
   const directory = path.join(contentDirectory, subdir);
   
@@ -88,7 +91,7 @@ export function getContentBySlug(
 /**
  * Get all content from a subdirectory
  */
-export function getAllContent(subdir: 'projects' | 'hackathons'): ContentData[] {
+export function getAllContent(subdir: 'projects'): ContentData[] {
   const slugs = getContentSlugs(subdir);
   return slugs
     .map((slug) => getContentBySlug(slug, subdir))

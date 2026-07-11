@@ -1,5 +1,5 @@
 import { getAllContent } from "@/lib/content";
-import { PROJECT_ICONS, HACKATHON_ICONS } from "@/lib/reference-icons";
+import { PROJECT_ICONS } from "@/lib/reference-icons";
 
 const VALID_PROJECT_SLUGS = [
   "photobomb",
@@ -11,7 +11,6 @@ export async function GET(req: Request) {
   const full = searchParams.get("full") === "true";
 
   const allProjects = getAllContent("projects");
-  const allHackathons = getAllContent("hackathons");
 
   const projects = allProjects
     .filter((p) => VALID_PROJECT_SLUGS.includes(p.slug))
@@ -32,22 +31,5 @@ export async function GET(req: Request) {
       return base;
     });
 
-  const hackathons = allHackathons.map((p) => {
-    const base = {
-      type: "hackathon" as const,
-      slug: p.slug,
-      title: p.frontmatter.title,
-      icon: HACKATHON_ICONS[p.slug] ?? "/image/icon/cursor.png",
-    };
-    if (full) {
-      return {
-        ...base,
-        frontmatter: p.frontmatter,
-        content: p.content,
-      };
-    }
-    return base;
-  });
-
-  return Response.json({ projects, hackathons });
+  return Response.json({ projects, hackathons: [] });
 }

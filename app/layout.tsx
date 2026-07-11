@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AIChatProvider } from "@/contexts/AIChatContext";
 import { SiteHeader } from "@/components/SiteHeader";
 import { AISidebarProvider } from "@/components/AISidebarProvider";
 import { ContentWrapper } from "@/components/ContentWrapper";
 import "./globals.css";
-
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  variable: "--font-source-serif",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://alhwyn.com"),
@@ -76,9 +69,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${sourceSerif.variable} ${sourceSerif.className} antialiased bg-[#f4f4f2] text-neutral-900`}
-      >
+      <body className="antialiased bg-[#f4f4f2] text-neutral-900">
         <AIChatProvider>
           <SiteHeader />
           <AISidebarProvider />

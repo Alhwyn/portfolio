@@ -400,7 +400,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                   value={input}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ask about this page... Type @ to reference projects or hackathons"
+                  placeholder="Ask about this page... Type @ to reference projects"
                   disabled={status !== "ready"}
                   className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-neutral-800 dark:text-neutral-200 placeholder-neutral-400 dark:placeholder-neutral-500 text-sm"
                 />
