@@ -1,29 +1,18 @@
 import { streamText, convertToModelMessages, type UIMessage, tool, jsonSchema } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
-import { getContentBySlug, getAllContent, getResume, getResumeFiles } from "@/lib/content";
+import { getResume, getResumeFiles } from "@/lib/content";
+import {
+  getAllProjects,
+  getProjectBySlug,
+  HOME_PROJECT_SLUGS,
+} from "@/lib/projects";
 
 export const maxDuration = 30;
 
-const VALID_PROJECT_SLUGS = [
-  "photobomb",
-  "canlii-mcp",
-];
+const VALID_PROJECT_SLUGS = [...HOME_PROJECT_SLUGS];
 
 function getPageContext(pathname: string): string {
-  const projectMatch = pathname.match(/^\/projects\/([^/]+)/);
-
-  if (projectMatch) {
-    const data = getContentBySlug(projectMatch[1], "projects");
-    if (data) {
-      const { frontmatter, content } = data;
-      return `Current page context - Project: "${frontmatter.title}"
-Frontmatter: ${JSON.stringify(frontmatter, null, 2)}
-Content:
-${content}`;
-    }
-  }
-
   if (pathname === "/events") {
     return `Current page context: Events cover flow — hosted events gallery (no article pages).`;
   }
@@ -36,7 +25,7 @@ This is Alhwyn Geonzon's portfolio with projects and events. Alhwyn is 19 and wo
   return `Current page context: ${pathname || "Unknown page"}`;
 }
 
-type ReferencedItem = { type: "project" | "hackathon"; slug: string };
+type ReferencedItem = { type: "project"; slug: string };
 
 function getReferencedContext(referencedItems: ReferencedItem[]): string {
   if (referencedItems.length === 0) return "";
@@ -44,13 +33,13 @@ function getReferencedContext(referencedItems: ReferencedItem[]): string {
   const sections = referencedItems
     .map(({ type, slug }) => {
       if (type !== "project") return null;
-      const data = getContentBySlug(slug, "projects");
+      const data = getProjectBySlug(slug);
       if (!data) return null;
-      const { frontmatter, content } = data;
-      return `Project: "${frontmatter.title}" (slug: ${slug})
-Frontmatter: ${JSON.stringify(frontmatter, null, 2)}
-Content:
-${content}`;
+      return `Project: "${data.title}" (slug: ${slug})
+Year: ${data.year}
+Tools: ${data.tools ?? "—"}
+URL: ${data.url ?? "—"}
+Description: ${data.description}`;
     })
     .filter(Boolean);
 
@@ -62,15 +51,15 @@ ${sections.join("\n\n---\n\n")}`;
 }
 
 function getProjectsContext(): string {
-  const allProjects = getAllContent("projects").filter((p) =>
-    VALID_PROJECT_SLUGS.includes(p.slug)
-  );
+  const allProjects = getAllProjects();
   if (allProjects.length === 0) return "";
   const list = allProjects
-    .map((p) => `- ${p.frontmatter.title} (slug: ${p.slug})
-  Year: ${p.frontmatter.year ?? "—"}
-  Tools: ${p.frontmatter.tools ?? "—"}
-  Description: ${p.content}`)
+    .map(
+      (p) => `- ${p.title} (slug: ${p.slug})
+  Year: ${p.year}
+  Tools: ${p.tools ?? "—"}
+  Description: ${p.description}`
+    )
     .join("\n\n");
   return `
 
@@ -163,21 +152,20 @@ ${pageContext}${referencedContext}${projectsContext}`;
         }),
         execute: async ({ slug }) => {
           const normalizedSlug = slug.toLowerCase().replace(/\s+/g, "-");
-          if (!VALID_PROJECT_SLUGS.includes(normalizedSlug)) {
+          if (!(VALID_PROJECT_SLUGS as readonly string[]).includes(normalizedSlug)) {
             return {
               error: `Project "${slug}" not found. Valid slugs: ${VALID_PROJECT_SLUGS.join(", ")}`,
             };
           }
-          const data = getContentBySlug(normalizedSlug, "projects");
+          const data = getProjectBySlug(normalizedSlug);
           if (!data) return { error: "Project not found" };
           return {
             slug: data.slug,
-            title: data.frontmatter.title,
-            year: data.frontmatter.year,
-            tools: data.frontmatter.tools,
-            role: data.frontmatter.role,
-            description: data.content,
-            frontmatter: data.frontmatter,
+            title: data.title,
+            year: data.year,
+            tools: data.tools,
+            description: data.description,
+            url: data.url,
           };
         },
       }),
