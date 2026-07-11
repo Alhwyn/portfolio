@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { usePathname } from "next/navigation";
-import { ArrowUp, X, FolderOpen, Trophy, Trash2 } from "lucide-react";
+import { ArrowUp, X, FolderOpen, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,7 +18,7 @@ interface AISidebarProps {
 }
 
 type ReferenceItem = {
-  type: "project" | "hackathon";
+  type: "project";
   slug: string;
   title: string;
   icon?: string;
@@ -33,7 +33,6 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
   const [input, setInput] = useState("");
   const [referencedItems, setReferencedItems] = useState<ReferenceItem[]>([]);
   const [projects, setProjects] = useState<ReferenceItem[]>([]);
-  const [hackathons, setHackathons] = useState<ReferenceItem[]>([]);
   const [showAtDropdown, setShowAtDropdown] = useState(false);
   const [atFilter, setAtFilter] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -63,11 +62,9 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
       .then((r) => r.json())
       .then((data) => {
         setProjects(data.projects || []);
-        setHackathons(data.hackathons || []);
       })
       .catch(() => {
         setProjects([]);
-        setHackathons([]);
       });
   }, []);
 
@@ -137,7 +134,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
     inputRef.current?.focus();
   };
 
-  const removeReferencedItem = (type: "project" | "hackathon", slug: string) => {
+  const removeReferencedItem = (type: "project", slug: string) => {
     setReferencedItems((prev) =>
       prev.filter((r) => !(r.type === type && r.slug === slug))
     );
@@ -153,11 +150,10 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
       : items;
 
   const filteredProjects = filterItems(projects);
-  const filteredHackathons = filterItems(hackathons);
 
   const flatItems = useMemo(
-    () => [...filteredProjects, ...filteredHackathons],
-    [filteredProjects, filteredHackathons]
+    () => filteredProjects,
+    [filteredProjects]
   );
 
   useEffect(() => {
@@ -400,7 +396,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                   value={input}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ask about this page... Type @ to reference projects or hackathons"
+                  placeholder="Ask about this page... Type @ to reference projects"
                   disabled={status !== "ready"}
                   className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-neutral-800 dark:text-neutral-200 placeholder-neutral-400 dark:placeholder-neutral-500 text-sm"
                 />
@@ -421,14 +417,13 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                     ) : (
                       <>
                         {filteredProjects.length > 0 && (
-                          <div className="border-b border-neutral-200 dark:border-neutral-700/80">
-                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 uppercase tracking-wide">
+                          <div>
+                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 tracking-wide">
                               <FolderOpen className="w-3 h-3" />
                               Projects
                             </div>
                             {filteredProjects.map((item, i) => {
-                              const idx = i;
-                              const isSelected = idx === selectedIndex;
+                              const isSelected = i === selectedIndex;
                               return (
                                 <button
                                   key={`project-${item.slug}`}
@@ -452,45 +447,6 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                                     />
                                   ) : (
                                     <FolderOpen className="w-4 h-4 text-neutral-500 shrink-0" />
-                                  )}
-                                  <span className="truncate">{item.title}</span>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        )}
-                        {filteredHackathons.length > 0 && (
-                          <div>
-                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 uppercase tracking-wide">
-                              <Trophy className="w-3 h-3" />
-                              Hackathons
-                            </div>
-                            {filteredHackathons.map((item, i) => {
-                              const idx = filteredProjects.length + i;
-                              const isSelected = idx === selectedIndex;
-                              return (
-                                <button
-                                  key={`hackathon-${item.slug}`}
-                                  ref={isSelected ? selectedItemRef : undefined}
-                                  type="button"
-                                  onClick={() => handleSelectItem(item)}
-                                  className={cn(
-                                    "w-full px-2 py-1.5 flex items-center gap-2 text-left text-xs text-neutral-800 dark:text-neutral-200",
-                                    isSelected
-                                      ? "bg-neutral-200 dark:bg-neutral-600"
-                                      : "hover:bg-neutral-100 dark:hover:bg-neutral-700/80"
-                                  )}
-                                >
-                                  {item.icon ? (
-                                    <Image
-                                      src={item.icon}
-                                      alt=""
-                                      width={18}
-                                      height={18}
-                                      className="rounded object-cover shrink-0"
-                                    />
-                                  ) : (
-                                    <Trophy className="w-4 h-4 text-neutral-500 shrink-0" />
                                   )}
                                   <span className="truncate">{item.title}</span>
                                 </button>

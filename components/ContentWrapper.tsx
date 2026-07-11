@@ -9,7 +9,6 @@ export function ContentWrapper({ children }: { children: React.ReactNode }) {
     <div
       className={cn(
         "transition-[margin] duration-200",
-        !isOpen && "lg:ml-64",
         isOpen && "sm:mr-[376px]"
       )}
     >

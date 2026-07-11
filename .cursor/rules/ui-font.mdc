@@ -1,0 +1,17 @@
+---
+description: Site UI font — system sans only
+alwaysApply: true
+---
+
+# Font
+
+Always system sans. No serif. No Inter/Roboto as brand pick — use OS stack:
+
+```
+ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+```
+
+Body / header / lists / captions = same font.
+
+Bad: Source Serif, Georgia, Times, special display font for UI copy.
+Good: stack above via `font-sans` or body default.

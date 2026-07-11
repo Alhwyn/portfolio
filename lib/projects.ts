@@ -1,77 +1,114 @@
-import { getContentBySlug } from "./content";
+import type { ProjectListItem } from "@/components/ProjectList";
 import { PROJECT_ICONS } from "./reference-icons";
-import type { Project } from "@/components/ProjectTimeline";
 
-const TIP_MAX_LENGTH = 80;
+export type Project = {
+  slug: string;
+  title: string;
+  year: string;
+  blurb?: string;
+  tools?: string;
+  stack?: string;
+  url?: string;
+  description: string;
+  previewSrc?: string;
+  previewType?: "video" | "image" | "carousel";
+  previewWidth?: number;
+  previewHeight?: number;
+  previewFrame?: "phone" | "flat";
+  previewImages?: Array<{ src: string; alt: string; type?: "image" | "video" }>;
+};
 
-function derivePreviewFromFrontmatter(data: {
-  frontmatter: { media?: { type?: string; src?: string; images?: Array<{ src: string }> }; project?: string };
-}) {
-  const { frontmatter } = data;
-  let previewVideo: string | undefined;
-  let previewImage: string | undefined;
-  let previewTip: string | undefined;
+export const HOME_PROJECT_SLUGS = ["photobomb", "canlii-mcp"] as const;
 
-  if (frontmatter.media) {
-    if (frontmatter.media.type === "video" && frontmatter.media.src) {
-      previewVideo = frontmatter.media.src;
-    } else if (
-      frontmatter.media.type === "carousel" &&
-      frontmatter.media.images?.length
-    ) {
-      previewImage = frontmatter.media.images[0].src;
-    }
-  }
-  if (!previewVideo && !previewImage && frontmatter.project) {
-    previewTip =
-      frontmatter.project.length > TIP_MAX_LENGTH
-        ? frontmatter.project.slice(0, TIP_MAX_LENGTH) + "..."
-        : frontmatter.project;
-  }
+export const PROJECTS: Project[] = [
+  {
+    slug: "photobomb",
+    title: "PhotoBomb",
+    year: "2026",
+    blurb: "Cards against humanity but you use your camera roll. 5k+ users",
+    tools: "React Native, Expo, Rust, AWS",
+    stack:
+      "Built in React Native with a Rust backend, deployed on AWS using EC2 and RDS.",
+    url: "https://photobomb.online",
+    description:
+      "PhotoBomb is a multiplayer photo party game for 3 to 12 players. Similar to Cards Against Humanity, each round we randomly choose a prompt from a selection of 1 to 7 prompts, and players take turns sharing photos that best match the prompt. The group votes on the funniest or most creative submission to decide the winner. Visit photobomb.online to check it out.",
+    previewType: "carousel",
+    previewFrame: "flat",
+    previewImages: [
+      {
+        src: "/video/photobomb_demo.mp4",
+        alt: "PhotoBomb demo",
+        type: "video",
+      },
+      {
+        src: "/image/photobomb/image-1.png",
+        alt: "PhotoBomb select a prompt",
+      },
+      {
+        src: "/image/photobomb/image-2.png",
+        alt: "PhotoBomb prompter chooses the photo",
+      },
+      {
+        src: "/image/photobomb/image-3.png",
+        alt: "PhotoBomb gameplay",
+      },
+      {
+        src: "/image/photobomb/image-4.png",
+        alt: "PhotoBomb app screen",
+      },
+    ],
+  },
+  {
+    slug: "canlii-mcp",
+    title: "CanLII MCP",
+    year: "2025",
+    tools: "TypeScript, Cloudflare Workers, CanLii API, MCP Protocol",
+    url: "https://github.com/alhwyn/canlii-mcp",
+    description:
+      "A Model Context Protocol (MCP) server for Canadian legal research. Integrates with the CanLII database to give AI assistants access to Canadian case law, statutes, and legal resources. Built with TypeScript and deployed on Cloudflare Workers.",
+    previewType: "video",
+    previewSrc: "/video/law_demo.mp4",
+    previewWidth: 600,
+    previewHeight: 340,
+  },
+];
 
-  return { previewVideo, previewImage, previewTip };
+export function getProjectBySlug(slug: string): Project | undefined {
+  return PROJECTS.find((p) => p.slug === slug);
 }
 
-export type ProjectOverrides = Partial<Pick<Project, "linkDisabled" | "description">>;
+export function getAllProjects(): Project[] {
+  return PROJECTS;
+}
 
 /**
- * Build project list for timeline from MDX content.
- * Derives preview (video, image, tip) from frontmatter media.
+ * Build project list entries for the homepage hairline list.
  */
-export function getProjectsForTimeline(
-  slugs: string[],
-  options?: { overrides?: Record<string, ProjectOverrides> }
-): Project[] {
-  const projects: Project[] = [];
+export function getProjectsForList(slugs: string[]): ProjectListItem[] {
+  return slugs
+    .map((slug) => getProjectBySlug(slug))
+    .filter((p): p is Project => p !== undefined)
+    .map((p) => ({
+      id: p.slug,
+      title: p.title,
+      year: p.year,
+      previewSrc: p.previewSrc ?? p.previewImages?.[0]?.src,
+      previewType: p.previewType ?? "image",
+      previewWidth: p.previewWidth,
+      previewHeight: p.previewHeight,
+      previewFrame: p.previewFrame ?? "flat",
+      previewImages: p.previewImages,
+      blurb: p.blurb,
+      stack: p.stack,
+      href: p.url,
+    }));
+}
 
-  for (const slug of slugs) {
-    const data = getContentBySlug(slug, "projects");
-    const overrides = options?.overrides?.[slug] ?? {};
-
-    if (data) {
-      const { frontmatter, content } = data;
-      const icon = PROJECT_ICONS[slug] ?? "/image/icon/archive.svg";
-      const { previewVideo, previewImage, previewTip } =
-        derivePreviewFromFrontmatter(data);
-
-      const firstParagraph = content.split("\n\n")[0]?.slice(0, 120) ?? "";
-      const description =
-        frontmatter.project ??
-        (firstParagraph.length >= 100 ? firstParagraph + "..." : firstParagraph);
-
-      projects.push({
-        id: slug,
-        title: frontmatter.title,
-        year: frontmatter.year ?? "",
-        description,
-        icon,
-        previewVideo,
-        previewImage,
-        previewTip,
-        ...overrides,
-      });
-    }
-  }
-
-  return projects;
+export function getProjectsForReference() {
+  return PROJECTS.map((p) => ({
+    type: "project" as const,
+    slug: p.slug,
+    title: p.title,
+    icon: PROJECT_ICONS[p.slug] ?? "/image/icon/photobob_icon.jpeg",
+  }));
 }
