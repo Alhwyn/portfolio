@@ -13,7 +13,7 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
       <ReactMarkdown
         components={{
         p: ({ children }) => (
-          <p className="leading-relaxed text-gray-800 dark:text-neutral-300 text-lg mb-6">
+          <p className="leading-[1.75] text-neutral-900 text-[15px] mb-6">
             {children}
           </p>
         ),
@@ -44,20 +44,20 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
           </h3>
         ),
         ul: ({ children }) => (
-          <ul className="list-disc list-inside mb-6 text-gray-800 dark:text-neutral-300">
+          <ul className="list-disc list-inside mb-6 text-xl leading-loose text-gray-800 dark:text-neutral-300">
             {children}
           </ul>
         ),
         ol: ({ children }) => (
-          <ol className="list-decimal list-inside mb-6 text-gray-800 dark:text-neutral-300">
+          <ol className="list-decimal list-inside mb-6 text-xl leading-loose text-gray-800 dark:text-neutral-300">
             {children}
           </ol>
         ),
         li: ({ children }) => (
-          <li className="mb-2">{children}</li>
+          <li className="mb-2 leading-loose">{children}</li>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="border-l-4 border-gray-300 dark:border-neutral-600 pl-4 my-6 italic text-gray-600 dark:text-neutral-400">
+          <blockquote className="border-l-4 border-gray-300 dark:border-neutral-600 pl-4 my-6 italic leading-loose text-gray-600 dark:text-neutral-400">
             {children}
           </blockquote>
         ),

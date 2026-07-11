@@ -422,7 +422,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                       <>
                         {filteredProjects.length > 0 && (
                           <div className="border-b border-neutral-200 dark:border-neutral-700/80">
-                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 uppercase tracking-wide">
+                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 tracking-wide">
                               <FolderOpen className="w-3 h-3" />
                               Projects
                             </div>
@@ -461,7 +461,7 @@ export function AISidebar({ isOpen, onClose }: AISidebarProps) {
                         )}
                         {filteredHackathons.length > 0 && (
                           <div>
-                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 uppercase tracking-wide">
+                            <div className="px-2 py-1 flex items-center gap-1.5 text-[10px] font-medium text-neutral-500 tracking-wide">
                               <Trophy className="w-3 h-3" />
                               Hackathons
                             </div>

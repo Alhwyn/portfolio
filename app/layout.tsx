@@ -1,34 +1,27 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Geist_Mono } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AIChatProvider } from "@/contexts/AIChatContext";
-import { Sidebar } from "@/components/Sidebar";
+import { SiteHeader } from "@/components/SiteHeader";
 import { AISidebarProvider } from "@/components/AISidebarProvider";
 import { ContentWrapper } from "@/components/ContentWrapper";
 import "./globals.css";
 
-const geistSans = Instrument_Serif({
-  variable: "--font-geist-sans",
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  weight: "400",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-source-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://alhwyn.com'),
+  metadataBase: new URL("https://alhwyn.com"),
   title: {
     default: "Alhwyn Geonzon",
-    template: "%s | Alhwyn Geonzon"
+    template: "%s | Alhwyn Geonzon",
   },
-  description: "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
-  keywords: [
-    "Alhwyn Geonzon",
-    "Alhwyn",
-  ],
+  description:
+    "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+  keywords: ["Alhwyn Geonzon", "Alhwyn"],
   authors: [{ name: "Alhwyn Geonzon" }],
   creator: "Alhwyn Geonzon",
   publisher: "Alhwyn Geonzon",
@@ -38,9 +31,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
@@ -49,7 +42,8 @@ export const metadata: Metadata = {
     url: "https://alhwyn.com",
     siteName: "Alhwyn Geonzon Portfolio",
     title: "Alhwyn Geonzon - Portfolio",
-    description: "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+    description:
+      "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
     images: [
       {
         url: "/image/icon/photobob_icon.jpeg",
@@ -62,7 +56,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Alhwyn Geonzon - Portfolio",
-    description: "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+    description:
+      "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
     site: "@alhwyn",
     creator: "@alhwyn",
     images: ["/image/icon/photobob_icon.jpeg"],
@@ -82,10 +77,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 dark:bg-neutral-900`}
+        className={`${sourceSerif.variable} ${sourceSerif.className} antialiased bg-[#f4f4f2] text-neutral-900`}
       >
         <AIChatProvider>
-          <Sidebar />
+          <SiteHeader />
           <AISidebarProvider />
           <ContentWrapper>{children}</ContentWrapper>
         </AIChatProvider>

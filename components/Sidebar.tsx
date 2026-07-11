@@ -27,7 +27,7 @@ export function Sidebar() {
         <h1 className="text-2xl instrument-serif-regular text-gray-700 dark:text-neutral-300">
           alhwyn.com
         </h1>
-        <div className="mt-3 space-y-2 text-gray-700 dark:text-neutral-400 text-sm">
+        <div className="mt-3 space-y-2 text-gray-700 dark:text-neutral-400">
           <a href="https://x.com/alhwyn" target="_blank" rel="noopener noreferrer" className="block hover:underline">
             x.com/alhwyn
           </a>
