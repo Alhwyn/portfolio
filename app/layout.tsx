@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { AIChatProvider } from "@/contexts/AIChatContext";
 import { SiteHeader } from "@/components/SiteHeader";
-import { AISidebarProvider } from "@/components/AISidebarProvider";
-import { ContentWrapper } from "@/components/ContentWrapper";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -70,11 +67,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-[#f4f4f2] text-neutral-900">
-        <AIChatProvider>
-          <SiteHeader />
-          <AISidebarProvider />
-          <ContentWrapper>{children}</ContentWrapper>
-        </AIChatProvider>
+        <SiteHeader />
+        {children}
         <Analytics />
       </body>
     </html>
