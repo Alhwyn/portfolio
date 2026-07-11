@@ -8,7 +8,7 @@ import { getContentBySlug, getContentSlugs } from "@/lib/content";
 import { ArrowLeft } from "lucide-react";
 
 // Valid project slugs that map to MDX files
-const validProjectSlugs = ['photobomb', 'canlii-mcp', 'reeflog', 'dockbot'];
+const validProjectSlugs = ['photobomb', 'canlii-mcp'];
 
 export async function generateStaticParams() {
   const slugs = getContentSlugs('projects');
@@ -129,7 +129,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
         )}
 
-        {/* Optional sections (for projects with multiple demos like Dockbot) */}
+        {/* Optional sections (for projects with multiple demos) */}
         {sections?.map((section, sectionIndex: number) => {
           const HeadingTag = section.headingLevel === "h3" ? "h3" : "h2";
           return (

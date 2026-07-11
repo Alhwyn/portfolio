@@ -24,21 +24,21 @@ export function SiteHeader() {
           <a href="/#info" className={navLinkClass}>
             Info
           </a>
+          <a href="/hackathons/scrapyard" className={navLinkClass}>
+            Events
+          </a>
+        </div>
+
+        <div className="flex flex-col gap-1">
           <a href="/#work" className={navLinkClass}>
             Work
           </a>
-        </div>
-
-        <div>
-          <a href="/#projects" className={navLinkClass}>
-            Projects
-          </a>
+          <span className={navLinkClass}>Github</span>
         </div>
 
         <div className="flex flex-col gap-1 sm:items-end">
-          <span className={navLinkClass}>github.com/Alhwyn</span>
-          <span className={navLinkClass}>linkedin.com/in/alhwyn</span>
-          <span className={navLinkClass}>x.com/alhwyn</span>
+          <span className={navLinkClass}>Linkedin</span>
+          <span className={navLinkClass}>X</span>
         </div>
       </div>
     </header>

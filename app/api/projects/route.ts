@@ -4,8 +4,6 @@ import { PROJECT_ICONS, HACKATHON_ICONS } from "@/lib/reference-icons";
 const VALID_PROJECT_SLUGS = [
   "photobomb",
   "canlii-mcp",
-  "reeflog",
-  "dockbot",
 ];
 
 export async function GET(req: Request) {
@@ -22,7 +20,7 @@ export async function GET(req: Request) {
         type: "project" as const,
         slug: p.slug,
         title: p.frontmatter.title,
-        icon: PROJECT_ICONS[p.slug] ?? "/image/icon/archive.svg",
+        icon: PROJECT_ICONS[p.slug] ?? "/image/icon/photobob_icon.jpeg",
       };
       if (full) {
         return {

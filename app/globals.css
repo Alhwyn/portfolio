@@ -122,59 +122,9 @@
   }
 }
 
-.editorial-text {
-  @apply text-[15px] leading-[1.75] text-neutral-900;
-}
-
-.editorial-caption {
-  @apply text-[13px] leading-snug text-neutral-700;
-}
-
-@keyframes slow-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(12px);
-  }
-}
-.slow-bounce {
-  animation: slow-bounce 2s infinite;
-  display: inline-block;
-}
-
-.jiggle-on-hover {
-  transition: transform 0.15s ease-in-out;
-}
-
-.jiggle-on-hover:hover {
-  transform: rotate(-4deg);
-}
-
-.source-serif-4,
 .instrument-serif-regular,
 .instrument-serif-regular-italic {
   font-family: var(--font-source-serif), Georgia, "Times New Roman", serif;
   font-weight: 400;
   font-style: normal;
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #c34b2f, #4383f4, #c99718);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 5s ease infinite;
-}
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
