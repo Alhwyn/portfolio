@@ -19,7 +19,7 @@ function getPageContext(pathname: string): string {
 
   if (pathname === "/" || pathname === "") {
     return `Current page context: Portfolio home page (alhwyn.com)
-This is Alhwyn Geonzon's portfolio with projects and events. Alhwyn is 19 and works as a software developer at Gist Applications in Victoria, Canada.`;
+This is Alhwyn Geonzon's portfolio with projects and events. Alhwyn works as a software developer based in Victoria, Canada.`;
   }
 
   return `Current page context: ${pathname || "Unknown page"}`;
