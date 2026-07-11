@@ -12,7 +12,7 @@ type ProjectListProps = {
 
 export function ProjectList({ projects }: ProjectListProps) {
   return (
-    <div className="w-full max-w-[13.125rem]">
+    <div className="w-full max-w-[18rem]">
       <ul className="m-0 list-none border-t border-neutral-900/20 p-0">
         {projects.map((project) => (
           <li
@@ -21,10 +21,12 @@ export function ProjectList({ projects }: ProjectListProps) {
           >
             <Link
               href={`/projects/${project.id}`}
-              className="grid grid-cols-[2.5rem_1fr] gap-x-2 py-1.5 text-inherit no-underline hover:opacity-60 transition-opacity"
+              className="flex items-center gap-2 py-1.5 text-inherit no-underline hover:opacity-60 transition-opacity"
             >
-              <span className="tabular-nums text-neutral-900/55">{project.year}</span>
               <span className="min-w-0">{project.title}</span>
+              <span className="ml-auto shrink-0 tabular-nums text-neutral-900/55">
+                {project.year}
+              </span>
             </Link>
           </li>
         ))}

@@ -4,7 +4,7 @@ import { getProjectsForList } from "@/lib/projects";
 
 const HOME_PROJECT_SLUGS = ["photobomb", "canlii-mcp"] as const;
 
-/** Same system geometric sans as SiteHeader — project `--font-sans` is Source Serif. */
+/** Same system geometric sans as SiteHeader. */
 const sectionSans =
   "[font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,'Helvetica_Neue',Arial,sans-serif]";
 
