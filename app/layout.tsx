@@ -34,23 +34,14 @@ export const metadata: Metadata = {
     title: "Alhwyn Geonzon - Portfolio",
     description:
       "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
-    images: [
-      {
-        url: "/image/icon/photobob_icon.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Alhwyn Geonzon Portfolio",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Alhwyn Geonzon - Portfolio",
     description:
       "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
-    site: "@alhwyn",
-    creator: "@alhwyn",
-    images: ["/image/icon/photobob_icon.jpeg"],
+    site: "@alhwynn",
+    creator: "@alhwynn",
   },
   alternates: {
     canonical: "https://alhwyn.com",
