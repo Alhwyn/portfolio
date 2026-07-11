@@ -6,6 +6,8 @@ const navLinkClass =
 const nameClass =
   "font-normal text-[15px] leading-snug text-neutral-900 hover:opacity-60 transition-opacity";
 
+const externalLinkClass = `${navLinkClass} inline-block`;
+
 export function SiteHeader() {
   return (
     <header className="px-6 sm:px-10 lg:px-16 pt-8 pb-6">
@@ -26,12 +28,33 @@ export function SiteHeader() {
           <Link href="/#work" className={navLinkClass}>
             Work
           </Link>
-          <span className={navLinkClass}>Github</span>
+          <a
+            href="https://github.com/alhwyn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={externalLinkClass}
+          >
+            Github
+          </a>
         </div>
 
         <div className="flex flex-col gap-1 sm:items-end">
-          <span className={navLinkClass}>Linkedin</span>
-          <span className={navLinkClass}>X</span>
+          <a
+            href="https://www.linkedin.com/in/alhwyn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={externalLinkClass}
+          >
+            Linkedin
+          </a>
+          <a
+            href="https://x.com/alhwynn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={externalLinkClass}
+          >
+            X
+          </a>
         </div>
       </div>
     </header>
