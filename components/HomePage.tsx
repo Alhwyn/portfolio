@@ -151,7 +151,7 @@ export function HomePage({ projects }: HomePageProps) {
             BC on Vancouver Island, Canada.
             <br />
             <br />
-            If you're building something cool I'd love to try it out by email at alhwyn@alhwyn.com
+            If you&apos;re building something cool I&apos;d love to try it out by email at alhwyn@alhwyn.com
           </p>
         </div>
       </div>
