@@ -149,6 +149,8 @@ export function HomePage({ projects }: HomePageProps) {
             hosted a bunch of Cursor events. Made Cards Against Humanity but for
             your camera roll, PhotoBomb, 5k+ users. I&apos;m based in Victoria,
             BC on Vancouver Island, Canada.
+
+            if youre building something cool would love to try it out by email at alhwyn@alhwyn.com
           </p>
         </div>
       </div>
