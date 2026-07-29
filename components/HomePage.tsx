@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import {
   ProjectList,
   type ProjectListItem,
@@ -11,6 +12,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 type HomePageProps = {
   projects: ProjectListItem[];
@@ -144,7 +150,9 @@ export function HomePage({ projects }: HomePageProps) {
             />
           </section>
 
-          <p className="m-0 max-w-[18rem] text-xs leading-snug text-neutral-900">
+          <p
+            className={`${plusJakarta.className} m-0 max-w-[18rem] text-xs leading-snug text-neutral-900`}
+          >
             I&apos;m 19. I like building software and doing events. I&apos;ve
             hosted a bunch of Cursor events. Made Cards Against Humanity but for
             your camera roll, PhotoBomb, 5k+ users. I&apos;m based in Victoria,
