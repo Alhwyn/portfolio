@@ -14,10 +14,10 @@ const experiences: Experience[] = [
     href: "https://www.gmicloud.ai",
   },
   {
-    company: "Cursor",
+    company: "SpaceX",
     role: "Ambassador",
     dates: "Present",
-    href: "https://cursor.com",
+    href: "https://www.spacex.com",
   },
   {
     company: "Gist",
