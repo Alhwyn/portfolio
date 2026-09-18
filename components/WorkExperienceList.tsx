@@ -8,7 +8,8 @@ type Experience = {
 /** Reverse-chronological (newest first). */
 const experiences: Experience[] = [
   {
-    company: "fliptexts.com",
+    company: "Flip Labs",
+    role: "SWE",
     dates: "Present",
     href: "https://fliptexts.com",
   },
