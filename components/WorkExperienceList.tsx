@@ -1,6 +1,6 @@
 type Experience = {
   company: string;
-  role: string;
+  role?: string;
   dates: string;
   href?: string;
 };
@@ -8,8 +8,7 @@ type Experience = {
 /** Reverse-chronological (newest first). */
 const experiences: Experience[] = [
   {
-    company: "FlipText",
-    role: "SDE",
+    company: "fliptexts.com",
     dates: "Present",
     href: "https://fliptexts.com",
   },
@@ -51,7 +50,7 @@ export function WorkExperienceList() {
           const content = (
             <>
               <span className="min-w-0">
-                {item.company} {item.role}
+                {item.role ? `${item.company} ${item.role}` : item.company}
               </span>
               <span className="ml-auto shrink-0 pl-3 tabular-nums text-neutral-900/55">
                 {item.dates}
@@ -64,7 +63,7 @@ export function WorkExperienceList() {
 
           return (
             <li
-              key={`${item.company}-${item.role}-${item.dates}`}
+              key={`${item.company}-${item.role ?? "none"}-${item.dates}`}
               className="border-b border-neutral-900/20 text-xs leading-tight text-neutral-900"
             >
               {item.href ? (
