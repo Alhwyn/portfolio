@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --experimental-strip-types --test lib/math-wars/*.test.ts"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

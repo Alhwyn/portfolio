@@ -69,6 +69,33 @@ function AppStoreCarousel({
   );
 }
 
+function captionLabel(href: string) {
+  if (href.startsWith("/")) return "Play it";
+  if (href.includes("roblox.com")) return "Play it on Roblox";
+  return "Check it out";
+}
+
+function ProjectCaptionLink({ href, label }: { href: string; label: string }) {
+  const external = href.startsWith("http://") || href.startsWith("https://");
+  const text = href.startsWith("/")
+    ? href.replace(/^\//, "")
+    : href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  return (
+    <p className="m-0">
+      {label}{" "}
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="text-neutral-900/80 underline-offset-2 hover:underline"
+      >
+        {text}
+      </a>
+    </p>
+  );
+}
+
 function ProjectPreviewMedia({ project }: { project: ProjectListItem }) {
   const images = project.previewImages ?? [];
 
@@ -95,7 +122,7 @@ function ProjectPreviewMedia({ project }: { project: ProjectListItem }) {
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={project.previewSrc}
-        alt=""
+        alt={project.title}
         className={
           project.previewFrame === "phone"
             ? "block h-auto w-full"
@@ -154,9 +181,10 @@ export function HomePage({ projects }: HomePageProps) {
             className={`${plusJakarta.className} m-0 max-w-[18rem] text-xs leading-snug text-neutral-900`}
           >
             I&apos;m 19. I like building software and doing events. I&apos;ve
-            hosted a bunch of Cursor events. Made Cards Against Humanity but for
-            your camera roll, PhotoBomb, 5k+ users. I&apos;m based in Victoria,
-            BC on Vancouver Island, Canada.
+            hosted a bunch of Cursor events. Made Math Wars, a Roblox math
+            arena. 10M+ views in under a week on a new account. Made Cards
+            Against Humanity but for your camera roll, PhotoBomb, 5k+ users.
+            I&apos;m based in Victoria, BC on Vancouver Island, Canada.
             <br />
             <br />
             If you&apos;re building something cool I&apos;d love to try it out by email at alhwyn@alhwyn.com
@@ -172,22 +200,24 @@ export function HomePage({ projects }: HomePageProps) {
         (selected.previewSrc || (selected.previewImages?.length ?? 0) > 0) ? (
           <div className="flex w-full max-w-3xl flex-col items-stretch gap-3">
             <ProjectPreviewMedia project={selected} />
-            {(selected.blurb || selected.stack || selected.href) && (
+            {(selected.blurb ||
+              selected.stack ||
+              selected.href ||
+              selected.playHref) && (
               <div className="flex w-full max-w-md flex-col items-start gap-1.5 self-start text-left text-xs leading-snug text-neutral-900/55">
                 {selected.blurb ? <p className="m-0">{selected.blurb}</p> : null}
                 {selected.stack ? <p className="m-0">{selected.stack}</p> : null}
                 {selected.href ? (
-                  <p className="m-0">
-                    Check it out{" "}
-                    <a
-                      href={selected.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-900/80 underline-offset-2 hover:underline"
-                    >
-                      {selected.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-                    </a>
-                  </p>
+                  <ProjectCaptionLink
+                    href={selected.href}
+                    label={captionLabel(selected.href)}
+                  />
+                ) : null}
+                {selected.playHref ? (
+                  <ProjectCaptionLink
+                    href={selected.playHref}
+                    label="Play a round here"
+                  />
                 ) : null}
               </div>
             )}

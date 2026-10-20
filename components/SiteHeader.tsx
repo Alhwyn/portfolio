@@ -24,6 +24,9 @@ export function SiteHeader() {
             <Link href="/events" className={navLinkClass}>
               Events
             </Link>
+            <Link href="/math-wars" className={navLinkClass}>
+              Math Wars
+            </Link>
             <Link href="/#work" className={navLinkClass}>
               Work
             </Link>
@@ -56,6 +59,9 @@ export function SiteHeader() {
           <div className="hidden sm:flex sm:flex-col sm:gap-1">
             <Link href="/events" className={navLinkClass}>
               Events
+            </Link>
+            <Link href="/math-wars" className={navLinkClass}>
+              Math Wars
             </Link>
           </div>
 

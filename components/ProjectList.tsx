@@ -16,6 +16,7 @@ export type ProjectListItem = {
   blurb?: string;
   stack?: string;
   href?: string;
+  playHref?: string;
 };
 
 type ProjectListProps = {

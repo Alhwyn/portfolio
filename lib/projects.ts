@@ -1,4 +1,5 @@
 import type { ProjectListItem } from "@/components/ProjectList";
+import { MATH_WARS_ROBLOX_URL } from "@/lib/math-wars/roblox";
 import { PROJECT_ICONS } from "./reference-icons";
 
 export type Project = {
@@ -9,6 +10,7 @@ export type Project = {
   tools?: string;
   stack?: string;
   url?: string;
+  playUrl?: string;
   description: string;
   previewSrc?: string;
   previewType?: "video" | "image" | "carousel";
@@ -18,9 +20,28 @@ export type Project = {
   previewImages?: Array<{ src: string; alt: string; type?: "image" | "video" }>;
 };
 
-export const HOME_PROJECT_SLUGS = ["photobomb", "canlii-mcp"] as const;
+export const HOME_PROJECT_SLUGS = ["math-wars", "photobomb", "canlii-mcp"] as const;
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "math-wars",
+    title: "Math Wars",
+    year: "2026",
+    blurb:
+      "Roblox math arena. 10M+ views in under a week on a new account.",
+    tools: "Roblox, Luau, TypeScript, Next.js",
+    stack:
+      "Type y = f(x), pick +x or −x, and fire the curve through cover. Last standing wins. Play it on Roblox, or a round in the browser.",
+    url: MATH_WARS_ROBLOX_URL,
+    playUrl: "/math-wars",
+    description:
+      "Math Wars is the Roblox graph-shot arena I shipped on a new account. It crossed 10M+ views in under a week. Type a function of x, fire it across destructible cover, and hit the other player before they hit you. Play on Roblox, or try a CPU / hotseat / practice round in the browser.",
+    previewType: "image",
+    previewSrc: "/image/math-wars/gameplay.png",
+    previewWidth: 768,
+    previewHeight: 432,
+    previewFrame: "flat",
+  },
   {
     slug: "photobomb",
     title: "PhotoBomb",
@@ -101,6 +122,7 @@ export function getProjectsForList(slugs: string[]): ProjectListItem[] {
       blurb: p.blurb,
       stack: p.stack,
       href: p.url,
+      playHref: p.playUrl,
     }));
 }
 
