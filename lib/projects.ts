@@ -1,6 +1,9 @@
 import type { ProjectListItem } from "@/components/ProjectList";
 import { PROJECT_ICONS } from "./reference-icons";
 
+export const MATH_WARS_ROBLOX_URL =
+  "https://www.roblox.com/games/107994348663960/Math-Wars";
+
 export type Project = {
   slug: string;
   title: string;
@@ -14,13 +17,31 @@ export type Project = {
   previewType?: "video" | "image" | "carousel";
   previewWidth?: number;
   previewHeight?: number;
-  previewFrame?: "phone" | "flat";
+  previewFrame?: "phone" | "flat" | "wide";
   previewImages?: Array<{ src: string; alt: string; type?: "image" | "video" }>;
 };
 
-export const HOME_PROJECT_SLUGS = ["photobomb", "canlii-mcp"] as const;
+export const HOME_PROJECT_SLUGS = ["math-wars", "photobomb", "canlii-mcp"] as const;
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "math-wars",
+    title: "Math Wars",
+    year: "2026",
+    tools: "Roblox, Luau",
+    url: MATH_WARS_ROBLOX_URL,
+    description:
+      "Math Wars is the Roblox graph-shot arena I shipped on a new account. It crossed 10M+ views in under a week.",
+    previewType: "carousel",
+    previewFrame: "wide",
+    previewWidth: 768,
+    previewHeight: 432,
+    previewImages: [
+      { src: "/image/math-wars/banner.png", alt: "Math Wars" },
+      { src: "/image/math-wars/character.png", alt: "Math Wars" },
+      { src: "/image/math-wars/gameplay.png", alt: "Math Wars" },
+    ],
+  },
   {
     slug: "photobomb",
     title: "PhotoBomb",

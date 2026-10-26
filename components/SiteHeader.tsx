@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MATH_WARS_ROBLOX_URL } from "@/lib/projects";
 
 const navLinkClass =
   "font-normal text-[15px] leading-snug text-neutral-900 hover:opacity-60 transition-opacity";
@@ -24,6 +25,14 @@ export function SiteHeader() {
             <Link href="/events" className={navLinkClass}>
               Events
             </Link>
+            <a
+              href={MATH_WARS_ROBLOX_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={externalLinkClass}
+            >
+              Math Wars
+            </a>
             <Link href="/#work" className={navLinkClass}>
               Work
             </Link>
@@ -57,6 +66,14 @@ export function SiteHeader() {
             <Link href="/events" className={navLinkClass}>
               Events
             </Link>
+            <a
+              href={MATH_WARS_ROBLOX_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={externalLinkClass}
+            >
+              Math Wars
+            </a>
           </div>
 
           <div className="hidden sm:flex sm:flex-col sm:gap-1">
