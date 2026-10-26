@@ -96,10 +96,49 @@ function ProjectCaptionLink({ href, label }: { href: string; label: string }) {
   );
 }
 
+function ImageCarousel({
+  images,
+}: {
+  images: Array<{ src: string; alt: string; type?: "image" | "video" }>;
+}) {
+  return (
+    <Carousel
+      opts={{ align: "start", loop: true, dragFree: false }}
+      className="w-full max-w-3xl"
+    >
+      <CarouselContent className="-ml-4">
+        {images.map((item) => (
+          <CarouselItem key={item.src} className="basis-full pl-4">
+            {item.type === "video" ? (
+              <video
+                src={item.src}
+                className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
+                draggable={false}
+              />
+            )}
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
+  );
+}
+
 function ProjectPreviewMedia({ project }: { project: ProjectListItem }) {
   const images = project.previewImages ?? [];
 
   if (project.previewType === "carousel" && images.length > 0) {
+    if (project.previewFrame === "wide") return <ImageCarousel images={images} />;
     return <AppStoreCarousel images={images} />;
   }
 

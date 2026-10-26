@@ -3,17 +3,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArenaCanvas, type Playback } from "@/components/math-wars/ArenaCanvas";
 import { FunctionBar } from "@/components/math-wars/FunctionBar";
-import { MathWarsMenu } from "@/components/math-wars/MathWarsMenu";
 import { sfx, setMuted, isMuted } from "@/lib/math-wars/audio";
 import { chooseCpuShot, defaultDirFor } from "@/lib/math-wars/cpu";
 import { parseExpr } from "@/lib/math-wars/expr";
 import { simulateShot, shotDamage } from "@/lib/math-wars/simulate";
-import {
-  loadStats,
-  recordMatch,
-  titleFor,
-  type MathWarsStats,
-} from "@/lib/math-wars/stats";
+import { loadStats, recordMatch } from "@/lib/math-wars/stats";
 import {
   MAP_LABELS,
   MODE_LABELS,
@@ -37,7 +31,6 @@ import {
 } from "@/lib/math-wars/world";
 
 type Phase =
-  | { kind: "menu" }
   | { kind: "aim"; turn: FighterId; until: number }
   | { kind: "firing"; turn: FighterId }
   | { kind: "cpu-think"; until: number }
@@ -63,17 +56,16 @@ function winnerLabel(mode: GameMode, winner: FighterId): string {
 }
 
 export function MathWarsGame() {
-  const [stats, setStats] = useState<MathWarsStats>({
-    wins: 0,
-    games: 0,
-    bestCombo: 0,
-  });
   const [muted, setMutedState] = useState(false);
   const [mode, setMode] = useState<GameMode>("cpu");
   const [world, setWorld] = useState<World>(() =>
     createWorld("brick-crossing", DUEL_HP, 7),
   );
-  const [phase, setPhase] = useState<Phase>({ kind: "menu" });
+  const [phase, setPhase] = useState<Phase>(() => ({
+    kind: "aim",
+    turn: "blue",
+    until: Date.now() + TURN_MS,
+  }));
   const [source, setSource] = useState("0.4x + 2*sin(x)");
   const [dir, setDir] = useState<Dir>(1);
   const [error, setError] = useState<string | null>(null);
@@ -91,11 +83,7 @@ export function MathWarsGame() {
   worldRef.current = world;
 
   useEffect(() => {
-    setStats(loadStats());
-  }, []);
-
-  useEffect(() => {
-    if (phase.kind === "menu" || phase.kind === "over") return;
+    if (phase.kind === "over") return;
     const id = window.setInterval(() => setNow(Date.now()), 250);
     return () => window.clearInterval(id);
   }, [phase.kind]);
@@ -243,7 +231,7 @@ export function MathWarsGame() {
     recordedRef.current = true;
     const won = mode !== "hotseat" && phase.winner === "blue";
     if (mode !== "hotseat") {
-      setStats((current) => recordMatch(current, won, bestComboThisMatch));
+      recordMatch(loadStats(), won, bestComboThisMatch);
     }
     sfx(phase.winner === "blue" ? "win" : "lose");
   }, [bestComboThisMatch, mode, phase]);
@@ -260,20 +248,23 @@ export function MathWarsGame() {
 
   return (
     <div className="relative flex min-h-[calc(100vh-8rem)] flex-col overflow-hidden rounded-2xl bg-[#12171e] text-white ring-1 ring-neutral-900/15">
-      {phase.kind === "menu" ? (
-        <MathWarsMenu stats={stats} onStart={startMatch} />
-      ) : null}
-
       <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
-        <div>
-          <p className="m-0 text-xs uppercase tracking-[0.18em] text-amber-300/80">
-            Math Wars
-          </p>
-          <p className="m-0 text-sm text-white/70">
-            {phase.kind === "menu"
-              ? titleFor(stats)
-              : `${MODE_LABELS[mode]} · ${MAP_LABELS[world.mapId]}`}
-          </p>
+        <div className="flex flex-wrap items-center gap-1.5">
+          {(Object.keys(MODE_LABELS) as GameMode[]).map((id) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => startMatch(id, world.mapId)}
+              className={`rounded-full px-2.5 py-1 text-xs ${
+                mode === id
+                  ? "bg-white text-neutral-900"
+                  : "bg-white/10 text-white/70"
+              }`}
+            >
+              {MODE_LABELS[id]}
+            </button>
+          ))}
+          <span className="text-xs text-white/40">{MAP_LABELS[world.mapId]}</span>
         </div>
         <div className="flex items-center gap-2">
           {phase.kind === "aim" && mode !== "practice" ? (
@@ -292,15 +283,6 @@ export function MathWarsGame() {
           >
             {muted ? "Sound off" : "Sound on"}
           </button>
-          {phase.kind !== "menu" ? (
-            <button
-              type="button"
-              onClick={() => setPhase({ kind: "menu" })}
-              className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-white/70"
-            >
-              Menu
-            </button>
-          ) : null}
         </div>
       </div>
 
@@ -317,33 +299,31 @@ export function MathWarsGame() {
         />
       </div>
 
-      {lastShot && phase.kind !== "menu" ? (
+      {lastShot ? (
         <p className="m-0 px-4 pb-1 font-mono text-[11px] text-white/40 sm:px-5">
           {lastShot}
         </p>
       ) : null}
 
-      {phase.kind !== "menu" ? (
-        <FunctionBar
-          value={source}
-          dir={dir}
-          error={error}
-          disabled={inputLocked}
-          label={
-            phase.kind === "over"
-              ? winnerLabel(mode, phase.winner)
-              : shooterLabel(mode, inputTurn ?? "blue")
-          }
-          onChange={(value) => {
-            setSource(value);
-            setError(null);
-          }}
-          onDir={setDir}
-          onFire={() => {
-            if (phase.kind === "aim") fire(phase.turn, source, dir);
-          }}
-        />
-      ) : null}
+      <FunctionBar
+        value={source}
+        dir={dir}
+        error={error}
+        disabled={inputLocked}
+        label={
+          phase.kind === "over"
+            ? winnerLabel(mode, phase.winner)
+            : shooterLabel(mode, inputTurn ?? "blue")
+        }
+        onChange={(value) => {
+          setSource(value);
+          setError(null);
+        }}
+        onDir={setDir}
+        onFire={() => {
+          if (phase.kind === "aim") fire(phase.turn, source, dir);
+        }}
+      />
 
       {phase.kind === "over" ? (
         <div className="flex justify-end gap-2 px-4 py-3 sm:px-5">
@@ -353,13 +333,6 @@ export function MathWarsGame() {
             className="rounded-lg bg-amber-300 px-3 py-2 text-sm font-medium text-neutral-900"
           >
             Rematch
-          </button>
-          <button
-            type="button"
-            onClick={() => setPhase({ kind: "menu" })}
-            className="rounded-lg bg-white/10 px-3 py-2 text-sm text-white/80"
-          >
-            Menu
           </button>
         </div>
       ) : null}

@@ -16,7 +16,8 @@ export type Project = {
   previewType?: "video" | "image" | "carousel";
   previewWidth?: number;
   previewHeight?: number;
-  previewFrame?: "phone" | "flat";
+  previewFrame?: "phone" | "flat" | "wide";
+  imagesOnly?: boolean;
   previewImages?: Array<{ src: string; alt: string; type?: "image" | "video" }>;
 };
 
@@ -27,20 +28,21 @@ export const PROJECTS: Project[] = [
     slug: "math-wars",
     title: "Math Wars",
     year: "2026",
-    blurb:
-      "Roblox math arena. 10M+ views in under a week on a new account.",
     tools: "Roblox, Luau, TypeScript, Next.js",
-    stack:
-      "Type y = f(x), pick +x or −x, and fire the curve through cover. Last standing wins. Play it on Roblox, or a round in the browser.",
     url: MATH_WARS_ROBLOX_URL,
     playUrl: "/math-wars",
     description:
       "Math Wars is the Roblox graph-shot arena I shipped on a new account. It crossed 10M+ views in under a week. Type a function of x, fire it across destructible cover, and hit the other player before they hit you. Play on Roblox, or try a CPU / hotseat / practice round in the browser.",
-    previewType: "image",
-    previewSrc: "/image/math-wars/gameplay.png",
+    previewType: "carousel",
+    previewFrame: "wide",
+    imagesOnly: true,
     previewWidth: 768,
     previewHeight: 432,
-    previewFrame: "flat",
+    previewImages: [
+      { src: "/image/math-wars/banner.png", alt: "Math Wars" },
+      { src: "/image/math-wars/character.png", alt: "Math Wars" },
+      { src: "/image/math-wars/gameplay.png", alt: "Math Wars" },
+    ],
   },
   {
     slug: "photobomb",
@@ -119,10 +121,10 @@ export function getProjectsForList(slugs: string[]): ProjectListItem[] {
       previewHeight: p.previewHeight,
       previewFrame: p.previewFrame ?? "flat",
       previewImages: p.previewImages,
-      blurb: p.blurb,
-      stack: p.stack,
-      href: p.url,
-      playHref: p.playUrl,
+      blurb: p.imagesOnly ? undefined : p.blurb,
+      stack: p.imagesOnly ? undefined : p.stack,
+      href: p.imagesOnly ? undefined : p.url,
+      playHref: p.imagesOnly ? undefined : p.playUrl,
     }));
 }
 
