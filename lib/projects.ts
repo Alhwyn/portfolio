@@ -1,6 +1,8 @@
 import type { ProjectListItem } from "@/components/ProjectList";
-import { MATH_WARS_ROBLOX_URL } from "@/lib/math-wars/roblox";
 import { PROJECT_ICONS } from "./reference-icons";
+
+export const MATH_WARS_ROBLOX_URL =
+  "https://www.roblox.com/games/107994348663960/Math-Wars";
 
 export type Project = {
   slug: string;
@@ -10,14 +12,12 @@ export type Project = {
   tools?: string;
   stack?: string;
   url?: string;
-  playUrl?: string;
   description: string;
   previewSrc?: string;
   previewType?: "video" | "image" | "carousel";
   previewWidth?: number;
   previewHeight?: number;
   previewFrame?: "phone" | "flat" | "wide";
-  imagesOnly?: boolean;
   previewImages?: Array<{ src: string; alt: string; type?: "image" | "video" }>;
 };
 
@@ -28,14 +28,12 @@ export const PROJECTS: Project[] = [
     slug: "math-wars",
     title: "Math Wars",
     year: "2026",
-    tools: "Roblox, Luau, TypeScript, Next.js",
+    tools: "Roblox, Luau",
     url: MATH_WARS_ROBLOX_URL,
-    playUrl: "/math-wars",
     description:
-      "Math Wars is the Roblox graph-shot arena I shipped on a new account. It crossed 10M+ views in under a week. Type a function of x, fire it across destructible cover, and hit the other player before they hit you. Play on Roblox, or try a CPU / hotseat / practice round in the browser.",
+      "Math Wars is the Roblox graph-shot arena I shipped on a new account. It crossed 10M+ views in under a week.",
     previewType: "carousel",
     previewFrame: "wide",
-    imagesOnly: true,
     previewWidth: 768,
     previewHeight: 432,
     previewImages: [
@@ -121,10 +119,9 @@ export function getProjectsForList(slugs: string[]): ProjectListItem[] {
       previewHeight: p.previewHeight,
       previewFrame: p.previewFrame ?? "flat",
       previewImages: p.previewImages,
-      blurb: p.imagesOnly ? undefined : p.blurb,
-      stack: p.imagesOnly ? undefined : p.stack,
-      href: p.imagesOnly ? undefined : p.url,
-      playHref: p.imagesOnly ? undefined : p.playUrl,
+      blurb: p.blurb,
+      stack: p.stack,
+      href: p.url,
     }));
 }
 

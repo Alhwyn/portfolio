@@ -239,10 +239,7 @@ export function HomePage({ projects }: HomePageProps) {
         (selected.previewSrc || (selected.previewImages?.length ?? 0) > 0) ? (
           <div className="flex w-full max-w-3xl flex-col items-stretch gap-3">
             <ProjectPreviewMedia project={selected} />
-            {(selected.blurb ||
-              selected.stack ||
-              selected.href ||
-              selected.playHref) && (
+            {(selected.blurb || selected.stack || selected.href) && (
               <div className="flex w-full max-w-md flex-col items-start gap-1.5 self-start text-left text-xs leading-snug text-neutral-900/55">
                 {selected.blurb ? <p className="m-0">{selected.blurb}</p> : null}
                 {selected.stack ? <p className="m-0">{selected.stack}</p> : null}
@@ -250,12 +247,6 @@ export function HomePage({ projects }: HomePageProps) {
                   <ProjectCaptionLink
                     href={selected.href}
                     label={captionLabel(selected.href)}
-                  />
-                ) : null}
-                {selected.playHref ? (
-                  <ProjectCaptionLink
-                    href={selected.playHref}
-                    label="Play a round here"
                   />
                 ) : null}
               </div>
