@@ -71,7 +71,13 @@ function AppStoreCarousel({
 
 function captionLabel(href: string) {
   if (href.startsWith("/")) return "Play it";
-  if (href.includes("roblox.com")) return "Play it on Roblox";
+  try {
+    const host = new URL(href).hostname.toLowerCase();
+    if (host === "roblox.com" || host.endsWith(".roblox.com"))
+      return "Play it on Roblox";
+  } catch {
+    // Keep default label for invalid URLs.
+  }
   return "Check it out";
 }
 
