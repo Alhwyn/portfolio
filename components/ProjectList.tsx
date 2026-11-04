@@ -11,7 +11,7 @@ export type ProjectListItem = {
   previewType?: "video" | "image" | "carousel";
   previewWidth?: number;
   previewHeight?: number;
-  previewFrame?: "phone" | "flat";
+  previewFrame?: "phone" | "flat" | "wide";
   previewImages?: Array<{ src: string; alt: string; type?: "image" | "video" }>;
   blurb?: string;
   stack?: string;

@@ -26,7 +26,8 @@ export function ProjectHoverPreview({ project }: ProjectHoverPreviewProps) {
   if (!media) return null;
 
   const portrait =
-    project.previewFrame === "phone" || project.previewType === "carousel";
+    project.previewFrame === "phone" ||
+    (project.previewType === "carousel" && project.previewFrame !== "wide");
 
   return (
     <div
