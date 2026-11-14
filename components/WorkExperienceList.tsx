@@ -14,7 +14,7 @@ const experiences: Experience[] = [
     href: "https://www.gmicloud.ai",
   },
   {
-    company: "part of the SpaceXSI Community",
+    company: "SpaceXSI Community",
     dates: "Present",
     href: "https://luma.com/spacexsi-community",
   },
