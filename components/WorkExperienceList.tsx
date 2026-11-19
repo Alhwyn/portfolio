@@ -8,15 +8,10 @@ type Experience = {
 /** Reverse-chronological (newest first). */
 const experiences: Experience[] = [
   {
-    company: "GMI Cloud",
-    role: "Ambassador",
-    dates: "Present",
-    href: "https://www.gmicloud.ai",
-  },
-  {
-    company: "part of the SpaceXSI Community",
-    dates: "Present",
-    href: "https://luma.com/spacexsi-community",
+    company: "FlipLabs",
+    role: "SWE intern",
+    dates: "2026",
+    href: "https://www.fliplabs.co",
   },
   {
     company: "Gist",

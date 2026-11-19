@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type CSSProperties,
@@ -11,19 +12,40 @@ import {
 } from "react";
 import { events, type PortfolioEvent } from "@/lib/events";
 
-const COVER_SIZE = "min(52vw, 480px)";
-const SPACING = 280;
 const MAX_VISIBLE_OFFSET = 3;
-const DRAG_STEP_PX = 100;
+const REFERENCE_COVER = 480;
 
-function coverTransform(offset: number): string {
+type CoverMetrics = {
+  coverSize: number;
+  spacing: number;
+  zPush: number;
+  zRecede: number;
+  dragStep: number;
+};
+
+function layoutMetrics(stageWidth: number): CoverMetrics {
+  const width = stageWidth > 0 ? stageWidth : REFERENCE_COVER / 0.52;
+  const narrow = width < 640;
+  const coverSize = narrow
+    ? width * 0.62
+    : Math.min(width * 0.52, REFERENCE_COVER);
+  return {
+    coverSize,
+    spacing: coverSize * (narrow ? 0.5 : 0.58),
+    zPush: coverSize * (100 / REFERENCE_COVER),
+    zRecede: coverSize * (130 / REFERENCE_COVER),
+    dragStep: coverSize * (100 / REFERENCE_COVER),
+  };
+}
+
+function coverTransform(offset: number, metrics: CoverMetrics): string {
   const abs = Math.abs(offset);
   if (offset === 0) {
-    return "translateX(-50%) translateZ(100px) rotateY(0deg) scale(1.06)";
+    return `translateX(-50%) translateZ(${metrics.zPush}px) rotateY(0deg) scale(1.06)`;
   }
   const dir = offset < 0 ? 1 : -1;
-  const x = offset * SPACING;
-  const z = -abs * 130;
+  const x = offset * metrics.spacing;
+  const z = -abs * metrics.zRecede;
   const rot = dir * Math.min(58, 38 + abs * 8);
   const scale = Math.max(0.72, 1 - abs * 0.08);
   return `translateX(calc(-50% + ${x}px)) translateZ(${z}px) rotateY(${rot}deg) scale(${scale})`;
@@ -75,12 +97,14 @@ function EventCover({
   event,
   offset,
   isActive,
+  metrics,
   onFocusCover,
   blockNavRef,
 }: {
   event: PortfolioEvent;
   offset: number;
   isActive: boolean;
+  metrics: CoverMetrics;
   onFocusCover: () => void;
   blockNavRef: MutableRefObject<boolean>;
 }) {
@@ -88,10 +112,10 @@ function EventCover({
   if (abs > MAX_VISIBLE_OFFSET) return null;
 
   const style: CSSProperties = {
-    transform: coverTransform(offset),
+    transform: coverTransform(offset, metrics),
     zIndex: 20 - abs,
     opacity: 1,
-    width: COVER_SIZE,
+    width: metrics.coverSize,
     transformStyle: "preserve-3d",
   };
 
@@ -119,6 +143,7 @@ function EventCover({
 
 export function EventsCoverFlow() {
   const [active, setActive] = useState(0);
+  const [metrics, setMetrics] = useState<CoverMetrics>(() => layoutMetrics(0));
   const stageRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{
     pointerId: number;
@@ -145,6 +170,33 @@ export function EventsCoverFlow() {
     },
     [clampIndex],
   );
+
+  useLayoutEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+
+    const applyWidth = (width: number) => {
+      setMetrics((current) => {
+        const next = layoutMetrics(width);
+        if (
+          Math.abs(current.coverSize - next.coverSize) < 0.5 &&
+          Math.abs(current.spacing - next.spacing) < 0.5 &&
+          Math.abs(current.dragStep - next.dragStep) < 0.5
+        ) {
+          return current;
+        }
+        return next;
+      });
+    };
+
+    applyWidth(el.getBoundingClientRect().width);
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (typeof width === "number") applyWidth(width);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -199,7 +251,7 @@ export function EventsCoverFlow() {
     if (Math.abs(dx) > 10) {
       blockNavRef.current = true;
     }
-    const steps = Math.round(-dx / DRAG_STEP_PX);
+    const steps = Math.round(-dx / metrics.dragStep);
     goTo(drag.baselined + steps);
   };
 
@@ -227,8 +279,12 @@ export function EventsCoverFlow() {
         aria-label="Events"
         aria-activedescendant={activeEvent?.id}
         tabIndex={0}
-        className="relative h-[min(85vw,640px)] w-full max-w-6xl overflow-hidden overscroll-none touch-none select-none outline-none cursor-grab active:cursor-grabbing [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-        style={{ perspective: "1200px", perspectiveOrigin: "50% 40%" }}
+        className="relative w-full max-w-6xl overflow-hidden overscroll-none touch-none select-none outline-none cursor-grab active:cursor-grabbing [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        style={{
+          height: metrics.coverSize * 1.22,
+          perspective: metrics.coverSize * 2.5,
+          perspectiveOrigin: "50% 40%",
+        }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -244,6 +300,7 @@ export function EventsCoverFlow() {
               event={event}
               offset={index - active}
               isActive={index === active}
+              metrics={metrics}
               blockNavRef={blockNavRef}
               onFocusCover={() => goTo(index)}
             />
@@ -267,27 +324,6 @@ export function EventsCoverFlow() {
             {activeEvent.description}
           </p>
         ) : null}
-      </div>
-
-      <div
-        className="mt-5 flex items-center gap-2"
-        role="group"
-        aria-label="Cover navigation"
-      >
-        {events.map((event, index) => (
-          <button
-            key={event.id}
-            type="button"
-            aria-label={`Show ${event.title}`}
-            aria-current={index === active ? "true" : undefined}
-            onClick={() => goTo(index)}
-            className={`h-1.5 rounded-full transition-all ${
-              index === active
-                ? "w-5 bg-foreground"
-                : "w-1.5 bg-foreground/25 hover:bg-foreground/45"
-            }`}
-          />
-        ))}
       </div>
     </section>
   );

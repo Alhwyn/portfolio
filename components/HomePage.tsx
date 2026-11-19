@@ -222,18 +222,22 @@ export function HomePage({ projects }: HomePageProps) {
             />
           </section>
 
-          <p
-            className={`${plusJakarta.className} m-0 max-w-[18rem] text-xs leading-snug text-neutral-900`}
+          <ul
+            className={`${plusJakarta.className} m-0 max-w-[18rem] list-disc pl-4 text-xs leading-snug text-neutral-900`}
           >
-            I&apos;m 19. I like building software and doing events. I&apos;ve
-            hosted a bunch of Cursor events. Made Math Wars, a Roblox math
-            arena. 10M+ views in under a week on a new account. Made Cards
-            Against Humanity but for your camera roll, PhotoBomb, 5k+ users.
-            I&apos;m based in Victoria, BC on Vancouver Island, Canada.
-            <br />
-            <br />
-            If you&apos;re building something cool I&apos;d love to try it out by email at alhwyn@alhwyn.com
-          </p>
+            <li>I&apos;m 19. I like building software and doing events.</li>
+            <li>I&apos;ve hosted a SpaceXSI event.</li>
+            <li>
+              Grew a game to 110,000+ users with 18M views in a month (Math
+              Wars).
+            </li>
+            <li>
+              Currently finding an exoplanet and making a game with a friend.
+            </li>
+            <li>
+              I&apos;m based in Victoria, BC on Vancouver Island, Canada.
+            </li>
+          </ul>
         </div>
       </div>
 
