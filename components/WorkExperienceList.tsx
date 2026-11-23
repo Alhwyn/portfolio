@@ -14,6 +14,18 @@ const experiences: Experience[] = [
     href: "https://www.fliplabs.co",
   },
   {
+    company: "SpaceXSI",
+    role: "Community Ambassador",
+    dates: "2026",
+    href: "https://luma.com/spacexsi-community",
+  },
+  {
+    company: "GMI Cloud",
+    role: "Ambassador",
+    dates: "2026",
+    href: "https://www.gmicloud.ai",
+  },
+  {
     company: "Gist",
     role: "Jr SDE",
     dates: "2026",
