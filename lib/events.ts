@@ -16,6 +16,17 @@ export type PortfolioEvent = {
 
 export const events: PortfolioEvent[] = [
   {
+    id: "grok-bot-growth-meetup",
+    title: "Grok Bot Growth & Product Meetup",
+    description: "Side-project growth with Grok Bot, then time to build",
+    image: "/image/events/grokbot-growth-meetup.png",
+    coverColor: "#000000",
+    coverTextColor: "#f4f4f2",
+    date: "2026-12-16",
+    dateLabel: "Dec 16, 2026",
+    status: "upcoming",
+  },
+  {
     id: "cursor-codechella-hackathon",
     title: "Cursor Codechella Hackathon",
     description: "Cursor hackathon in Victoria with partners & builders",
@@ -25,6 +36,17 @@ export const events: PortfolioEvent[] = [
     date: "2026-08-22",
     dateLabel: "Aug 22, 2026",
     status: "upcoming",
+  },
+  {
+    id: "grok-bot-meetup",
+    title: "Grok Bot Meetup",
+    description: "Grok Bot build night at Swans Pub in Victoria",
+    image: "/image/events/grokbot-meetup.png",
+    coverColor: "#000000",
+    coverTextColor: "#f4f4f2",
+    date: "2026-09-21",
+    dateLabel: "Sep 21, 2026",
+    status: "hosted",
   },
   {
     id: "planetscale-boards-game-night",
