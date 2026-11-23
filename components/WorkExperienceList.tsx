@@ -14,7 +14,7 @@ const experiences: Experience[] = [
     href: "https://www.fliplabs.co",
   },
   {
-    company: "Bot ambassadors in the SpaceXSI Community",
+    company: "Bot Ambassador for SpaceXSI",
     dates: "2026",
     href: "https://luma.com/spacexsi-community",
   },
