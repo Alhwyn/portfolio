@@ -16,8 +16,9 @@ export function createSiteOgImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+          padding: "64px 72px",
           backgroundColor: "#f4f4f2",
           color: "#171717",
           fontFamily:
