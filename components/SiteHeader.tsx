@@ -44,7 +44,7 @@ export function SiteHeader() {
               Linkedin
             </a>
             <a
-              href="https://x.com/alhwynn"
+              href="https://x.com/alhwyn"
               target="_blank"
               rel="noopener noreferrer"
               className={externalLinkClass}
@@ -83,7 +83,7 @@ export function SiteHeader() {
               Linkedin
             </a>
             <a
-              href="https://x.com/alhwynn"
+              href="https://x.com/alhwyn"
               target="_blank"
               rel="noopener noreferrer"
               className={externalLinkClass}

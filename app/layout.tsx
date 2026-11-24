@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     title: "Alhwyn Geonzon - Portfolio",
     description:
       "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
-    site: "@alhwynn",
-    creator: "@alhwynn",
+    site: "@alhwyn",
+    creator: "@alhwyn",
   },
   alternates: {
     canonical: "https://alhwyn.com",
