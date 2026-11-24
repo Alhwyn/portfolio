@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { EventsCoverFlow } from "@/components/EventsCoverFlow";
+import { eventsPageDescription } from "@/lib/events";
 
 export const metadata: Metadata = {
   title: "Events",
-  description:
-    "Events hosted by Alhwyn — Grok Bot meetups, Scrapyard Victoria, Cursor hackathons, cafes, and game nights.",
+  description: eventsPageDescription,
 };
 
 export default function EventsPage() {
