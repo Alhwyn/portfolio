@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/SiteHeader";
+import {
+  personJsonLd,
+  personName,
+  personWorkSummary,
+  siteUrl,
+} from "@/lib/profile";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://alhwyn.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Alhwyn Geonzon",
-    template: "%s | Alhwyn Geonzon",
+    default: personName,
+    template: `%s | ${personName}`,
   },
-  description:
-    "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
-  keywords: ["Alhwyn Geonzon", "Alhwyn"],
-  authors: [{ name: "Alhwyn Geonzon" }],
-  creator: "Alhwyn Geonzon",
-  publisher: "Alhwyn Geonzon",
+  description: personWorkSummary,
+  keywords: [personName, "Alhwyn"],
+  authors: [{ name: personName }],
+  creator: personName,
+  publisher: personName,
   robots: {
     index: true,
     follow: true,
@@ -29,22 +34,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://alhwyn.com",
-    siteName: "Alhwyn Geonzon Portfolio",
-    title: "Alhwyn Geonzon - Portfolio",
-    description:
-      "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+    url: siteUrl,
+    siteName: `${personName} Portfolio`,
+    title: `${personName} - Portfolio`,
+    description: personWorkSummary,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alhwyn Geonzon - Portfolio",
-    description:
-      "Portfolio showing my projects and hackathons. Mix of games, AI stuff, and random builds—mostly things I shipped for fun or events around Victoria. I host events and hackathons.",
+    title: `${personName} - Portfolio`,
+    description: personWorkSummary,
     site: "@alhwyn",
     creator: "@alhwyn",
   },
   alternates: {
-    canonical: "https://alhwyn.com",
+    canonical: siteUrl,
   },
   category: "Technology",
   classification: "Portfolio Website",
@@ -58,6 +61,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-[#f4f4f2] text-neutral-900">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <SiteHeader />
         {children}
         <Analytics />

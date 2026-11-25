@@ -1,3 +1,6 @@
+export const eventsPageDescription =
+  "Events hosted by Alhwyn — Grok Bot meetups, Scrapyard Victoria, Cursor hackathons, cafes, and game nights.";
+
 export type PortfolioEvent = {
   id: string;
   title: string;

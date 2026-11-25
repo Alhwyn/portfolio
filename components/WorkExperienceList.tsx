@@ -1,42 +1,4 @@
-type Experience = {
-  company: string;
-  role?: string;
-  dates: string;
-  href?: string;
-};
-
-/** Reverse-chronological (newest first). */
-const experiences: Experience[] = [
-  {
-    company: "FlipLabs",
-    role: "SWE intern",
-    dates: "2026",
-    href: "https://www.fliplabs.co",
-  },
-  {
-    company: "Bot Ambassador for SpaceXSI",
-    dates: "2026",
-    href: "https://luma.com/spacexsi-community",
-  },
-  {
-    company: "GMI Cloud",
-    role: "Ambassador",
-    dates: "2026",
-    href: "https://www.gmicloud.ai",
-  },
-  {
-    company: "Gist",
-    role: "Jr SDE",
-    dates: "2026",
-    href: "https://gist-apps.com",
-  },
-  {
-    company: "Folly Partners",
-    role: "Intern",
-    dates: "2025",
-    href: "https://follypartners.com",
-  },
-];
+import { workExperiences } from "@/lib/work";
 
 function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://");
@@ -46,7 +8,7 @@ export function WorkExperienceList() {
   return (
     <div className="w-full max-w-[18rem]">
       <ul className="m-0 list-none border-t border-neutral-900/20 p-0">
-        {experiences.map((item) => {
+        {workExperiences.map((item) => {
           const content = (
             <>
               <span className="min-w-0">

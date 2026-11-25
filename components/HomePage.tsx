@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { personFacts } from "@/lib/profile";
 import {
   ProjectList,
   type ProjectListItem,
@@ -225,18 +226,9 @@ export function HomePage({ projects }: HomePageProps) {
           <ul
             className={`${plusJakarta.className} m-0 max-w-[18rem] list-disc pl-4 text-xs leading-snug text-neutral-900`}
           >
-            <li>I&apos;m 19. I like building software and doing events.</li>
-            <li>I&apos;ve hosted a SpaceXSI event.</li>
-            <li>
-              Grew a game to 110,000+ users with 18M views in a month (Math
-              Wars).
-            </li>
-            <li>
-              Currently finding an exoplanet and making a game with a friend.
-            </li>
-            <li>
-              I&apos;m based in Victoria, BC on Vancouver Island, Canada.
-            </li>
+            {personFacts.map((fact) => (
+              <li key={fact}>{fact}</li>
+            ))}
           </ul>
         </div>
       </div>
